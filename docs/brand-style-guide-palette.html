@@ -1,0 +1,406 @@
+<title>UAPP — Кольорова палітра</title>
+<style>
+  :root {
+    --bg: #F6F7FC;
+    --surface: #FFFFFF;
+    --surface-sunken: #EEF0F9;
+    --border: #E5E7EB;
+    --text: #111827;
+    --text-muted: #6B7280;
+    --text-faint: #9CA3AF;
+    --accent: #011EFF;
+    --accent-ink: #000F7D;
+    --accent-soft: #E6E8FF;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #00041E;
+      --surface: #111827;
+      --surface-sunken: #0A1030;
+      --border: #1F2937;
+      --text: #FFFFFF;
+      --text-muted: #E5E7EB;
+      --text-faint: #9CA3AF;
+      --accent: #546BFF;
+      --accent-ink: #FFFFFF;
+      --accent-soft: #1F2937;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #00041E;
+    --surface: #111827;
+    --surface-sunken: #0A1030;
+    --border: #1F2937;
+    --text: #FFFFFF;
+    --text-muted: #E5E7EB;
+    --text-faint: #9CA3AF;
+    --accent: #546BFF;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #1F2937;
+  }
+  :root[data-theme="light"] {
+    --bg: #F6F7FC;
+    --surface: #FFFFFF;
+    --surface-sunken: #EEF0F9;
+    --border: #E5E7EB;
+    --text: #111827;
+    --text-muted: #6B7280;
+    --text-faint: #9CA3AF;
+    --accent: #011EFF;
+    --accent-ink: #000F7D;
+    --accent-soft: #E6E8FF;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.5;
+    padding: 48px 24px 96px;
+  }
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  header.page-head {
+    margin-bottom: 56px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .lede {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 62ch;
+    margin: 0;
+  }
+  .source-note {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+    margin: 14px 0 0;
+  }
+
+  section { margin-bottom: 56px; }
+  section > h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin: 0 0 22px;
+  }
+  h3.subhead {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0 0 12px;
+  }
+
+  /* Scales */
+  .scale {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .swatch {
+    position: relative;
+    aspect-ratio: 1 / 1.05;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8px 6px;
+  }
+  .swatch .step {
+    font-family: var(--mono);
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  .swatch .hex {
+    font-family: var(--mono);
+    font-size: 10px;
+    opacity: 0.75;
+    white-space: nowrap;
+  }
+  .scale-wrap { margin-bottom: 26px; }
+  .scale-wrap:last-child { margin-bottom: 0; }
+
+  .base-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .base-swatch {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    height: 72px;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 12px;
+  }
+  .base-swatch .step { font-family: var(--mono); font-size: 12px; }
+  .base-swatch .hex { font-family: var(--mono); font-size: 11px; opacity: 0.75; }
+
+  /* Semantic surfaces */
+  .surfaces {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 700px) {
+    .surfaces { grid-template-columns: 1fr; }
+  }
+  .demo-surface {
+    border-radius: 14px;
+    padding: 26px 24px;
+    border: 1px solid var(--border);
+  }
+  .demo-surface.is-light { background: #FFFFFF; }
+  .demo-surface.is-dark { background: #00041E; }
+  .demo-surface .surface-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .demo-surface.is-light .surface-label { color: #6B7280; }
+  .demo-surface.is-dark .surface-label { color: #9CA3AF; }
+
+  .demo-card {
+    border-radius: 10px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+  }
+  .demo-surface.is-light .demo-card { background: #FFFFFF; border: 1px solid #E5E7EB; }
+  .demo-surface.is-dark .demo-card { background: #111827; border: 1px solid #1F2937; }
+
+  .demo-heading {
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .demo-surface.is-light .demo-heading { color: #000F7D; }
+  .demo-surface.is-dark .demo-heading { color: #FFFFFF; }
+
+  .demo-body { font-size: 14px; margin: 0 0 10px; }
+  .demo-surface.is-light .demo-body { color: #374151; }
+  .demo-surface.is-dark .demo-body { color: #E5E7EB; }
+
+  .demo-muted { font-size: 12.5px; margin: 0 0 14px; }
+  .demo-surface.is-light .demo-muted { color: #6B7280; }
+  .demo-surface.is-dark .demo-muted { color: #9CA3AF; }
+
+  .demo-link {
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .demo-surface.is-light .demo-link { color: #011EFF; }
+  .demo-surface.is-dark .demo-link { color: #546BFF; }
+
+  .demo-btn {
+    display: inline-block;
+    margin-top: 14px;
+    background: #011EFF;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 16px;
+    border-radius: 7px;
+  }
+
+  /* Typography table */
+  table.type-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  table.type-table th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.type-table td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.type-table td:first-child { color: var(--text-muted); width: 40%; }
+  .font-name { font-weight: 700; }
+
+  /* Logo */
+  .logo-row {
+    display: flex;
+    gap: 16px;
+  }
+  .logo-canvas {
+    flex: 1;
+    border-radius: 12px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+  }
+  .logo-canvas.dark { background: #00041E; }
+  .logo-canvas.light { background: #FFFFFF; }
+</style>
+
+<main>
+
+  <header class="page-head">
+    <p class="eyebrow">UAPP · Brand style</p>
+  </header>
+
+  <section>
+    <h2>1 · Основні кольори</h2>
+
+    <div class="scale-wrap">
+      <h3 class="subhead">Primary — Ultramarine</h3>
+      <div class="scale">
+        <div class="swatch" style="background:#E6E8FF; color:#000F7D;"><span class="step">50</span><span class="hex">#E6E8FF</span></div>
+        <div class="swatch" style="background:#CBD3FF; color:#000F7D;"><span class="step">100</span><span class="hex">#CBD3FF</span></div>
+        <div class="swatch" style="background:#A8B5FF; color:#000F7D;"><span class="step">200</span><span class="hex">#A8B5FF</span></div>
+        <div class="swatch" style="background:#8091FF; color:#00073C;"><span class="step">300</span><span class="hex">#8091FF</span></div>
+        <div class="swatch" style="background:#546BFF; color:#FFFFFF;"><span class="step">400</span><span class="hex">#546BFF</span></div>
+        <div class="swatch" style="background:#2944FF; color:#FFFFFF;"><span class="step">500</span><span class="hex">#2944FF</span></div>
+        <div class="swatch" style="background:#011EFF; color:#FFFFFF;"><span class="step">600</span><span class="hex">#011EFF</span></div>
+        <div class="swatch" style="background:#0116BF; color:#FFFFFF;"><span class="step">700</span><span class="hex">#0116BF</span></div>
+        <div class="swatch" style="background:#000F7D; color:#FFFFFF;"><span class="step">800</span><span class="hex">#000F7D</span></div>
+        <div class="swatch" style="background:#00073C; color:#FFFFFF;"><span class="step">900</span><span class="hex">#00073C</span></div>
+        <div class="swatch" style="background:#000000; color:#FFFFFF;"><span class="step">950</span><span class="hex">#000000</span></div>
+      </div>
+    </div>
+
+    <div class="scale-wrap">
+      <h3 class="subhead">Neutral — Gray</h3>
+      <div class="scale">
+        <div class="swatch" style="background:#F9FAFB; color:#111827;"><span class="step">50</span><span class="hex">#F9FAFB</span></div>
+        <div class="swatch" style="background:#F3F4F6; color:#111827;"><span class="step">100</span><span class="hex">#F3F4F6</span></div>
+        <div class="swatch" style="background:#E5E7EB; color:#111827;"><span class="step">200</span><span class="hex">#E5E7EB</span></div>
+        <div class="swatch" style="background:#D1D5DB; color:#111827;"><span class="step">300</span><span class="hex">#D1D5DB</span></div>
+        <div class="swatch" style="background:#9CA3AF; color:#111827;"><span class="step">400</span><span class="hex">#9CA3AF</span></div>
+        <div class="swatch" style="background:#6B7280; color:#FFFFFF;"><span class="step">500</span><span class="hex">#6B7280</span></div>
+        <div class="swatch" style="background:#4B5563; color:#FFFFFF;"><span class="step">600</span><span class="hex">#4B5563</span></div>
+        <div class="swatch" style="background:#374151; color:#FFFFFF;"><span class="step">700</span><span class="hex">#374151</span></div>
+        <div class="swatch" style="background:#1F2937; color:#FFFFFF;"><span class="step">800</span><span class="hex">#1F2937</span></div>
+        <div class="swatch" style="background:#111827; color:#FFFFFF;"><span class="step">900</span><span class="hex">#111827</span></div>
+        <div class="swatch" style="background:#040816; color:#FFFFFF;"><span class="step">950</span><span class="hex">#040816</span></div>
+      </div>
+    </div>
+
+    <div class="base-row">
+      <div class="base-swatch" style="background:#000000; color:#FFFFFF;"><div><span class="step">Black</span><br><span class="hex">#000000</span></div></div>
+      <div class="base-swatch" style="background:#FFFFFF; color:#111827; border:1px solid var(--border);"><div><span class="step">White</span><br><span class="hex">#FFFFFF</span></div></div>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>2 · Кольори на світлому і темному тлі</h2>
+    <div class="surfaces">
+
+      <div class="demo-surface is-light">
+        <p class="surface-label">Світла версія</p>
+        <div class="demo-card">
+          <p class="demo-heading">Приклад заголовка</p>
+          <p class="demo-body">Основний текст для абзаців та описів.</p>
+          <p class="demo-muted">Другорядний текст / підпис</p>
+          <a class="demo-link" href="#" onclick="return false;">Посилання</a>
+          <div><span class="demo-btn">Основна дія</span></div>
+        </div>
+      </div>
+
+      <div class="demo-surface is-dark">
+        <p class="surface-label">Темна версія</p>
+        <div class="demo-card">
+          <p class="demo-heading">Приклад заголовка</p>
+          <p class="demo-body">Основний текст для абзаців та описів.</p>
+          <p class="demo-muted">Другорядний текст / підпис</p>
+          <a class="demo-link" href="#" onclick="return false;">Посилання</a>
+          <div><span class="demo-btn">Основна дія</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>3 · Типографіка та лого</h2>
+    <table class="type-table">
+      <thead>
+        <tr><th>Роль</th><th>Шрифт</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Заголовки (H1–H3, display)</td><td class="font-name">e-Ukraine Head</td></tr>
+        <tr><td>Основний текст (body, UI, лейбли)</td><td class="font-name">e-Ukraine</td></tr>
+      </tbody>
+    </table>
+
+    <div class="logo-row" style="margin-top:26px;">
+      <div class="logo-canvas dark">
+        <svg width="86" height="24" viewBox="0 0 86 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50.6039 17.9004C50.6795 19.468 50.7619 21.1001 49.207 22.298C47.8173 23.367 46.2444 23.8827 44.3987 23.9981C44.3592 23.6757 44.298 23.4211 44.298 23.1668C44.2945 18.5213 44.255 13.8725 44.3088 9.22704C44.3663 4.39496 47.8101 0.733564 52.8016 0.0820529C58.0913 -0.61018 62.9537 3.17675 63.521 8.42283C64.0381 13.1972 59.8977 17.8529 54.7947 18.131C53.4481 18.2058 52.0907 17.9921 50.6039 17.9004ZM53.8717 12.2708C55.75 12.2878 57.2545 10.9135 57.2834 9.15578C57.312 7.41161 55.8252 5.96945 53.9687 5.93892C52.1193 5.90499 50.5968 7.3064 50.5644 9.06755C50.5249 10.8287 52.0008 12.2539 53.8717 12.2708Z" fill="white"/>
+          <path d="M72.4055 17.7124C72.4701 19.5163 72.5813 21.2281 70.8961 22.4273C69.5047 23.4158 67.9845 23.9525 66.2059 24C66.1702 23.7419 66.1162 23.5482 66.1162 23.3511C66.1127 18.5684 66.059 13.7856 66.127 9.00285C66.195 4.37629 69.7414 0.717864 74.6287 0.0792644C79.0641 -0.501602 83.5928 2.26344 84.8979 6.4416C85.9201 9.71618 85.246 12.7156 82.8004 15.2429C80.294 17.828 77.1458 18.6806 73.5243 17.9775C73.2122 17.9128 72.9076 17.8313 72.4055 17.7124ZM79.0929 9.18627C79.1324 7.43688 77.6587 5.98303 75.8084 5.94226C73.9546 5.9015 72.4415 7.28062 72.3912 9.05381C72.3446 10.8202 73.7969 12.2537 75.6686 12.2842C77.5367 12.3148 79.0535 10.9425 79.0929 9.18627Z" fill="white"/>
+          <path d="M22.765 18.284C22.765 14.4533 22.44 10.923 22.847 7.47027C23.3756 2.9409 28.0118 -0.295818 32.7695 0.0214473C37.7092 0.352196 41.6204 4.13566 41.7205 8.77643C41.7846 11.8376 41.7311 14.9022 41.7311 17.9465C39.5594 18.2266 36.9591 17.0489 36.0126 15.3545C35.7735 14.9258 35.652 14.3993 35.6269 13.9133C35.5484 12.3304 35.5412 10.7441 35.4983 9.15781C35.4484 7.25087 34.0553 5.8941 32.1729 5.90421C30.2728 5.91434 28.8763 7.27789 28.837 9.16119C28.8083 10.545 28.7049 11.9288 28.7761 13.3092C28.8726 15.1857 27.8905 16.4209 26.2546 17.1873C25.2008 17.6832 24.0007 17.9061 22.765 18.284Z" fill="white"/>
+          <path d="M32.1876 12.8228C30.8981 12.8093 29.7908 11.7428 29.8301 10.5446C29.866 9.39372 30.9838 8.40142 32.2269 8.41493C33.5164 8.43182 34.6379 9.50509 34.595 10.6864C34.5523 11.8238 33.4162 12.8363 32.1876 12.8228Z" fill="white"/>
+          <path d="M19.9907 0.00158691C19.9907 3.8323 20.3156 7.36266 19.9085 10.8154C19.3763 15.3447 14.7402 18.5815 9.98253 18.2641C5.04275 17.9335 1.13166 14.1466 1.03163 9.50921C0.967357 6.44799 1.02093 3.05121 1.02093 0.00350415C3.13938 0.00355409 5.79282 1.23687 6.73936 2.93117C6.97867 3.35981 7.1001 3.88631 7.12509 4.37231C7.20369 5.95523 7.21083 7.54153 7.2537 9.12783C7.30369 11.0347 8.69668 12.3915 10.579 12.3814C12.4792 12.3713 13.8758 11.0077 13.9151 9.12445C13.9436 7.74067 14.0472 6.35688 13.9758 4.97647C13.8794 3.0999 14.8616 1.86465 16.4975 1.0985C17.5511 0.602342 18.7513 0.379592 19.9907 0.00158691Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-canvas light">
+        <svg width="86" height="24" viewBox="0 0 86 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50.6039 17.9004C50.6795 19.468 50.7619 21.1001 49.207 22.298C47.8173 23.367 46.2444 23.8827 44.3987 23.9981C44.3592 23.6757 44.298 23.4211 44.298 23.1668C44.2945 18.5213 44.255 13.8725 44.3088 9.22704C44.3663 4.39496 47.8101 0.733564 52.8016 0.0820529C58.0913 -0.61018 62.9537 3.17675 63.521 8.42283C64.0381 13.1972 59.8977 17.8529 54.7947 18.131C53.4481 18.2058 52.0907 17.9921 50.6039 17.9004ZM53.8717 12.2708C55.75 12.2878 57.2545 10.9135 57.2834 9.15578C57.312 7.41161 55.8252 5.96945 53.9687 5.93892C52.1193 5.90499 50.5968 7.3064 50.5644 9.06755C50.5249 10.8287 52.0008 12.2539 53.8717 12.2708Z" fill="black"/>
+          <path d="M72.4055 17.7124C72.4701 19.5163 72.5813 21.2281 70.8961 22.4273C69.5047 23.4158 67.9845 23.9525 66.2059 24C66.1702 23.7419 66.1162 23.5482 66.1162 23.3511C66.1127 18.5684 66.059 13.7856 66.127 9.00285C66.195 4.37629 69.7414 0.717864 74.6287 0.0792644C79.0641 -0.501602 83.5928 2.26344 84.8979 6.4416C85.9201 9.71618 85.246 12.7156 82.8004 15.2429C80.294 17.828 77.1458 18.6806 73.5243 17.9775C73.2122 17.9128 72.9076 17.8313 72.4055 17.7124ZM79.0929 9.18627C79.1324 7.43688 77.6587 5.98303 75.8084 5.94226C73.9546 5.9015 72.4415 7.28062 72.3912 9.05381C72.3446 10.8202 73.7969 12.2537 75.6686 12.2842C77.5367 12.3148 79.0535 10.9425 79.0929 9.18627Z" fill="black"/>
+          <path d="M22.765 18.284C22.765 14.4533 22.44 10.923 22.847 7.47027C23.3756 2.9409 28.0118 -0.295818 32.7695 0.0214473C37.7092 0.352196 41.6204 4.13566 41.7205 8.77643C41.7846 11.8376 41.7311 14.9022 41.7311 17.9465C39.5594 18.2266 36.9591 17.0489 36.0126 15.3545C35.7735 14.9258 35.652 14.3993 35.6269 13.9133C35.5484 12.3304 35.5412 10.7441 35.4983 9.15781C35.4484 7.25087 34.0553 5.8941 32.1729 5.90421C30.2728 5.91434 28.8763 7.27789 28.837 9.16119C28.8083 10.545 28.7049 11.9288 28.7761 13.3092C28.8726 15.1857 27.8905 16.4209 26.2546 17.1873C25.2008 17.6832 24.0007 17.9061 22.765 18.284Z" fill="black"/>
+          <path d="M32.1876 12.8228C30.8981 12.8093 29.7908 11.7428 29.8301 10.5446C29.866 9.39372 30.9838 8.40142 32.2269 8.41493C33.5164 8.43182 34.6379 9.50509 34.595 10.6864C34.5523 11.8238 33.4162 12.8363 32.1876 12.8228Z" fill="black"/>
+          <path d="M19.9907 0.00158691C19.9907 3.8323 20.3156 7.36266 19.9085 10.8154C19.3763 15.3447 14.7402 18.5815 9.98253 18.2641C5.04275 17.9335 1.13166 14.1466 1.03163 9.50921C0.967357 6.44799 1.02093 3.05121 1.02093 0.00350415C3.13938 0.00355409 5.79282 1.23687 6.73936 2.93117C6.97867 3.35981 7.1001 3.88631 7.12509 4.37231C7.20369 5.95523 7.21083 7.54153 7.2537 9.12783C7.30369 11.0347 8.69668 12.3915 10.579 12.3814C12.4792 12.3713 13.8758 11.0077 13.9151 9.12445C13.9436 7.74067 14.0472 6.35688 13.9758 4.97647C13.8794 3.0999 14.8616 1.86465 16.4975 1.0985C17.5511 0.602342 18.7513 0.379592 19.9907 0.00158691Z" fill="black"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4 · Рух / мікроанімації</h2>
+    <p class="lede">Крім кольору й типографіки бренд працює й через рух: стриманий, інженерно точний, ніколи не «кричущий». Це простір для пропозиції дизайнера на етапі макету, а не готовий стиль — тут фіксується лише сам факт, що такий інструментарій доречний для UAPP.</p>
+    <h3 class="subhead" style="margin-top:22px;">Категорії, які варто розглянути</h3>
+    <ul style="margin:0; padding-left:20px; color:var(--text); font-size:14.5px; line-height:1.7;">
+      <li><strong>Анімовані діаграми процесів/пайплайнів</strong> — наочно показують складні продукти («вхід → обробка → результат»), не перевантажуючи текстом.</li>
+      <li><strong>Легкі hover/scroll-мікроінтеракції</strong> — на картках, кнопках, елементах навігації.</li>
+      <li><strong>Анімовані outlined-ілюстрації/схеми</strong> — продовжують візуальну мову hero в інших блоках, замість стокових ілюстрацій.</li>
+    </ul>
+    <p class="source-note">Конкретний темп, тривалість і виконання узгоджуються дизайнером на етапі макету.</p>
+  </section>
+
+</main>

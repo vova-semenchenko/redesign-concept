@@ -1,0 +1,12 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Claude Code local tooling (agent config, installed skills) —
+# not part of the design-concept deliverable, kept local-only
+.agents/
+.claude/
+skills-lock.json
