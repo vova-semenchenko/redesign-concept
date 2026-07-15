@@ -15,45 +15,6 @@
     --sans: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #00041E;
-      --surface: #111827;
-      --surface-sunken: #0A1030;
-      --border: #1F2937;
-      --text: #FFFFFF;
-      --text-muted: #E5E7EB;
-      --text-faint: #9CA3AF;
-      --accent: #546BFF;
-      --accent-ink: #FFFFFF;
-      --accent-soft: #1F2937;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #00041E;
-    --surface: #111827;
-    --surface-sunken: #0A1030;
-    --border: #1F2937;
-    --text: #FFFFFF;
-    --text-muted: #E5E7EB;
-    --text-faint: #9CA3AF;
-    --accent: #546BFF;
-    --accent-ink: #FFFFFF;
-    --accent-soft: #1F2937;
-  }
-  :root[data-theme="light"] {
-    --bg: #F6F7FC;
-    --surface: #FFFFFF;
-    --surface-sunken: #EEF0F9;
-    --border: #E5E7EB;
-    --text: #111827;
-    --text-muted: #6B7280;
-    --text-faint: #9CA3AF;
-    --accent: #011EFF;
-    --accent-ink: #000F7D;
-    --accent-soft: #E6E8FF;
-  }
-
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
@@ -179,7 +140,7 @@
     padding: 26px 24px;
     border: 1px solid var(--border);
   }
-  .demo-surface.is-light { background: #FFFFFF; }
+  .demo-surface.is-light { background: #FFFFFF; border: 1px solid #E5E7EB; }
   .demo-surface.is-dark { background: #00041E; }
   .demo-surface .surface-label {
     font-family: var(--mono);
@@ -275,7 +236,7 @@
     border: 1px solid var(--border);
   }
   .logo-canvas.dark { background: #00041E; }
-  .logo-canvas.light { background: #FFFFFF; }
+  .logo-canvas.light { background: #FFFFFF; border: 1px solid #E5E7EB; }
 </style>
 
 <main>
