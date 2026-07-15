@@ -5,7 +5,7 @@
 ## З чого почати
 
 1. **[Figma-концепт](https://www.figma.com/design/Y4hZIZjrpGokO2m0mYgYBC/UAPP-GROUP-Redesign-Concept?node-id=19-57&t=eMWeNJblJlgjnbw0-11)** — референс-сайти та зібрані приклади (ілюстрації, діаграми) в одному файлі.
-2. **[Styleguide](docs/brand-style-guide.md)** — задані клієнтом токени (палітра ultramarine, шрифти e-Ukraine Head/e-Ukraine, лого) + семантичні токени з розрахунком контрасту + візуальні референси з розбором «що беремо для UAPP» (розд. 8).
+2. **[Styleguide](docs/brand-style-guide.md)** — токени бренду та візуальні референси з розбором «що беремо для UAPP» (розд. 8).
 3. **[Бриф](docs/task/uapp-redesign-brief.md)** — бізнес-ціль, ЦА, потік 12 блоків головної, мандатний копірайт.
 4. **[Консолідований звіт дослідження](research/uapp-redesign-research.md)** — TL;DR-висновки та навігація по повному ресьорчу.
 
