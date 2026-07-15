@@ -2,6 +2,8 @@
 
 ## 1. Примітивні токени
 
+Візуальне превʼю палітри — [PNG-знімок](brand-style-guide-palette.png).
+
 ### 1.1 Primary — Ultramarine
 
 | Ступінь | HEX |
