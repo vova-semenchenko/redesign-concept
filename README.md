@@ -15,6 +15,7 @@
 |---|---|
 | [`docs/task/`](docs/task/) | Бриф редизайну (ТЗ v7) + оригінальний PDF від клієнта |
 | [`docs/brand-style-guide.md`](docs/brand-style-guide.md) | Стильові токени за брендбуком + семантичні пари світла/темна поверхня + візуальні референси |
+| [`docs/frontend-architecture.md`](docs/frontend-architecture.md) | Frontend-архітектура: стек, конвеєр токенів, CMS-стратегія, документація, SDD-процес |
 | [`docs/brand-style-guide-palette.html`](docs/brand-style-guide-palette.html) | Інтерактивне превʼю палітри (відкрити в браузері) · [PNG-знімок](docs/brand-style-guide-palette.png) для швидкого перегляду без браузера |
 | [`research/`](research/) | Дослідження: [звіт-індекс](research/uapp-redesign-research.md) → [01 аудит сайту](research/01-current-site-audit.md) · [02 візуальний бенчмаркінг](research/02-visual-benchmark.md) · [03 UX-стратегія](research/03-ux-audience-strategy.md) · [04 візуальна концепція](research/04-visual-redesign-concept.md) · [05 бренд-гіпотези](research/05-brand-strategy-hypotheses.md) |
 | [`research/screenshots/`](research/screenshots/) | 35 скриншотів аудиту поточного сайту (докази до звіту 01) |
