@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Примітиви — 1:1 зі docs/brand-style-guide.md розд. 1 ── */
+@theme {
+  --color-ultramarine-50: #e6e8ff;
+  --color-ultramarine-100: #cbd3ff;
+  --color-ultramarine-200: #a8b5ff;
+  --color-ultramarine-300: #8091ff;
+  --color-ultramarine-400: #546bff;
+  --color-ultramarine-500: #2944ff;
+  --color-ultramarine-600: #011eff;
+  --color-ultramarine-700: #0116bf;
+  --color-ultramarine-800: #000f7d;
+  --color-ultramarine-900: #00073c;
+  --color-ultramarine-950: #000000;
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #040816;
+
+  /* Шрифти: e-Ukraine підключиться пізніше (ліцензія) — поки фолбек-стек */
+  --font-head: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ── Семантика: світла поверхня (стайлгайд розд. 4, світла колонка) ── */
+:root {
+  --background: #ffffff;
+  --foreground: var(--color-gray-700);
+  --heading: var(--color-ultramarine-800);
+  --card: #ffffff;
+  --card-foreground: var(--color-gray-700);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-gray-700);
+  --primary: var(--color-ultramarine-600);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-gray-100);
+  --secondary-foreground: var(--color-gray-700);
+  --muted: var(--color-gray-100);
+  --muted-foreground: var(--color-gray-500);
+  --accent: var(--color-ultramarine-600);
+  --accent-foreground: #ffffff;
+  /* destructive не заданий брендбуком — дефолт shadcn до окремого рішення */
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: var(--color-gray-200);
+  --input: var(--color-gray-200);
+  --ring: var(--color-ultramarine-600);
+  --radius: 0.5rem;
+}
+
+/* ── Семантика: темна поверхня — скоуп секції (стайлгайд розд. 4, темна колонка) ── */
+.dark {
+  --background: var(--color-ultramarine-900);
+  --foreground: var(--color-gray-200);
+  --heading: #ffffff;
+  --card: var(--color-gray-900);
+  --card-foreground: var(--color-gray-200);
+  --popover: var(--color-gray-900);
+  --popover-foreground: var(--color-gray-200);
+  --primary: var(--color-ultramarine-600);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-gray-800);
+  --secondary-foreground: var(--color-gray-200);
+  --muted: var(--color-gray-900);
+  --muted-foreground: var(--color-gray-400);
+  /* accent на темному — ultramarine/400, ТІЛЬКИ великий текст/лейбли (стайлгайд) */
+  --accent: var(--color-ultramarine-400);
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: var(--color-gray-800);
+  --input: var(--color-gray-800);
+  --ring: var(--color-ultramarine-600);
+}
+
+/* ── Міст семантики в утиліти Tailwind ── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-heading: var(--heading);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --font-heading: var(--font-head);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3 {
+    @apply font-head text-heading;
+  }
+}

@@ -5,8 +5,10 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Claude Code local tooling (agent config, installed skills) —
+# Agent local tooling (Claude Code / Codex config, installed skills) —
 # not part of the design-concept deliverable, kept local-only
 .agents/
 .claude/
+.codex/
+.superpowers/
 skills-lock.json
