@@ -79,14 +79,38 @@
 
 ## 2. Ролі агентів (`.claude/agents/`)
 
-| Агент | Режим | Вхід | Вихід | Скіли/джерела |
-|-------|-------|------|-------|---------------|
-| `requirements-validator` | read-only | спека + джерела вимог | список прогалин/суперечностей із посиланнями | брif §1/§8/§11, brand-style-guide, voice-and-tone §0 |
-| `plan-challenger` | read-only | план + лінза (промптом) | зауваження з severity та аргументом | лінза tech: vercel-react-best-practices; лінза brand: бренд-доки; лінза scope: без скілів |
-| `frontend-implementer` | write | SDD-бриф (файл) | SDD-звіт (файл), статуси DONE/…/BLOCKED | vercel-react-best-practices, shadcn, pick-ui-library, emil-design-eng, apple-design (motion) + код-правила `uapp-site/README.md` |
-| `qa-lead` | read-only, координатор | review-package (diff гілки) + скоуп раунду | єдиний QA-звіт файлом: findings з severity, дедупліковані по зонах | фан-аутить ui-qa ×зони + copy-guard паралельно |
-| `ui-qa` | read-only | зона чекліста (промптом) + review-package | findings-таблиця severity + `file:line`, вердикт зони | чекліст §4; review-animations (Block/Approve для motion); викликається `qa-lead` |
-| `copy-guard` | read-only | diff текстів + зачеплені блоки | verbatim-розбіжності + вердикт по рівнях свободи | бриф §8, voice-and-tone §0; викликається `qa-lead` |
+| Агент | Режим | Модель | Вхід | Вихід | Скіли/джерела |
+|-------|-------|--------|------|-------|---------------|
+| `requirements-validator` | read-only | sonnet | спека + джерела вимог | список прогалин/суперечностей із посиланнями | бриф §1/§8/§11, brand-style-guide, voice-and-tone §0 |
+| `plan-challenger` | read-only | opus | план + лінза (промптом) | зауваження з severity та аргументом | лінза tech: vercel-react-best-practices; лінза brand: бренд-доки; лінза scope: без скілів |
+| `frontend-implementer` | write | sonnet (контролер може міняти тир пер-диспатч) | SDD-бриф (файл) | SDD-звіт (файл), статуси DONE/…/BLOCKED | vercel-react-best-practices, shadcn, pick-ui-library, emil-design-eng, apple-design (motion) + код-правила `uapp-site/README.md` |
+| `qa-lead` | read-only, координатор | sonnet | review-package (diff гілки) + скоуп раунду | єдиний QA-звіт файлом: findings з severity, дедупліковані по зонах | фан-аутить ui-qa ×зони + copy-guard паралельно |
+| `ui-qa` | read-only | sonnet | зона чекліста (промптом) + review-package | findings-таблиця severity + `file:line`, вердикт зони | чекліст §4; review-animations (Block/Approve для motion); викликається `qa-lead` |
+| `copy-guard` | read-only | sonnet | diff текстів + зачеплені блоки | verbatim-розбіжності + вердикт по рівнях свободи | бриф §8, voice-and-tone §0; викликається `qa-lead` |
+
+Логіка вибору моделей — тирові правила SDD («turn count beats token
+price»):
+
+- **Ревʼюерський мінімум — середній тир (sonnet):** усі перевіряльні
+  ролі. Для `copy-guard` спокуслива дешевша модель (звірка verbatim —
+  механічна), але хибне «ОК» на мандатному копірайті — найдорожча
+  помилка цього репо, тому тир не знижуємо.
+- **Архітектурний рівень — найздібніша модель (opus):**
+  `plan-challenger`, бо challenge плану — це і є архітектурне ревʼю;
+  слабкі лінзи генерують шум замість зауважень. Фінальне ревʼю гілки
+  SDD теж іде на opus (штатне правило скіла).
+- **Імплементація — sonnet за замовчуванням**, з пер-диспатчевими
+  відхиленнями за правилами SDD: haiku, коли план містить готовий код
+  (транскрипція + тести); opus для складної інтеграції та застряглих
+  fix-раундів 4–5 (SDD вимагає там тир вище за застряглий).
+
+`model:` у frontmatter дефініції пінить дефолт і задовольняє вимогу SDD
+про явну модель у кожному диспатчі; контролер має право переозначити
+тир per-dispatch. Скіли підключаються двома способами: легкі —
+передзавантаженням через frontmatter `skills:`, важкі
+(vercel-react-best-practices, shadcn — сотні файлів) — точковим
+викликом через Skill tool під час роботи, щоб не роздувати контекст
+на старті.
 
 Принципи, спільні для всіх ролей:
 
@@ -242,8 +266,6 @@ impeccable на PostToolUse/Stop.
 
 ## Відкриті питання (не блокують план)
 
-- Модельні тири на швах SDD для кастомних ролей (SDD вимагає явного
-  `model` у кожному диспатчі — зафіксувати рекомендації в дефініціях).
 - Чи потрібен окремий агент-ревʼюер плану на базі
   `plan-document-reviewer-prompt.md` з writing-plans (зараз цю функцію
   покриває challenge-панель).
