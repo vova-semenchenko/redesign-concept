@@ -38,7 +38,7 @@
 | 1 | План | головний агент | superpowers:writing-plans | — | `docs/superpowers/plans/…md` | — |
 | 2 | Challenge | головний агент | dispatching-parallel-agents | plan-challenger ×3 лінзи | дайджест у плані | **Чекпоінт A** |
 | 3 | Імплементація | головний агент (контролер) | subagent-driven-development | frontend-implementer на шві імплементатора | коміти + SDD-леджер | — |
-| 4 | QA | головний агент | dispatching-parallel-agents | ui-qa + copy-guard (+ штатний code-reviewer SDD) | QA-звіт | **Чекпоінт B** |
+| 4 | QA | головний агент → `qa-lead` | вкладений фан-аут (dispatching-parallel-agents) | qa-lead → паралельні ui-qa по зонах + copy-guard | QA-звіт (єдиний, від qa-lead) | **Чекпоінт B** |
 | 5 | Візуальна перевірка | користувач | `npm run dev`, очі | правки → fix-задачі через frontend-implementer | — | за фактом правок |
 | 6 | Фініш | головний агент | verification-before-completion, finishing-a-development-branch | — | — | інтеграція лише за явним запитом |
 
@@ -59,13 +59,19 @@
   безперервне виконання без звернень до користувача. Єдина заміна: на шві
   «імплементатор» диспатчиться `frontend-implementer` замість
   general-purpose. Ревʼюери задач — штатні шаблони SDD.
-- **Етап 4.** Після фінального ревʼю SDD — паралельний фан-аут `ui-qa` і
-  `copy-guard` на весь diff гілки. Знахідки зводяться в один пакет;
-  автоцикл «fix-диспатч → повторне сфокусоване ревʼю лише зачеплених
-  правил» — **не більше 3 раундів на пакет**. Що не зійшлося — у звіт.
-  **Чекпоінт B:** звіт «знайдено / виправлено / відкладено» + стан
-  `typecheck`/`lint`/`build`. Конфлікти правил (знахідка суперечить плану
-  чи брифу) не крутяться в циклі — виносяться в цей же звіт.
+- **Етап 4.** Після фінального ревʼю SDD головний агент диспатчить
+  **одного** `qa-lead` — координатора QA. Той паралельно фан-аутить
+  ревʼюерів, кожен відповідає за свою зону чекліста (§4): бренд-токени,
+  код-правила, a11y/responsive/perf, motion (лише якщо diff торкається
+  анімацій) — плюс `copy-guard` для мандатного копірайту. `qa-lead`
+  зводить знахідки в єдиний пакет (дедуплікація, узгодження severity,
+  конфлікти між зонами) і повертає один QA-звіт файлом. Fix-цикл
+  лишається за головним агентом: «fix-диспатч → повторний `qa-lead`,
+  скоуплений лише на зачеплені зони» — **не більше 3 раундів на пакет**.
+  Що не зійшлося — у звіт. **Чекпоінт B:** звіт «знайдено / виправлено /
+  відкладено» + стан `typecheck`/`lint`/`build`. Конфлікти правил
+  (знахідка суперечить плану чи брифу) не крутяться в циклі —
+  виносяться в цей же звіт.
 - **Етап 5.** Користувач дивиться результат у браузері. Правки формулює
   словами/скріншотами; кожна стає fix-задачею для `frontend-implementer`,
   після — сфокусований повторний QA лише зачеплених правил (не повний
@@ -78,8 +84,9 @@
 | `requirements-validator` | read-only | спека + джерела вимог | список прогалин/суперечностей із посиланнями | брif §1/§8/§11, brand-style-guide, voice-and-tone §0 |
 | `plan-challenger` | read-only | план + лінза (промптом) | зауваження з severity та аргументом | лінза tech: vercel-react-best-practices; лінза brand: бренд-доки; лінза scope: без скілів |
 | `frontend-implementer` | write | SDD-бриф (файл) | SDD-звіт (файл), статуси DONE/…/BLOCKED | vercel-react-best-practices, shadcn, pick-ui-library, emil-design-eng, apple-design (motion) + код-правила `uapp-site/README.md` |
-| `ui-qa` | read-only | review-package (diff гілки) | findings-таблиця severity + `file:line`, вердикт | чекліст §4; review-animations (Block/Approve для motion) |
-| `copy-guard` | read-only | diff текстів + зачеплені блоки | verbatim-розбіжності + вердикт по рівнях свободи | бриф §8, voice-and-tone §0 |
+| `qa-lead` | read-only, координатор | review-package (diff гілки) + скоуп раунду | єдиний QA-звіт файлом: findings з severity, дедупліковані по зонах | фан-аутить ui-qa ×зони + copy-guard паралельно |
+| `ui-qa` | read-only | зона чекліста (промптом) + review-package | findings-таблиця severity + `file:line`, вердикт зони | чекліст §4; review-animations (Block/Approve для motion); викликається `qa-lead` |
+| `copy-guard` | read-only | diff текстів + зачеплені блоки | verbatim-розбіжності + вердикт по рівнях свободи | бриф §8, voice-and-tone §0; викликається `qa-lead` |
 
 Принципи, спільні для всіх ролей:
 
@@ -104,6 +111,7 @@
 | Агент | Інструменти |
 |-------|-------------|
 | `requirements-validator`, `plan-challenger`, `ui-qa`, `copy-guard` | `Read, Grep, Glob, Agent` — без інструментів запису |
+| `qa-lead` | `Read, Grep, Glob, Agent, Write` — запис лише для власного звіту у воркспейс; шляхи тримає шар 2 |
 | `frontend-implementer` | стандартний набір (Read, Edit, Write, Bash, Grep, Glob) + `Agent` — межі тримають шари 2–3 |
 
 Read-only ролі не «обіцяють» не редагувати — вони фізично не отримують
@@ -167,7 +175,10 @@ Read-only ролі не «обіцяють» не редагувати — во�
 коміти в main, force-push, секрети — діє й на Bash сабагентів) та хуки
 impeccable на PostToolUse/Stop.
 
-## 4. Чекліст ui-qa
+## 4. Чекліст QA — зони паралельних ревʼюерів
+
+Кожен пункт — окрема зона, яку `qa-lead` диспатчить паралельним
+екземплярам `ui-qa` (зона передається промптом):
 
 1. **Бренд-токени:** кольори/шрифти лише з семантичного рівня
    `globals.css`; примітиви `ultramarine-*`/`gray-*` поза визначеннями
