@@ -16,8 +16,7 @@ UAPP is repositioning its site from "generalist outsourcing" to a focused **regu
 
 - `docs/task/uapp-redesign-brief.md` — full context: business goal, audience, positioning, block flow, mandated copy.
 - `docs/research/` — `uapp-redesign-research.md` (consolidated index report) over the numbered `01-current-site-audit` … `05-brand-strategy-hypotheses`. Warning: `04-visual-redesign-concept.md` is obsolete — do not use its navy palette or IBM Plex; the client style guide is the mandate.
-- `docs/brand-style-guide.md` — client-mandated tokens (colors/fonts/logo) and annotated visual references.
-- `docs/frontend-foundation.md` — the research→code bridge: material status, token layers, open decisions.
+- `docs/brand-style-guide.md` — client-mandated tokens (colors/fonts/logo) and annotated visual references; in code they live as tokens in `uapp-site/src/styles/globals.css`.
 - `uapp-site/README.md` — prototype structure and code rules.
 - `README.md` — entry point: document navigation plus the Figma concept link.
 
@@ -26,13 +25,13 @@ These documents change faster than this file — read them directly instead of r
 ## Current iteration scope
 
 - Home page only, in English.
-- Desktop-first; responsive is a separate later phase.
+- Desktop-first.
 - Deliverable: a high-fidelity prototype of the home page.
 
 ## Working rules (not obvious from code/docs)
 
 - **Never rewrite mandated copy — and verify against the brief on every text change.** The client brief (§1, §8, §11) fixes the content and message of the hero, positioning band, expertise, case studies, and the AI block. Wording may be refined; positioning may not. Writing original copy for these blocks or globally replacing text is forbidden. Before changing any prototype text, determine the block's freedom level (mandated / editable / free) and, for mandated blocks, check against the verbatim brief text (§8) — the levels table and verification rule are in `docs/voice-and-tone.md` §0. Voice, tone, and microcopy for free blocks also follow `docs/voice-and-tone.md`.
-- **Style decisions are mandated by the client's brand book — don't invent them.** The client provided brand book fragments (ultramarine palette, e-Ukraine Head/e-Ukraine fonts, logo); they are captured in `docs/brand-style-guide.md` as given tokens — apply them rather than proposing your own. The full brand book doesn't exist yet: open items (font weights, webfont license, logo clearspace) are listed there — don't guess at them.
+- **Style decisions are mandated by the client's brand book — don't invent them.** The client provided brand book fragments (ultramarine palette, e-Ukraine Head/e-Ukraine fonts, logo); they are captured in `docs/brand-style-guide.md` as given tokens. In code these tokens are already materialized in `uapp-site/src/styles/globals.css` — components consume semantic tokens only (`bg-background`, `text-primary`…), never raw hex values or primitives copied from the doc. The style guide is the source of truth for token *values*; `globals.css` is the source of truth for how code consumes them. The full brand book doesn't exist yet: open items (font weights, webfont license, logo clearspace) are listed there — don't guess at them.
 - **Embedded Crypto for Banks is the flagship product in the showcase, not the site's headline.** Don't undermine the banking-first identity.
 - The team is presented by domain roles only — no "Frontend/Backend" split.
 - Case studies are anonymous under NDA; non-fintech projects go only under "Other experience", never on the home page.
