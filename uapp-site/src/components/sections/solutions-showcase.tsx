@@ -5,7 +5,11 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { HomeContent } from "@/content/types";
 
-export function SolutionsShowcase({ solutions }: { solutions: HomeContent["solutions"] }) {
+export function SolutionsShowcase({
+  solutions,
+}: {
+  solutions: HomeContent["solutions"];
+}) {
   return (
     <section id="solutions" className="mx-auto max-w-6xl px-6 py-20">
       <SectionHeading title={solutions.heading} />
@@ -23,7 +27,9 @@ export function SolutionsShowcase({ solutions }: { solutions: HomeContent["solut
               <h3 className="text-xl font-semibold">{card.title}</h3>
               {card.flagship ? <Badge>Flagship</Badge> : null}
             </div>
-            <p className="mt-1 text-sm text-muted-foreground">{card.audience}</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {card.audience}
+            </p>
             <p className="mt-3 max-w-2xl">{card.problem}</p>
           </TabsContent>
         ))}

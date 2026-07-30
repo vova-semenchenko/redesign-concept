@@ -125,7 +125,9 @@
   body {
     @apply bg-background text-foreground;
   }
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     @apply font-head text-heading;
   }
 }

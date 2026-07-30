@@ -45,7 +45,10 @@ export interface HomeContent {
   solutions: { heading: string; cards: SolutionCard[] };
   selectedWork: { heading: string; ndaBadge: string; cases: CaseTeaser[] };
   aiLayer: { heading: string; statement: string; certificationsNote: string };
-  approach: { heading: string; pillars: { title: string; description: string }[] };
+  approach: {
+    heading: string;
+    pillars: { title: string; description: string }[];
+  };
   team: { heading: string; description: string };
   insights: { heading: string; description: string };
   finalCta: {

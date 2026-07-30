@@ -9,7 +9,11 @@ import {
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { HomeContent } from "@/content/types";
 
-export function ExpertiseGrid({ expertise }: { expertise: HomeContent["expertise"] }) {
+export function ExpertiseGrid({
+  expertise,
+}: {
+  expertise: HomeContent["expertise"];
+}) {
   return (
     <section id="expertise" className="mx-auto max-w-6xl px-6 py-20">
       <SectionHeading title={expertise.heading} />

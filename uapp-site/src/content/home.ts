@@ -63,7 +63,11 @@ export const homeContent: HomeContent = {
         title: "Crypto & Web3",
         description:
           "Wallets, exchanges and on-chain compliance — deep crypto competence where you need it.",
-        standards: ["Multi-chain wallets", "On-chain compliance", "Settlement webhooks"],
+        standards: [
+          "Multi-chain wallets",
+          "On-chain compliance",
+          "Settlement webhooks",
+        ],
       },
     ],
   },
@@ -114,7 +118,8 @@ export const homeContent: HomeContent = {
       {
         id: "prepaid-cards",
         clientProfile: "US prepaid card program",
-        domainLine: "Web & mobile — Mastercard tokenization, Apple/Google Pay, real-time KYC",
+        domainLine:
+          "Web & mobile — Mastercard tokenization, Apple/Google Pay, real-time KYC",
         factAnchor: "Card issuing across web and mobile",
       },
       {
@@ -147,7 +152,8 @@ export const homeContent: HomeContent = {
     heading: "AI across every layer",
     statement:
       "AI runs through how we work — from AI-assisted discovery and design-to-code to AI-augmented QA, and into the products we build for you.",
-    certificationsNote: "Team AI certifications — list to be provided by the client.",
+    certificationsNote:
+      "Team AI certifications — list to be provided by the client.",
   },
   approach: {
     heading: "Why us",

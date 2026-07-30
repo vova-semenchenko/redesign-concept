@@ -54,7 +54,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 
 ## 3. Лого
 
-Актив: [`assets/logo-uapp.svg`](../assets/logo-uapp.svg) — фінальний знак «UAPP», формою не змінювати.
+Актив: [`docs/research/assets/logo-uapp.svg`](research/assets/logo-uapp.svg) — фінальний знак «UAPP», формою не змінювати.
 
 | Полотно | Заливка |
 |---|---|
@@ -117,7 +117,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 
 ### 8.1. [Column](https://column.com) — банківська інфраструктура
 
-![Hero Column](../assets/screenshots/hero-column.png)
+![Hero Column](research/assets/screenshots/hero-column.png)
 
 **Стиль:** максимально стриманий і «дорослий»: білий простір, чорнильний текст, оверсайз-заголовки без жодного декору. Замість стокових картинок — реальні інтерфейси, фрагменти коду та жива стрічка транзакцій. Комплаєнс і цифри (uptime, ліцензії) — прямо в основному тексті, а не дрібним шрифтом у футері.
 
@@ -128,7 +128,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 
 ### 8.2. [Cal.com](https://cal.com) — open-source планування зустрічей
 
-![Hero Cal.com](../assets/screenshots/hero-cal.png)
+![Hero Cal.com](research/assets/screenshots/hero-cal.png)
 
 **Стиль:** майже монохром — чорний текст на білому, великі спокійні заголовки, багато повітря. Продукт показаний чистими скріншотами інтерфейсу; секції розділені простором, а не рамками й фонами. Мінімум кольору, нуль візуального шуму.
 
@@ -139,7 +139,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 
 ### 8.3. [Doss](https://www.doss.com) — операційна платформа (ERP)
 
-![Hero Doss](../assets/screenshots/hero-doss.jpeg)
+![Hero Doss](research/assets/screenshots/hero-doss.jpeg)
 
 **Стиль:** великими декларативні заголовки («ERP is broken. We created something new»). Модульна сітка, прості геометричні ілюстрації та іконки, короткі впевнені формулювання. Складний enterprise-продукт поданий легко і зрозуміло.
 
@@ -150,7 +150,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 
 ### 8.4. [Fingerprint](https://fingerprint.com) — device intelligence / антифрод
 
-![Hero Fingerprint](../assets/screenshots/hero-fingerprint.png)
+![Hero Fingerprint](research/assets/screenshots/hero-fingerprint.png)
 
 **Стиль:** технічна точність як естетика: UI-мокапи, фрагменти коду й дата-візуалізації замість фотографій. Нейтральна база з одним фірмовим акцентним кольором. Метрики точності та масштабу — як головний аргумент довіри.
 
@@ -161,7 +161,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 
 ### 8.5. [Firecrawl](https://www.firecrawl.dev) — інструмент для розробників
 
-![Hero Firecrawl](../assets/screenshots/hero-firecrawl.png)
+![Hero Firecrawl](research/assets/screenshots/hero-firecrawl.png)
 
 > ⚠️ **Важливо: беремо без фонових анімацій.** Референс — верстка, типографіка й модульна структура; фонові ефекти для нас зайві (дрейф у «крипто/кібер»-естетику, якої свідомо уникаємо).
 
@@ -181,7 +181,7 @@ Secondary-кольори (`#578ADA`, `#9A98FF`) розглядались і ви
 5. **Рух — дозовано.** Один виразний ефект у hero, далі — тільки делікатні hover/scroll-мікроінтеракції; жодних фонових анімацій на всю сторінку.
 
 > Детальний розбір ширшого ряду бенчмарків (14 fintech-сайтів + анти-патерни) — у
-> [`../research/02-visual-benchmark.md`](../research/02-visual-benchmark.md).
+> [`docs/research/02-visual-benchmark.md`](research/02-visual-benchmark.md).
 
 ### 8.7. Додаткові посилання (без розбору, щоб не загубити)
 
