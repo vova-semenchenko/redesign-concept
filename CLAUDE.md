@@ -1,24 +1,37 @@
-# UAPP — редизайн сайту
+# UAPP — Website Redesign
 
-Репозиторій редизайну головної сторінки uapp.group. Містить документацію (бриф, дослідження, скриншоти аудиту), задані клієнтом стильові токени (`docs/brand-style-guide.md`) і фінальне лого (`docs/research/assets/logo-uapp.svg`).
+Redesign of the uapp.group home page: documentation lives in `docs/` (brief, research, client-mandated style tokens in `docs/brand-style-guide.md`, final logo `docs/research/assets/logo-uapp.svg`); the prototype is a Next.js app in `uapp-site/`.
 
-## Суть проєкту
+## Commands (run inside `uapp-site/`)
 
-UAPP міняє позиціонування сайту з «дженераліст-аутсорсу» на сфокусовану команду **regulated fintech & payments (banking-first), з крипто-компетенцією як перевагою**, наскрізно AI-native. Мета — не візитівка, а lead-engine під ~60-особову компанію.
+- `npm run dev` — dev server (http://localhost:3000)
+- `npm run typecheck && npm run lint` — checks before committing
+- `npm run format` — Prettier over all files
 
-Повний контекст (бізнес-ціль, ЦА, позиціонування, потік блоків, мандатний копірайт) — у `docs/task/uapp-redesign-brief.md`. Дослідження — у `docs/research/`: `uapp-redesign-research.md` (консолідований звіт-індекс) над нумерованими `01-current-site-audit` … `05-brand-strategy-hypotheses`. Задані клієнтом токени (кольори/шрифти/лого) і візуальні референси з розбором — у `docs/brand-style-guide.md`. Вхідна точка по матеріалах — `README.md`: навігація по документах + лінк на Figma-концепт. Не переказувати ці документи в CLAUDE.md — читати напряму, вони змінюються швидше, ніж цей файл.
+## What this project is
 
-## Обсяг поточної ітерації
+UAPP is repositioning its site from "generalist outsourcing" to a focused **regulated fintech & payments (banking-first) team with crypto competence as an advantage**, AI-native throughout. The goal is a lead engine for a ~60-person company, not a business card.
 
-- Тільки головна сторінка (Home), англійською.
-- Desktop-first; адаптив — окремим етапом пізніше.
-- Deliverable: High-Fidelity прототип головної.
+## Document map
 
-## Правила роботи (не самоочевидні з коду/документів)
+- `docs/task/uapp-redesign-brief.md` — full context: business goal, audience, positioning, block flow, mandated copy.
+- `docs/research/` — `uapp-redesign-research.md` (consolidated index report) over the numbered `01-current-site-audit` … `05-brand-strategy-hypotheses`. Warning: `04-visual-redesign-concept.md` is obsolete — do not use its navy palette or IBM Plex; the client style guide is the mandate.
+- `docs/brand-style-guide.md` — client-mandated tokens (colors/fonts/logo) and annotated visual references; in code they live as tokens in `uapp-site/src/styles/globals.css`.
+- `uapp-site/README.md` — prototype structure and code rules.
+- `README.md` — entry point: document navigation plus the Figma concept link.
 
-- **Мандатний копірайт не переписувати.** ТЗ клієнта (брифу §8) задає зміст і меседж hero, positioning band, expertise, кейсів. Формулювання можна уточнювати, позиціонування — ні.
-- **Стильові рішення — мандатні за брендбуком клієнта, не винаходити.** Клієнт надав фрагменти брендбуку (палітра ultramarine, шрифти e-Ukraine Head/e-Ukraine, лого) — вони зафіксовані в `docs/brand-style-guide.md` як задані токени; застосовувати їх, а не пропонувати власні. Повного брендбуку ще немає: відкриті пункти (ваги шрифтів, webfont-ліцензія, clearspace лого) перелічені там же — їх не домислювати.
-- **Embedded Crypto for Banks — флагманський продукт у showcase, не заголовок сайту.** Не підважувати banking-first ідентичність.
-- Команда подається без поділу «Frontend/Backend» — тільки за доменними ролями.
-- Кейси — анонімні під NDA; нефінтех-проєкти — лише в «Other experience», не на головній.
-- Робочі документи — українською; контент сайту — англійською (вимога ТЗ).
+These documents change faster than this file — read them directly instead of restating them in CLAUDE.md.
+
+## Current iteration scope
+
+- Home page only, in English.
+- Desktop-first.
+- Deliverable: a high-fidelity prototype of the home page.
+
+## Working rules (not obvious from code/docs)
+
+- **Never rewrite mandated copy — and verify against the brief on every text change.** The client brief (§1, §8, §11) fixes the content and message of the hero, positioning band, expertise, case studies, and the AI block. Wording may be refined; positioning may not. Writing original copy for these blocks or globally replacing text is forbidden. Before changing any prototype text, determine the block's freedom level (mandated / editable / free) and, for mandated blocks, check against the verbatim brief text (§8) — the levels table and verification rule are in `docs/voice-and-tone.md` §0. Voice, tone, and microcopy for free blocks also follow `docs/voice-and-tone.md`.
+- **Style decisions are mandated by the client's brand book — don't invent them.** The client provided brand book fragments (ultramarine palette, e-Ukraine Head/e-Ukraine fonts, logo); they are captured in `docs/brand-style-guide.md` as given tokens — the source of truth for token *values*. In code they are already materialized as the token layer in `uapp-site/src/styles/globals.css`; how components consume tokens is defined by the code rules in `uapp-site/README.md`. The full brand book doesn't exist yet: open items (font weights, webfont license, logo clearspace) are listed there — don't guess at them.
+- **Embedded Crypto for Banks is the flagship product in the showcase, not the site's headline.** Don't undermine the banking-first identity.
+- The team is presented by domain roles only — no "Frontend/Backend" split.
+- Case studies are anonymous under NDA; non-fintech projects go only under "Other experience", never on the home page.
