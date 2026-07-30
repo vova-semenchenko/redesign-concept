@@ -6,7 +6,7 @@
 
 - `npm run dev` — дев-сервер (http://localhost:3000)
 - `npm run build && npm run start` — прод-збірка і сервер
-- `npx tsc --noEmit && npm run lint` — перевірки перед комітом
+- `npm run typecheck && npm run lint` — перевірки перед комітом
 
 ## Структура
 
