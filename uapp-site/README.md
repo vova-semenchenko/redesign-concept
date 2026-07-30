@@ -1,18 +1,21 @@
 # uapp-site
 
-Прототип головної сторінки uapp.group: Next.js (App Router, TypeScript) + Tailwind CSS v4 + shadcn/ui.
+Prototype of the uapp.group home page: Next.js (App Router, TypeScript) + Tailwind CSS v4 + shadcn/ui. Requires Node >= 20.9.
 
-## Команди
+## Commands
 
-- `npm run dev` — дев-сервер (http://localhost:3000)
-- `npm run build && npm run start` — прод-збірка і сервер
-- `npm run typecheck && npm run lint` — перевірки перед комітом
+- `npm run dev` — dev server (http://localhost:3000)
+- `npm run build && npm run start` — production build and server
+- `npm run typecheck && npm run lint` — checks before committing
+- `npm run format` — Prettier over all files (`npm run format:check` to verify only)
 
-## Структура
+## Structure
 
-- `src/app/` — layout і сторінка
-- `src/components/ui/` — shadcn-компоненти (додаються тільки через `npx shadcn@latest add`) + кастомні примітиви
-- `src/components/sections/` — 12 секцій головної (композиція примітивів, кольори — тільки семантичні токени)
-- `src/components/hero-animation/` — ізольований модуль hero-ефекту (контракт — у README модуля)
-- `src/content/` — мандатний копірайт як типізовані дані
-- `src/styles/globals.css` — токени бренду; джерело правди — `docs/brand-style-guide.md` у корені репозиторію
+- `src/app/` — layout and the page
+- `src/components/ui/` — shadcn components (added only via `npx shadcn@latest add`) plus custom primitives
+- `src/components/sections/` — the 12 home-page sections (composition of primitives; colors — semantic tokens only)
+- `src/components/hero-animation/` — isolated hero-effect module (contract in the module's README); the only place where primitive color tokens are allowed, and only for the decorative layer
+- `src/content/` — mandated copy as typed data
+- `src/lib/` — shared helpers (`cn`)
+- `src/styles/globals.css` — brand tokens; source of truth for the values is `docs/brand-style-guide.md` at the repo root
+- `public/` — static assets (logo)
