@@ -13,6 +13,6 @@
 - `src/app/` — layout і сторінка
 - `src/components/ui/` — shadcn-компоненти (додаються тільки через `npx shadcn@latest add`) + кастомні примітиви
 - `src/components/sections/` — 12 секцій головної (композиція примітивів, кольори — тільки семантичні токени)
-- `src/hero-animation/` — ізольований модуль hero-ефекту (контракт — у README модуля)
+- `src/components/hero-animation/` — ізольований модуль hero-ефекту (контракт — у README модуля)
 - `src/content/` — мандатний копірайт як типізовані дані
 - `src/styles/globals.css` — токени бренду; джерело правди — `docs/brand-style-guide.md` у корені репозиторію

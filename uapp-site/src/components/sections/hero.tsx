@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MetricStat } from "@/components/ui/metric-stat";
-import { HeroVisual } from "@/hero-animation";
+import { HeroVisual } from "@/components/hero-animation";
 import type { HomeContent } from "@/content/types";
 
 export function Hero({ hero }: { hero: HomeContent["hero"] }) {
