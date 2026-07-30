@@ -8,7 +8,9 @@ export function TrustStrip({ trust }: { trust: HomeContent["trust"] }) {
         {trust.metrics.map((m) => (
           <MetricStat key={m.label} value={m.value} label={m.label} />
         ))}
-        <p className="text-sm text-muted-foreground">{trust.certificationsNote}</p>
+        <p className="text-sm text-muted-foreground">
+          {trust.certificationsNote}
+        </p>
       </div>
     </section>
   );
