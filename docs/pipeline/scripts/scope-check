@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# scope-check <BRIEF-FILE> <BASE-REF> <HEAD-REF>
+#
+# Compares what actually changed between BASE and HEAD against the **Files:**
+# section of an SDD task brief. A file the brief never declared is an
+# out-of-scope change: fix the diff, or record an explicit controller ruling in
+# the SDD ledger. Silent scope creep is what this prevents (spec §3, layer 3).
+#
+# Uncommitted work also fails: a clean "nothing changed" result while the work
+# sits unstaged is the loudest possible false green.
+#
+# Run with cwd inside the repository under test.
+# Exit: 0 in scope · 1 out of scope or dirty tree · 64 bad invocation.
+set -u
+
+if [ $# -ne 3 ]; then
+  echo "usage: scope-check <BRIEF-FILE> <BASE-REF> <HEAD-REF>" >&2
+  exit 64
+fi
+
+BRIEF="$1"
+BASE="$2"
+HEAD_REF="$3"
+
+[ -f "$BRIEF" ] || { echo "scope-check: brief not found: $BRIEF" >&2; exit 64; }
+
+# Declared paths: "- Create: `p`", "- Modify: `p:12-30`", "- Delete: `p`",
+# "- Test: `p`" — the shape writing-plans emits.
+DECLARED="$(perl -ne '
+  if (/^\s*-\s*(?:Create|Modify|Delete|Test)\s*:\s*`([^`]+)`/) {
+    my $p = $1;
+    $p =~ s/:\d+(?:-\d+)?\s*$//;
+    $p =~ s/^\s+|\s+$//g;
+    print "$p\n" if length $p;
+  }
+' "$BRIEF" | sort -u)"
+
+if [ -z "$DECLARED" ]; then
+  echo "scope-check: no Files section found in $BRIEF — cannot verify scope." >&2
+  echo "scope-check: a brief without declared files is a plan defect; fix the plan." >&2
+  exit 64
+fi
+
+DIRTY="$(git status --porcelain)"
+if [ -n "$DIRTY" ]; then
+  echo "scope-check: FAILED — uncommitted changes in the working tree:" >&2
+  printf '%s\n' "$DIRTY" | sed 's/^/  /' >&2
+  echo "scope-check: commit the work before the review, or the diff under review is not the work." >&2
+  exit 1
+fi
+
+# --no-renames so a rename reports both the old and the new path instead of
+# hiding the removal behind rename detection.
+CHANGED="$(git diff --name-only --no-renames "$BASE" "$HEAD_REF" | sort -u)"
+
+if [ -z "$CHANGED" ]; then
+  echo "scope-check: OK — no files changed between $BASE and $HEAD_REF."
+  exit 0
+fi
+
+STRAY=""
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+  printf '%s\n' "$DECLARED" | grep -Fxq "$f" || STRAY="$STRAY$f
+"
+done <<EOF
+$CHANGED
+EOF
+
+if [ -n "$STRAY" ]; then
+  echo "scope-check: OUT OF SCOPE — changed files not declared in $BRIEF:" >&2
+  printf '%s' "$STRAY" | sed 's/^/  - /' >&2
+  echo "scope-check: fix the diff, or record an explicit controller ruling in the SDD ledger." >&2
+  exit 1
+fi
+
+echo "scope-check: OK — every changed file is declared in $BRIEF."
