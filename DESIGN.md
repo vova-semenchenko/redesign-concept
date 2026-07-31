@@ -65,6 +65,13 @@ typography:
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "0em"
+  metric:
+    fontFamily: "e-Ukraine Head, system-ui, sans-serif"
+    fontSize: "clamp(2.25rem, 3.1vw, 3rem)"
+    fontWeight: 300
+    lineHeight: 1
+    letterSpacing: "-0.02em"
+    fontFeature: "tabular-nums"
   label:
     fontFamily: "e-Ukraine, system-ui, sans-serif"
     fontSize: "0.6875rem"
