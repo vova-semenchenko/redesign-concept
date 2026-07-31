@@ -48,8 +48,19 @@ export interface HomeContent {
     ctaPrimary: string;
     ctaSecondary: string;
     metrics: Metric[];
-    /** Підпис під сигнатурним ефектом — він і називає його схемою. */
+    /** Підпис над сигнатурною схемою — він і називає її схемою. */
     visualCaption: string;
+    /**
+     * Розріз мосту. Асиметрія тут не оформлення, а зміст: мандатний
+     * positioning band перелічує п'ять фіатних рейок і три on-chain,
+     * і саме ця пропорція має читатися з першого екрана.
+     */
+    diagram: {
+      primary: { title: string; nodes: string[] };
+      secondary: { title: string; nodes: string[] };
+      /** Титульний блок креслення — тільки перевірні числа. */
+      scale: string[];
+    };
   };
   /** Мандатний текст, розбитий на твердження і деталізацію — слова ті самі. */
   positioningBand: { marker: string; statement: string; detail: string };

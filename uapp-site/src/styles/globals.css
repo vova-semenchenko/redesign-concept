@@ -316,9 +316,9 @@
   .corner-ticks::after {
     content: "";
     position: absolute;
-    width: 9px;
-    height: 9px;
-    border-color: var(--rule-strong);
+    width: 11px;
+    height: 11px;
+    border-color: var(--tick, var(--rule-strong));
     border-style: solid;
     pointer-events: none;
   }

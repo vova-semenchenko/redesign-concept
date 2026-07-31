@@ -344,6 +344,15 @@ gutter, and hairline-ruled content inside. It is how the product is shown — al
 light theme even when placed in an ink zone, cropped rather than fitted, and always labelled
 as a schematic because all client work is under NDA.
 
+**The Built-Versus-Adjacent Rule.** When a schematic compares two things of unequal weight —
+the hero's fiat rails against its on-chain rails — the heavier side gets the white surface and
+the corner ticks; the lighter side sits directly on the zone, contour only, no fill. Corner
+ticks frame the object that has an edge to frame: they belong on the built white rectangle
+itself, never on an outer wrapper that also contains unfilled content, or they float in empty
+space with nothing to mark. `SchematicWindow`'s `frame="open"` variant renders no background
+and no ticks at all — it exists only to host a composition that draws its own built surface
+elsewhere, as the hero's fiat-side `Shore` does.
+
 ### Tabs
 
 Flat: no pill, no background, no container. Labels are two-part — a small uppercase action

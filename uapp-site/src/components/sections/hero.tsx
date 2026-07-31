@@ -59,7 +59,7 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
           className="settle col-start-8 col-end-13 min-w-0"
           style={{ animationDelay: "560ms" }}
         >
-          <HeroVisual caption={hero.visualCaption} />
+          <HeroVisual caption={hero.visualCaption} diagram={hero.diagram} />
         </div>
 
         <MetricRow

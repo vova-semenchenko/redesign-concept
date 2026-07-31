@@ -36,6 +36,23 @@ export const homeContent: HomeContent = {
       { value: "$1B+", label: "client annual revenue" },
     ],
     visualCaption: "Both sides · schematic",
+    diagram: {
+      primary: {
+        title: "Fiat rails",
+        nodes: [
+          "SEPA Instant",
+          "ISO 20022",
+          "Card programs",
+          "Reconciliation",
+          "Bank-grade security",
+        ],
+      },
+      secondary: {
+        title: "On-chain rails",
+        nodes: ["Wallets", "Exchanges", "On-chain compliance"],
+      },
+      scale: ["6 engagements", "15 countries", "7+ networks"],
+    },
   },
   positioningBand: {
     marker: "Positioning",
