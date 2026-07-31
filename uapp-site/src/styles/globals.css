@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ── Примітиви — 1:1 зі docs/brand-style-guide.md розд. 1 ── */
+/* ── Примітиви — 1:1 зі docs/concept-research.md розд. 1 ── */
 @theme {
   --color-ultramarine-50: #e6e8ff;
   --color-ultramarine-100: #cbd3ff;
