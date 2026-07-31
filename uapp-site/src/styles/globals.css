@@ -30,16 +30,29 @@
   --color-gray-900: #111827;
   --color-gray-950: #040816;
 
-  /* Шрифти: e-Ukraine підключиться пізніше (ліцензія) — поки фолбек-стек */
-  --font-head: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Гарнітури брендбуку; --font-*-loaded приходять з next/font (src/fonts) */
+  --font-head:
+    var(--font-head-loaded), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:
+    var(--font-body-loaded), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Аркуш: 12 колонок, контент у 3–10, зовнішні пари колонок порожні */
+  --sheet-max: 1440px;
+  --sheet-gutter: 24px;
+
+  /* Моушн — дискретний, механічний: без пружин і bounce */
+  --ease-draft: cubic-bezier(0.2, 0, 0, 1);
+  --dur-state: 180ms;
+  --dur-move: 320ms;
+  --dur-draw: 700ms;
 }
 
-/* ── Семантика: світла поверхня (стайлгайд розд. 4, світла колонка) ── */
+/* ── Семантика: світла зона «paper» (стайлгайд розд. 4, світла колонка) ── */
 :root {
-  --background: #ffffff;
+  --background: var(--color-gray-50);
   --foreground: var(--color-gray-700);
   --heading: var(--color-ultramarine-800);
+  /* card = «вікно в продукт»: єдина поверхня, якій дозволено бути чисто білою */
   --card: #ffffff;
   --card-foreground: var(--color-gray-700);
   --popover: #ffffff;
@@ -58,10 +71,25 @@
   --border: var(--color-gray-200);
   --input: var(--color-gray-200);
   --ring: var(--color-ultramarine-600);
-  --radius: 0.5rem;
+  --radius: 2px;
+
+  /* Блюпринт-шар */
+  --rule: var(--color-gray-200);
+  --rule-strong: var(--color-gray-300);
+  --marker: var(--color-gray-500);
+  --accent-quiet: var(--color-ultramarine-600);
+  /* «Вікно в продукт» — єдина чисто біла поверхня; її семантика не залежить
+     від зони, тому схема читається однаково на paper і на ink */
+  --window: #ffffff;
+  --window-foreground: var(--color-gray-700);
+  --window-muted: var(--color-gray-500);
+  --window-rule: var(--color-gray-200);
+  --window-rule-strong: var(--color-gray-300);
+  /* Знак заливається за поверхнею — брендбук розд. 3 */
+  --logo: #000000;
 }
 
-/* ── Семантика: темна поверхня — скоуп секції (стайлгайд розд. 4, темна колонка) ── */
+/* ── Семантика: темна зона «ink» — скоуп секції (стайлгайд розд. 4, темна колонка) ── */
 .dark {
   --background: var(--color-ultramarine-900);
   --foreground: var(--color-gray-200);
@@ -81,9 +109,21 @@
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: var(--color-gray-800);
-  --input: var(--color-gray-800);
-  --ring: var(--color-ultramarine-600);
+  --border: color-mix(in srgb, #ffffff 12%, transparent);
+  --input: color-mix(in srgb, #ffffff 16%, transparent);
+  --ring: var(--color-ultramarine-400);
+
+  /* Блюпринт-шар: на темному лінії живуть прозорістю, не сірим */
+  --rule: color-mix(in srgb, #ffffff 10%, transparent);
+  --rule-strong: color-mix(in srgb, #ffffff 22%, transparent);
+  --marker: var(--color-gray-400);
+  --accent-quiet: var(--color-ultramarine-400);
+  --window: #ffffff;
+  --window-foreground: var(--color-gray-700);
+  --window-muted: var(--color-gray-500);
+  --window-rule: var(--color-gray-200);
+  --window-rule-strong: var(--color-gray-300);
+  --logo: #ffffff;
 }
 
 /* ── Міст семантики в утиліти Tailwind ── */
@@ -108,13 +148,23 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-marker: var(--marker);
+  --color-accent-quiet: var(--accent-quiet);
+  --color-window: var(--window);
+  --color-window-foreground: var(--window-foreground);
+  --color-window-muted: var(--window-muted);
+  --color-window-rule: var(--window-rule);
+  --color-window-rule-strong: var(--window-rule-strong);
+  --color-logo: var(--logo);
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-md: var(--radius);
+  --radius-sm: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
   --font-heading: var(--font-head);
 }
 
@@ -124,10 +174,217 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
   }
   h1,
   h2,
   h3 {
     @apply font-head text-heading;
+    font-weight: 400;
+  }
+  ::selection {
+    background: var(--color-ultramarine-600);
+    color: #ffffff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* ── Аркуш і сітка ─────────────────────────────────────────────
+     .sheet ставить поля сторінки; .sheet-grid розкладає 12 колонок;
+     .rules-v малює конструкційні лінії на кожній 2-й межі колонки.
+     Геометрія однакова в кожній зоні, тому лінії читаються наскрізними. */
+  .sheet {
+    width: 100%;
+    max-width: var(--sheet-max);
+    margin-inline: auto;
+    padding-inline: var(--sheet-gutter);
+  }
+
+  .sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  /* Контент живе в колонках 3–10: зовнішні пари лишаються порожніми */
+  .sheet-main {
+    grid-column: 3 / 11;
+  }
+  .sheet-edge-start {
+    grid-column: 1 / 3;
+  }
+  .sheet-edge-end {
+    grid-column: 11 / 13;
+  }
+
+  .rules-v {
+    height: 100%;
+    background-image: linear-gradient(
+      to right,
+      var(--rule) 0 1px,
+      transparent 1px
+    );
+    background-size: calc(100% / 6) 100%;
+    background-repeat: repeat-x;
+    border-right: 1px solid var(--rule);
+  }
+
+  /* ── Типографічні ролі ───────────────────────────────────────── */
+  .type-display {
+    font-family: var(--font-head);
+    font-size: clamp(3.25rem, 5.6vw, 5.25rem);
+    font-weight: 300;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .type-headline {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .type-title {
+    font-family: var(--font-head);
+    font-size: 2.125rem;
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  /* Твердження блоку: крупніше за тіло, дрібніше за заголовок секції */
+  .type-statement {
+    font-family: var(--font-head);
+    font-size: clamp(1.5rem, 2.1vw, 1.9rem);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .type-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .type-body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+  /* Підпис: другорядний текст, що має лишатися читабельним — посилання
+     футера, факт у комірці кейса, повідомлення про помилку */
+  .type-caption {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .type-lead {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  .type-metric {
+    font-family: var(--font-head);
+    font-weight: 300;
+    font-size: 3rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Єдиний uppercase у системі: 11px / 0.14em. Іншого немає. */
+  .label-micro {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-wrap: pretty;
+  }
+
+  /* ── Кутові тики: рамка креслення навколо схематичного вікна ── */
+  .corner-ticks::before,
+  .corner-ticks::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-color: var(--rule-strong);
+    border-style: solid;
+    pointer-events: none;
+  }
+  .corner-ticks::before {
+    inset-block-start: -1px;
+    inset-inline-start: -1px;
+    border-width: 1px 0 0 1px;
+  }
+  .corner-ticks::after {
+    inset-block-end: -1px;
+    inset-inline-end: -1px;
+    border-width: 0 1px 1px 0;
+  }
+
+  /* ── Пунктир: те, що спроєктоване або зв'язане, а не збудоване ── */
+  .rule-dashed {
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--rule-strong) 0 4px,
+      transparent 4px 8px
+    );
+    height: 1px;
+  }
+}
+
+@layer utilities {
+  .nums-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ── Єдиний авторський момент сторінки: hero прокреслюється ──────
+   Лінії йдуть першими, як на кальці, потім у них сідає текст.
+   Усе стартує з видимого стану, якщо анімації вимкнені. */
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes draw-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .draw-x {
+    transform-origin: left center;
+    animation: draw-x var(--dur-draw) var(--ease-draft) both;
+  }
+  .draw-y {
+    transform-origin: top center;
+    animation: draw-y var(--dur-draw) var(--ease-draft) both;
+  }
+  .settle {
+    animation: settle var(--dur-move) var(--ease-draft) both;
   }
 }

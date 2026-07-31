@@ -5,7 +5,7 @@ export function Logo({ className }: { className?: string }) {
     <span
       role="img"
       aria-label="UAPP"
-      className={cn("inline-block h-6 w-24 bg-current", className)}
+      className={cn("text-logo inline-block h-6 w-24 bg-current", className)}
       style={{
         maskImage: "url(/logo-uapp.svg)",
         maskRepeat: "no-repeat",

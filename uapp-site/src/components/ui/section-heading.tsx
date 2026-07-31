@@ -1,29 +1,39 @@
 import { cn } from "@/lib/utils";
+import { Marker } from "@/components/ui/marker";
+import { Rule } from "@/components/ui/rule";
 
 interface SectionHeadingProps {
-  eyebrow?: string;
+  /** Мітка регіону: «об'єкт · величина», а не декоративний eyebrow. */
+  marker: string;
   title: string;
+  /** Приглушений опис праворуч — другий і останній рівень тексту в блоці. */
   description?: string;
   className?: string;
 }
 
+/**
+ * Заголовок секції як заголовок виду на кресленні: мітка регіону,
+ * твердження, і — коли є що додати — приглушений опис у правій половині.
+ * Закінчується лінією, з якої починається вміст.
+ */
 export function SectionHeading({
-  eyebrow,
+  marker,
   title,
   description,
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={cn("max-w-3xl", className)}>
-      {eyebrow ? (
-        <p className="mb-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2 className="text-3xl font-bold">{title}</h2>
-      {description ? (
-        <p className="mt-4 text-lg text-foreground">{description}</p>
-      ) : null}
-    </div>
+    <header className={cn("flex flex-col gap-8", className)}>
+      <Marker>{marker}</Marker>
+      <div className="grid grid-cols-8 items-end gap-y-6">
+        <h2 className="type-title col-span-5 pr-8">{title}</h2>
+        {description ? (
+          <p className="type-body text-muted-foreground col-span-3 pr-8">
+            {description}
+          </p>
+        ) : null}
+      </div>
+      <Rule />
+    </header>
   );
 }

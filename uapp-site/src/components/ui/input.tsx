@@ -2,13 +2,21 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * Поле — це лінія, а не коробка: жодного фону, рамки й радіуса.
+ * Фокус потовщує підкреслення до 2px і фарбує його акцентом
+ * (через inset-тінь, щоб рядок не стрибав), і ніколи не світиться.
+ */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input
       type={type}
       data-slot="input"
       className={cn(
-        "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        "border-rule-strong text-foreground placeholder:text-marker/70 h-11 w-full min-w-0 rounded-none border-0 border-b bg-transparent px-0 text-[0.9375rem] transition-shadow duration-[var(--dur-state)] outline-none",
+        "focus-visible:shadow-[inset_0_-2px_0_0_var(--primary)] focus-visible:outline-none",
+        "aria-invalid:shadow-[inset_0_-2px_0_0_var(--destructive)]",
+        "disabled:opacity-40",
         className,
       )}
       {...props}
