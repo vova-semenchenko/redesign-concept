@@ -78,5 +78,7 @@ check_def() {
 
 check_def "requirements-validator.md" "requirements-validator" "sonnet" "Read, Grep, Glob, Agent"
 check_def "plan-challenger.md"        "plan-challenger"        "opus"   "Read, Grep, Glob, Agent"
+check_def "frontend-implementer.md"   "frontend-implementer"   "sonnet" "Read, Edit, Write, Bash, Grep, Glob, Agent"
+check_def "animation-engineer.md"     "animation-engineer"     "opus"   "Read, Edit, Write, Bash, Grep, Glob, Agent"
 
 summary
