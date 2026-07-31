@@ -12,16 +12,15 @@
 | `vercel-react-best-practices` | 70 правил React/Next-перформансу у 8 категоріях, по файлу на правило (lazy-load) | advisory | авто | frontend-implementer (при написанні), ui-qa (лінза ревʼю), plan-challenger (tech-лінза) |
 | `shadcn` | Управління shadcn/ui: додавання/пошук/фікс компонентів, правила стилізації й композиції | write | авто (модельний) | frontend-implementer |
 | `pick-ui-library` | Довідник вибору бібліотек (motion, cmdk, Sonner, zustand…); спершу перевіряє `package.json` | advisory | лише явно | frontend-implementer (при потребі нової залежності) |
-| `emil-design-eng` | Філософія UI-полішу Emil Kowalski: анімаційні рішення, компонентні правила, чекліст ревʼю | advisory | авто | frontend-implementer (поліш) |
-| `apple-design` | Apple-принципи fluid interfaces для вебу: жести, springs, interruptibility, reduced-motion | advisory | авто | frontend-implementer (motion/жести) |
+| `emil-design-eng` | Філософія UI-полішу Emil Kowalski: фреймворк анімаційних рішень (частота → мета → easing → тривалість), компонентні правила, перф-правила, чекліст ревʼю | advisory | авто | **animation-engineer — головний фреймворк**; frontend-implementer (поліш компонентів) |
+| `apple-design` | Apple-принципи fluid interfaces для вебу: жести, springs, interruptibility, reduced-motion | advisory | авто | animation-engineer (жести/springs/фізика) |
 | `review-animations` | Diff-ревʼю motion проти 10 стандартів; вердикт Block/Approve з `file:line` | read-only | лише явно | ui-qa (стандарт motion-перевірки) |
-| `find-animation-opportunities` | Шукає місця, де motion відсутній, але доречний; ≤5–7 пропозицій + відхилені | read-only | авто | поза пайплайном, за запитом |
+| `find-animation-opportunities` | Шукає місця, де motion відсутній, але доречний; ≤5–7 пропозицій + відхилені | read-only | авто | animation-engineer — фаза дослідження елементів |
 | `improve-animations` | Аудит motion (сам фан-аутить read-only сабагентів) → пронумеровані плани в `plans/` | read-only (пише лише плани) | авто | поза пайплайном, за запитом |
-| `animation-vocabulary` | Глосарій ~120 термінів motion: опис ефекту → точна назва | advisory | авто | довідка за потреби |
+| `animation-vocabulary` | Глосарій ~120 термінів motion: опис ефекту → точна назва | advisory | авто | animation-engineer — довідка термінів |
 | `impeccable` | Дизайн-директорський фреймворк, 24 підкоманди (critique, audit, polish, live…); **2.9М, write-capable, ставить хуки** | write | явно (меню) | точково з головного лупа; не в сабагентах |
 | `prototype` | 3–5 справді різних варіантів одного UI за візуальним пікером; продакшн не чіпає до промоуту | write (пісочниця) | лише явно | етап 0/2 для дивергенції дизайну, за запитом |
 | `migrate-radix-to-base` | Механічна міграція Radix UI → Base UI («golden pair», three-way merge) | write | авто | поза пайплайном |
-| `grill-me` | Стаб «Run a `/grilling` session» — безжальне інтерв'ю для загострення плану; команди `/grilling` в репо немає | interactive | лише явно | етап 0, альтернатива/доповнення brainstorming |
 
 ## Superpowers (плагін, v6.2.0)
 
@@ -48,7 +47,9 @@
   **local-only**, у репо їх не видно. Джерело правди про систему — спека.
 - `impeccable` існує у двох копіях (`.agents/` — Codex-варіант,
   `.claude/` — Claude-варіант) — при оновленні синхронізувати обидві.
-- Скіли з `disable-model-invocation: true` (grill-me, pick-ui-library,
-  prototype, review-animations) самі не тригеряться — лише явний виклик.
+- Скіли з `disable-model-invocation: true` (pick-ui-library, prototype,
+  review-animations) самі не тригеряться — лише явний виклик.
+- `grill-me` виключено з пайплайна (стаб посилається на неіснуючу
+  команду `/grilling`); тека скіла лишається в `.agents/skills/`.
 - Хуки impeccable у `.claude/settings.local.json` спрацьовують на кожен
   Edit/Write UI-файлів — враховувати в очікуваннях від етапу 3.
