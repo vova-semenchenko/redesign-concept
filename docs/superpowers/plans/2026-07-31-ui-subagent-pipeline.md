@@ -455,7 +455,7 @@ exit 0
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `bash docs/pipeline/tests/run-all.sh`
-Expected: PASS — `test-agent-guard: 33 passed, 0 failed`, далі `run-all: ALL SUITES PASSED`.
+Expected: PASS — `test-agent-guard: 38 passed, 0 failed`, далі `run-all: ALL SUITES PASSED`.
 
 Якщо `denies absolute path outside the repo` падає з exit 0 — перевір, що deny-таблиця стоїть **до** temp-allowance, і що `/etc/passwd` не потрапляє в жоден temp-патерн.
 
@@ -783,7 +783,7 @@ echo "report-check: OK — $REPORT"
 - [ ] **Step 5: Run the tests to verify they pass**
 
 Run: `bash docs/pipeline/tests/run-all.sh`
-Expected: PASS — `test-scope-check: 10 passed, 0 failed`, `test-report-check: 9 passed, 0 failed`, `run-all: ALL SUITES PASSED`.
+Expected: PASS — `test-scope-check: 9 passed, 0 failed`, `test-report-check: 9 passed, 0 failed`, `run-all: ALL SUITES PASSED`.
 
 - [ ] **Step 6: Commit with the executable bits**
 
@@ -1017,7 +1017,7 @@ exit "$STATUS"
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `bash docs/pipeline/tests/run-all.sh`
-Expected: PASS — `test-install: 12 passed, 0 failed`, `run-all: ALL SUITES PASSED`. Живий `.claude/` не змінюється: тест ставить усе в temp-теку.
+Expected: PASS — `test-install: 11 passed, 0 failed`, `run-all: ALL SUITES PASSED`. Живий `.claude/` не змінюється: тест ставить усе в temp-теку.
 
 - [ ] **Step 5: Commit**
 
@@ -1951,7 +1951,7 @@ not a finding: false positives here teach the controller to ignore you.
 - [ ] **Step 6: Run the tests to verify they pass**
 
 Run: `bash docs/pipeline/tests/run-all.sh`
-Expected: `test-agent-defs: 52 passed, 0 failed` і `run-all: ALL SUITES PASSED`.
+Expected: `test-agent-defs: 54 passed, 0 failed` і `run-all: ALL SUITES PASSED`.
 
 - [ ] **Step 7: Commit**
 
