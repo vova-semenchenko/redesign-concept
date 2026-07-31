@@ -20,7 +20,7 @@ export const homeContent: HomeContent = {
     cta: "Describe your challenge",
   },
   hero: {
-    marker: "Regulated fintech · payments · crypto",
+    marker: "Banking-first payments · crypto-fluent",
     h1: "Engineering for regulated finance",
     h1Alternatives: [
       "We build the systems that move money",
