@@ -93,7 +93,7 @@
 | `requirements-validator` | read-only | sonnet | спека + джерела вимог | список прогалин/суперечностей із посиланнями | бриф §1/§8/§11, brand-style-guide, voice-and-tone §0 |
 | `plan-challenger` | read-only | opus | план + лінза (промптом) | зауваження з severity та аргументом | лінза tech: vercel-react-best-practices; лінза brand: бренд-доки; лінза scope: без скілів |
 | `frontend-implementer` | write | sonnet (контролер може міняти тир пер-диспатч) | SDD-бриф (файл) | SDD-звіт (файл), статуси DONE/…/BLOCKED | vercel-react-best-practices, shadcn, pick-ui-library + код-правила `uapp-site/README.md`; анімації — зона `animation-engineer` |
-| `animation-engineer` | write | sonnet | motion-задача (SDD-бриф) + цільовий блок/секція | SDD-звіт; анімації в коді блоку + таблиця Before/After/Why | **emil-design-eng — головний фреймворк**; find-animation-opportunities (дослідження), apple-design (жести/springs), animation-vocabulary |
+| `animation-engineer` | write | opus | motion-задача (SDD-бриф) + цільовий блок/секція | SDD-звіт; анімації в коді блоку + таблиця Before/After/Why | **emil-design-eng — головний фреймворк**; find-animation-opportunities (дослідження), apple-design (жести/springs), animation-vocabulary |
 | `qa-lead` | read-only, координатор | sonnet | review-package (diff гілки) + скоуп раунду | єдиний QA-звіт файлом: findings з severity, дедупліковані по зонах | фан-аутить ui-qa ×зони + copy-guard паралельно |
 | `ui-qa` | read-only | sonnet | зона чекліста (промптом) + review-package | findings-таблиця severity + `file:line`, вердикт зони | чекліст §4; review-animations (Block/Approve для motion); викликається `qa-lead` |
 | `copy-guard` | read-only | sonnet | diff текстів + зачеплені блоки | verbatim-розбіжності + вердикт по рівнях свободи | бриф §8, voice-and-tone §0; викликається `qa-lead` |
@@ -108,7 +108,10 @@ price»):
 - **Архітектурний рівень — найздібніша модель (opus):**
   `plan-challenger`, бо challenge плану — це і є архітектурне ревʼю;
   слабкі лінзи генерують шум замість зауважень. Фінальне ревʼю гілки
-  SDD теж іде на opus (штатне правило скіла).
+  SDD теж іде на opus (штатне правило скіла). Сюди ж —
+  `animation-engineer`: якість motion визначає відчуття всього сайту,
+  а рішення за фреймворком emil-design-eng (що анімувати, а що ні,
+  криві, тайминги) — справа смаку, де слабший тир помітно гірший.
 - **Імплементація — sonnet за замовчуванням**, з пер-диспатчевими
   відхиленнями за правилами SDD: haiku, коли план містить готовий код
   (транскрипція + тести); opus для складної інтеграції та застряглих
