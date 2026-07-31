@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "title": "Design System: UAPP",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Deep Navy Ink",
+        "canonical": "#00073C",
+        "tonalRamp": [
+          "#000000",
+          "#00073c",
+          "#000f7d",
+          "#0116bf",
+          "#011eff",
+          "#2944ff",
+          "#546bff",
+          "#a8b5ff"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "#F9FAFB",
+        "tonalRamp": [
+          "#040816",
+          "#111827",
+          "#374151",
+          "#6b7280",
+          "#9ca3af",
+          "#d1d5db",
+          "#e5e7eb",
+          "#f9fafb"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal Ultramarine",
+        "canonical": "#011EFF",
+        "tonalRamp": [
+          "#00073c",
+          "#000f7d",
+          "#0116bf",
+          "#011eff",
+          "#2944ff",
+          "#546bff",
+          "#8091ff",
+          "#cbd3ff"
+        ]
+      },
+      "window": {
+        "role": "neutral",
+        "displayName": "Window White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#374151",
+          "#6b7280",
+          "#9ca3af",
+          "#d1d5db",
+          "#e5e7eb",
+          "#f3f4f6",
+          "#f9fafb",
+          "#ffffff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero statement and the final call to action only."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "The single assertion that opens a block."
+      },
+      "label": {
+        "displayName": "Marker",
+        "purpose": "The only uppercase in the system: 11px / 0.14em region markers and annotations."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-draft",
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "The only easing. Mechanical, no overshoot — a drawing instrument, not a spring."
+      },
+      {
+        "name": "dur-state",
+        "value": "180ms",
+        "purpose": "Hover and focus state changes."
+      },
+      {
+        "name": "dur-move",
+        "value": "320ms",
+        "purpose": "The tab underline sliding to a new position."
+      },
+      {
+        "name": "dur-draw",
+        "value": "700ms",
+        "purpose": "The hero's construction lines drawing themselves in — once per page."
+      }
+    ],
+    "breakpoints": [{ "name": "lg", "value": "1024px" }]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The page's one action. The only round shape on a sheet of right angles.",
+      "html": "<button class=\"ds-btn-primary\">Describe your challenge</button>",
+      "css": ".ds-btn-primary { background: #011eff; color: #fff; border: 0; border-radius: 9999px; padding: 14px 28px; font: 500 15px/1 var(--font-body, system-ui); cursor: pointer; transition: background 180ms cubic-bezier(0.2,0,0,1); } .ds-btn-primary:hover { background: #0116bf; } .ds-btn-primary:focus-visible { outline: 2px solid #011eff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "In-content action. A 2px rectangle with a hairline and no fill.",
+      "html": "<button class=\"ds-btn-quiet\">Explore ISO 20022 Toolkit</button>",
+      "css": ".ds-btn-quiet { background: transparent; color: #374151; border: 1px solid #d1d5db; border-radius: 2px; padding: 9px 20px; font: 500 13px/1 var(--font-body, system-ui); cursor: pointer; transition: color 180ms, border-color 180ms; } .ds-btn-quiet:hover { color: #000f7d; border-color: #000f7d; }"
+    },
+    {
+      "name": "Region Marker",
+      "kind": "chip",
+      "refersTo": "label",
+      "description": "The only uppercase in the system. Names a region the way a drawing labels a view.",
+      "html": "<p class=\"ds-marker\"><span class=\"ds-marker-tick\"></span>Expertise · 4 domains</p>",
+      "css": ".ds-marker { display: flex; align-items: center; gap: 8px; margin: 0; color: #6b7280; font: 500 11px/1.45 var(--font-body, system-ui); letter-spacing: 0.14em; text-transform: uppercase; } .ds-marker-tick { width: 5px; height: 5px; background: #011eff; display: inline-block; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A line, not a box. Focus thickens and colours the underline; it never glows.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Work email</span><input class=\"ds-input\" type=\"email\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 12px; } .ds-field-label { color: #6b7280; font: 500 11px/1.45 var(--font-body, system-ui); letter-spacing: 0.14em; text-transform: uppercase; } .ds-input { height: 44px; border: 0; border-bottom: 1px solid #d1d5db; border-radius: 0; background: transparent; padding: 0; font: 400 15px/1 var(--font-body, system-ui); color: #374151; outline: none; transition: box-shadow 180ms; } .ds-input:focus-visible { box-shadow: inset 0 -2px 0 0 #011eff; }"
+    },
+    {
+      "name": "Tab Row",
+      "kind": "nav",
+      "refersTo": "tabs",
+      "description": "Flat tabs divided by vertical hairlines; the accent underline slides rather than switches.",
+      "html": "<div class=\"ds-tabs\"><button class=\"ds-tab\" data-active=\"true\"><span class=\"ds-tab-action\">Embed crypto</span><span class=\"ds-tab-object\">Embedded Crypto for Banks</span></button><button class=\"ds-tab\"><span class=\"ds-tab-action\">Process messages</span><span class=\"ds-tab-object\">ISO 20022 Toolkit</span></button><span class=\"ds-tab-underline\"></span></div>",
+      "css": ".ds-tabs { position: relative; display: flex; border-bottom: 1px solid #e5e7eb; } .ds-tab { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px 24px; background: none; border: 0; border-left: 1px solid #e5e7eb; cursor: pointer; text-align: left; } .ds-tab:first-child { border-left: 0; padding-left: 0; } .ds-tab-action { color: #6b7280; font: 500 11px/1.45 var(--font-body, system-ui); letter-spacing: 0.14em; text-transform: uppercase; } .ds-tab-object { color: #6b7280; font: 500 17px/1.35 var(--font-body, system-ui); } .ds-tab[data-active=\"true\"] .ds-tab-object { color: #000f7d; } .ds-tab-underline { position: absolute; bottom: 0; left: 0; width: 214px; height: 2px; background: #011eff; transition: left 320ms cubic-bezier(0.2,0,0,1), width 320ms cubic-bezier(0.2,0,0,1); }"
+    },
+    {
+      "name": "Schematic Window",
+      "kind": "card",
+      "refersTo": "schematic-window",
+      "description": "The signature component: a pure-white panel with corner ticks, always labelled as a schematic because client work is under NDA.",
+      "html": "<figure class=\"ds-schematic\"><figcaption class=\"ds-schematic-caption\">Both sides · schematic</figcaption><div class=\"ds-schematic-body\">Fiat rails ↔ on-chain rails</div></figure>",
+      "css": ".ds-schematic { margin: 0; display: flex; flex-direction: column; gap: 12px; } .ds-schematic-caption { color: #6b7280; font: 500 11px/1.45 var(--font-body, system-ui); letter-spacing: 0.14em; text-transform: uppercase; } .ds-schematic-body { position: relative; background: #fff; color: #374151; border: 1px solid #d1d5db; border-radius: 2px; padding: 32px 28px; font: 400 13px/1.5 var(--font-body, system-ui); } .ds-schematic-body::before, .ds-schematic-body::after { content: \"\"; position: absolute; width: 9px; height: 9px; border-color: #d1d5db; border-style: solid; } .ds-schematic-body::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; } .ds-schematic-body::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }"
+    },
+    {
+      "name": "Metric",
+      "kind": "custom",
+      "refersTo": "metric",
+      "description": "A figure without commentary. Tabular numerals, no card, no icon.",
+      "html": "<div class=\"ds-metric\"><span class=\"ds-metric-value\">170+</span><span class=\"ds-metric-label\">Projects delivered</span></div>",
+      "css": ".ds-metric { display: flex; flex-direction: column; gap: 12px; } .ds-metric-value { color: #000f7d; font: 300 48px/1 var(--font-head, system-ui); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; } .ds-metric-label { color: #6b7280; font: 500 11px/1.45 var(--font-body, system-ui); letter-spacing: 0.14em; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Engineering Blueprint",
+    "overview": "The site looks like a drawing sheet from the engineering office that builds payment systems. Its structure is not hidden behind surfaces — it is drawn. Thin construction lines run the full height of the page and continue through empty space; horizontal hairlines separate sections and list rows instead of padding doing the work; small tracked uppercase markers label regions the way a drawing labels its views. Nothing is decorated, everything is dimensioned.\n\nThe page reads as a system seen through, which is the argument the company is making: these are engineers you can hand a regulated payment flow to. Density is high in information and low in ornament — the content column occupies roughly the middle two thirds of the sheet and the outer columns stay deliberately empty, because margin is what a drawing has and a brochure does not.\n\nThe one saturated colour on the sheet is ultramarine, and it is rationed. It fills the primary action and the small indicators inside diagrams, and nothing else. Encountered maybe four times on the whole page, it reads as an event each time.",
+    "keyCharacteristics": [
+      "The grid is visible and continuous — it is the identity, not a layout aid",
+      "Hard-edged alternation of dark (ink) and light (paper) zones, never a gradient transition",
+      "Hairlines instead of spacing to separate; empty outer columns instead of full-bleed",
+      "One typeface family, hierarchy carried by weight and opacity rather than many sizes",
+      "Saturated accent under 5% of any viewport",
+      "Zero shadows, zero gradients, near-zero corner radius",
+      "Discrete, mechanical motion — no springs, no bounce"
+    ],
+    "rules": [
+      {
+        "name": "The Five Percent Rule",
+        "body": "Ultramarine covers less than 5% of any viewport. If a screenshot of the page shows more, an element is wrong, not the rule.",
+        "section": "colors"
+      },
+      {
+        "name": "The White Means Window Rule",
+        "body": "Pure white is never a page background. It appears only inside a schematic panel, so white always signals \"this is the product, seen through glass\".",
+        "section": "colors"
+      },
+      {
+        "name": "The No Accent Text Rule",
+        "body": "#011EFF and darker ultramarine steps are never text on ink — the contrast falls to about 2.5:1. On dark, the accent exists as fill, line and indicator only.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Level Rule",
+        "body": "Inside a single block there are only two type levels: one statement at normal weight and one muted description. A third level means the block is doing two jobs.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Everything is sentence case — headings, buttons, navigation. Uppercase exists at exactly one size, 11px, and always with 0.14em tracking. There is no uppercase in between.",
+        "section": "typography"
+      },
+      {
+        "name": "The Full Stop Rule",
+        "body": "Statement headings end in a period. It makes them read as assertions rather than slogans. Single-word section headings (Expertise, Solutions) are markers, not statements, and take no period.",
+        "section": "typography"
+      },
+      {
+        "name": "The Line Not Gap Rule",
+        "body": "When two things need separating, draw a hairline before you add space. Space is what the sheet has left over, not the tool of first resort.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "If an element needs to feel raised, it is wrong — give it a rule, a ground change, or an empty column instead. A drawing has no shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do draw the six construction lines in every full zone, including through empty space — half the page must show the grid.",
+      "Do keep columns 1 and 12 empty, and put markers, arrows and annotations there.",
+      "Do end a zone on a hairline and start the next one on a hard colour change.",
+      "Do carry hierarchy with weight and opacity; two levels per block.",
+      "Do set every uppercase label at 11px with 0.14em tracking, and nowhere else.",
+      "Do use dashed hairlines for what is projected or connected, solid for what is built.",
+      "Do keep motion discrete: cubic-bezier(0.2, 0, 0, 1), 180ms for state, 320ms for transitions, 700ms for a line drawing itself in. One authored moment per page.",
+      "Do label authored interface material as a schematic — client work is under NDA."
+    ],
+    "donts": [
+      "Don't add a shadow, gradient, glass surface or radius above 2px (the pill excepted).",
+      "Don't let ultramarine exceed 5% of a viewport, become body text, or appear as text on an ink zone.",
+      "Don't use pure white as a page background — white means \"window into the product\".",
+      "Don't separate things with space when a hairline would do it.",
+      "Don't introduce a second typeface, a monospace, or an uppercase size other than 11px.",
+      "Don't animate with springs, bounce, scale-up hovers or a repeated per-section entrance.",
+      "Don't put an icon-plus-heading-plus-text card grid on the page as its structure; cells are regions of the sheet, divided by its lines.",
+      "Don't fabricate client names, logos, screenshots, certifications or benchmarks — the absence is a fact of the product, not a gap to fill."
+    ]
+  }
+}
