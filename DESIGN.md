@@ -6,7 +6,7 @@ colors:
   paper: "#F9FAFB"
   window: "#FFFFFF"
   accent: "#011EFF"
-  accent-quiet: "#546BFF"
+  accent-quiet: "#8091FF"
   ink-heading: "#000F7D"
   text-body-light: "#374151"
   text-muted-light: "#6B7280"
@@ -14,6 +14,8 @@ colors:
   text-body-dark: "#E5E7EB"
   text-muted-dark: "#9CA3AF"
   rule-dark: "rgb(255 255 255 / 0.10)"
+  rule-dark-strong: "rgb(255 255 255 / 0.42)"
+  destructive-dark: "#F87171"
 typography:
   display:
     fontFamily: "e-Ukraine Head, system-ui, sans-serif"
@@ -67,16 +69,15 @@ typography:
     fontFamily: "e-Ukraine, system-ui, sans-serif"
     fontSize: "0.6875rem"
     fontWeight: 500
-    lineHeight: 1
+    lineHeight: 1.45
     letterSpacing: "0.14em"
 rounded:
   edge: "2px"
   pill: "9999px"
 spacing:
-  hair: "4px"
-  tight: "8px"
-  step: "16px"
-  block: "32px"
+  row: "40px"
+  cell: "32px"
+  band: "56px"
   zone: "96px"
   zone-lg: "128px"
 components:
@@ -93,7 +94,8 @@ components:
     backgroundColor: "transparent"
     textColor: "{colors.text-body-light}"
     rounded: "{rounded.edge}"
-    padding: "9px 14px"
+    padding: "0 20px"
+    height: "36px"
   card-cell:
     backgroundColor: "transparent"
     textColor: "{colors.text-body-light}"
@@ -155,8 +157,9 @@ ultramarine that is spent sparingly. Every value comes from the client brand boo
   primary pill button, the top hairline of the document, the fill of the single solid object
   inside a diagram, and small state indicators. Never used for body text, never as a
   background field, never on a dark surface as text.
-- **Quiet Ultramarine** (`#546BFF`): the accent's only permitted text form, and only on ink
-  zones, and only at label or large-text size. Used for links and section markers on dark.
+- **Quiet Ultramarine** (`#8091FF`): the accent's only permitted text form, and only on ink
+  zones. Ultramarine/400 was the brand book's nomination but lands at 4.49:1 on navy — one
+  hundredth under AA for an 11px marker — so the system steps up to ultramarine/300.
 
 ### Neutral
 
@@ -172,6 +175,9 @@ ultramarine that is spent sparingly. Every value comes from the client brand boo
   text on paper; **Muted Slate** (`#6B7280`) for captions and markers on paper.
 - **Hairline Light** (`#E5E7EB`) and **Hairline Dark** (`rgb(255 255 255 / 0.10)`): the
   construction lines. Barely visible by design — legible as structure, never as decoration.
+  Their strong step (`#D1D5DB` on paper, `rgb(255 255 255 / 0.42)` on ink) is not decoration
+  either: it is the boundary of a control — an input underline, a quiet button — and so it
+  stays at or above 3:1 against its ground.
 - On ink zones text works in layers of transparency: white for headings, `#E5E7EB` for body,
   `#9CA3AF` for muted, and the hairline nearly dissolving into the ground.
 
@@ -191,8 +197,9 @@ the contrast falls to about 2.5:1. On dark, the accent exists as fill, line and 
 **Display Font:** e-Ukraine Head (fallback: system-ui, sans-serif)
 **Body Font:** e-Ukraine (fallback: system-ui, sans-serif)
 
-Both are mandated by the client brand book; the files are self-hosted from
-`public/fonts/woff2` in three head weights (300/400/500) and two body weights (400/500).
+Both are mandated by the client brand book; the WOFF2 builds are self-hosted from
+`uapp-site/src/fonts` through `next/font/local`, in three head weights (300/400/500) and two
+body weights (400/500). The source OTFs stay in `uapp-site/public/fonts` and do not ship.
 There is no monospace in the system — technical character comes from the grid and the
 markers, not from a code costume. Numerals are set with `font-variant-numeric: tabular-nums`
 wherever they are compared.
@@ -239,8 +246,13 @@ statements, and take no period.
 ## Layout
 
 A 12-column sheet, maximum width 1440px, with 24px page gutters. The content occupies
-columns 2–11; **columns 1 and 12 stay empty on purpose** and carousel arrows, region markers
-and running annotations live in them.
+columns 3–10; **the outer pairs (1–2 and 11–12) stay empty on purpose** and region markers,
+annotations and the schematic's bleed live in them.
+
+Nested grids never use a column gap. A cell separates itself with padding, so every edge in
+the page lands exactly on a construction line — which also means a row of N cells only works
+when 8 divides by N: two across (4+4) and four across (2+2+2+2) are the system's row shapes,
+three across is not.
 
 Six vertical construction lines are drawn at every second column boundary and run the full
 height of every zone, including through empty space. They are painted per zone so they
@@ -281,7 +293,7 @@ sheet of right angles is the thing you are meant to press.
 
 Borders are always exactly 1px. Dashed 1px hairlines (`4 4` dash) mark what is projected,
 connected or continued — orbits, links, planned regions — and solid hairlines mark what is
-built. Corner ticks (8px L-shaped marks at panel corners) frame schematic windows the way
+built. Corner ticks (9px L-shaped marks at panel corners) frame schematic windows the way
 crop marks frame a plate.
 
 ## Components
@@ -292,8 +304,8 @@ crop marks frame a plate.
 - **Primary:** ultramarine fill (`#011EFF`) with white text, 14px/28px padding, identical on
   both zones — the brand book fixes this pair, and the constancy is what makes the accent
   legible as "the action" wherever it appears.
-- **Hover / Focus:** hover deepens to `#0116BF` over 180ms; focus-visible draws a 2px
-  offset ring in the accent. No lift, no scale, no shadow.
+- **Hover / Focus:** hover deepens to `#0116BF` over 180ms; focus-visible draws a 2px ring
+  in `--ring` at 3px offset. No lift, no scale, no shadow.
 - **Quiet:** a 2px rectangle with a hairline border and no fill, 13px label, used inside
   content ("Explore ISO 20022 Toolkit"), never for the page's main action.
 
@@ -305,8 +317,7 @@ crop marks frame a plate.
 - **Border:** the shared hairline grid; a cell draws only the line it needs (right, bottom).
 - **Internal Padding:** 32px top, 28px sides, 36px bottom — asymmetric, weighted to the base
   so the marker at the top and the statement sit high in the region.
-- **Hover:** the cell's own hairline strengthens and the accent tick at its corner appears.
-  Nothing moves.
+- **Hover:** the cell's own hairline strengthens. Nothing moves, nothing appears.
 
 ### Schematic Window
 
@@ -347,7 +358,8 @@ or a percentage sign it did not earn.
 
 - **Do** draw the six construction lines in every full zone, including through empty space —
   half the page must show the grid.
-- **Do** keep columns 1 and 12 empty, and put markers, arrows and annotations there.
+- **Do** keep the outer column pairs empty, and put markers and annotations there.
+- **Do** split rows two or four across so their edges fall on construction lines.
 - **Do** end a zone on a hairline and start the next one on a hard colour change.
 - **Do** carry hierarchy with weight and opacity; two levels per block.
 - **Do** set every uppercase label at 11px with 0.14em tracking, and nowhere else.

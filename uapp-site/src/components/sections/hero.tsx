@@ -55,7 +55,7 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
           className="settle col-start-8 col-end-13 min-w-0"
           style={{ animationDelay: "560ms" }}
         >
-          <HeroVisual caption={hero.visualCaption} note={hero.visualNote} />
+          <HeroVisual caption={hero.visualCaption} />
         </div>
 
         <div className="sheet-main flex flex-col gap-10">

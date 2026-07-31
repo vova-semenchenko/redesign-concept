@@ -47,8 +47,7 @@ export default function Home() {
         <SolutionsShowcase solutions={homeContent.solutions} />
         <SelectedWork work={homeContent.selectedWork} />
         <AiLayer ai={homeContent.aiLayer} />
-        <CtaStrip cta={homeContent.ctaStrip} tone="ink" />
-        <Approach approach={homeContent.approach} />
+        <Approach approach={homeContent.approach} cta={homeContent.ctaStrip} />
         <TeamTeaser team={homeContent.team} />
         <InsightsTeaser insights={homeContent.insights} />
         <FinalCta cta={homeContent.finalCta} />

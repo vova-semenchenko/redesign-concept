@@ -36,7 +36,6 @@ export const homeContent: HomeContent = {
       { value: "$1B+", label: "in clients' annual revenue" },
     ],
     visualCaption: "Both sides · schematic",
-    visualNote: "Motion next iteration",
   },
   positioningBand: {
     marker: "Positioning",
@@ -45,14 +44,9 @@ export const homeContent: HomeContent = {
       "Eight years in regulated finance — ISO 20022, cards, SEPA, reconciliation and bank-grade security — and just as deeply in wallets, exchanges and on-chain compliance. One team, both sides.",
   },
   trust: {
-    marker: "Track record",
-    metrics: [
-      { value: "8+", label: "years" },
-      { value: "170+", label: "projects" },
-      { value: "15", label: "countries" },
-      { value: "$1B+", label: "clients' annual revenue" },
-    ],
-    certificationsNote: "Security documentation available under NDA.",
+    marker: "Standards we work to",
+    standards: ["ISO 20022", "SEPA Instant", "PSD2 / SCA", "AML / KYC"],
+    note: "Security documentation available under NDA.",
   },
   expertise: {
     marker: "Expertise · 4 domains",
@@ -159,7 +153,7 @@ export const homeContent: HomeContent = {
         id: "debt-collection",
         clientProfile: "EU debt-collection & reconciliation platform",
         domainLine: "CAMT/ISO 20022 statements, multi-jurisdiction VAT",
-        factAnchor: "Automated reconciliation at scale",
+        factAnchor: "Automated CAMT reconciliation",
       },
       {
         id: "sca-secure-enclave",
@@ -186,8 +180,12 @@ export const homeContent: HomeContent = {
     heading: "AI across every layer.",
     statement:
       "AI runs through how we work — from AI-assisted discovery and design-to-code to AI-augmented QA, and into the products we build for you.",
-    certificationsNote:
-      "Team AI certifications — list to be provided by the client.",
+    layers: [
+      "AI-assisted discovery",
+      "Design-to-code",
+      "AI-augmented QA",
+      "The products we build for you",
+    ],
   },
   approach: {
     marker: "Why us · 3 reasons",
@@ -237,7 +235,7 @@ export const homeContent: HomeContent = {
     action: "Describe your challenge",
   },
   finalCta: {
-    marker: "Contact · one business day",
+    marker: "Contact",
     heading: "Describe your challenge.",
     microcopy: [
       "We'll sign an NDA before any details.",
@@ -288,6 +286,6 @@ export const homeContent: HomeContent = {
       { label: "Privacy policy", href: "#" },
       { label: "Cookie policy", href: "#" },
     ],
-    note: "Client work is under NDA. Security documentation available on request.",
+    note: "Client work is under NDA.",
   },
 };

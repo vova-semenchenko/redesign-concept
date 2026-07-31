@@ -75,7 +75,8 @@ readiness, and on whether the team has shipped the exact rail in question.
   `docs/brand-style-guide.md`: ultramarine scale, gray scale, black and white. The two
   secondary colours (`#578ADA`, `#9A98FF`) were explicitly excluded.
 - **Typefaces:** e-Ukraine Head for headings, e-Ukraine for body and UI. Font files are in
-  the repository (`uapp-site/public/fonts/`); the webfont licence question stays open.
+  the repository (source OTFs in `uapp-site/public/fonts/`, shipped WOFF2 in
+  `uapp-site/src/fonts/`); the webfont licence question stays open.
 - **Logo:** `docs/research/assets/logo-uapp.svg`, shape unchanged, white on dark surfaces
   and black on light ones.
 - **Voice:** engineers you can trust with money · precision over promotion · calm

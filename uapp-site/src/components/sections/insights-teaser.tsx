@@ -17,7 +17,7 @@ export function InsightsTeaser({
           description={insights.description}
           className="sheet-main"
         />
-        <ul className="sheet-main">
+        <ul className="border-rule sheet-main border-t">
           {insights.topics.map((topic) => (
             <li
               key={topic.title}

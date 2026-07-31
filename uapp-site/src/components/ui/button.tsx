@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
  * Жодного підняття, масштабування чи тіні на hover: аркуш плаский.
  */
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap font-body font-medium transition-colors duration-[var(--dur-state)] ease-[var(--ease-draft)] outline-none select-none disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button font-body inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors duration-[var(--dur-state)] ease-[var(--ease-draft)] select-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[var(--ring)] disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {

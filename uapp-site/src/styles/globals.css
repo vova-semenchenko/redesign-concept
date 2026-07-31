@@ -107,17 +107,21 @@
   /* accent на темному — ultramarine/400, ТІЛЬКИ великий текст/лейбли (стайлгайд) */
   --accent: var(--color-ultramarine-400);
   --accent-foreground: #ffffff;
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
+  /* #dc2626 на navy дає 3.97:1 — на темній зоні беремо світлішу сходинку */
+  --destructive: #f87171;
+  --destructive-foreground: #00073c;
   --border: color-mix(in srgb, #ffffff 12%, transparent);
   --input: color-mix(in srgb, #ffffff 16%, transparent);
   --ring: var(--color-ultramarine-400);
 
   /* Блюпринт-шар: на темному лінії живуть прозорістю, не сірим */
   --rule: color-mix(in srgb, #ffffff 10%, transparent);
-  --rule-strong: color-mix(in srgb, #ffffff 22%, transparent);
+  /* 42%, не 22%: підкреслення поля — його єдина межа, і вона мусить
+     лишатися видимою як контрол (WCAG 1.4.11, ≥3:1) */
+  --rule-strong: color-mix(in srgb, #ffffff 42%, transparent);
   --marker: var(--color-gray-400);
-  --accent-quiet: var(--color-ultramarine-400);
+  /* ultramarine/400 на navy = 4.49:1, на 0.01 нижче AA для 11px мітки */
+  --accent-quiet: var(--color-ultramarine-300);
   --window: #ffffff;
   --window-foreground: var(--color-gray-700);
   --window-muted: var(--color-gray-500);
@@ -216,6 +220,7 @@
   }
   .sheet-edge-start {
     grid-column: 1 / 3;
+    padding-right: 24px;
   }
   .sheet-edge-end {
     grid-column: 11 / 13;

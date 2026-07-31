@@ -102,7 +102,12 @@
         "purpose": "The hero's construction lines drawing themselves in — once per page."
       }
     ],
-    "breakpoints": [{ "name": "lg", "value": "1024px" }]
+    "breakpoints": [
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
   },
   "components": [
     {

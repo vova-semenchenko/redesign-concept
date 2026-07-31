@@ -17,7 +17,7 @@ export function TeamTeaser({ team }: { team: HomeContent["team"] }) {
           description={team.description}
           className="sheet-main"
         />
-        <ul className="divide-rule border-rule sheet-main grid grid-cols-4 divide-x border-b">
+        <ul className="divide-rule border-rule sheet-main grid grid-cols-4 divide-x border-y">
           {team.roles.map((role) => (
             <li
               key={role}

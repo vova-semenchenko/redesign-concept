@@ -5,15 +5,16 @@ import { Zone } from "@/components/ui/zone";
 import type { HomeContent } from "@/content/types";
 
 /**
- * Титульний блок аркуша: знак, колонки посилань дрібним приглушеним
- * шрифтом і окремий рядок юридичних. Внизу — та сама акцентна лінія,
- * якою сторінка починалася.
+ * Титульний блок аркуша: знак у власному рядку, три колонки посилань
+ * по чотири модулі кожна — так їхні межі стають конструкційними лініями,
+ * а не випадковими краями. Внизу — та сама акцентна лінія, якою
+ * сторінка починалася.
  */
 export function Footer({ footer }: { footer: HomeContent["footer"] }) {
   return (
     <Zone tone="ink" pad="md" divider={false} className="pb-0">
-      <div className="sheet-grid gap-y-16">
-        <div className="col-span-2 flex flex-col gap-6">
+      <div className="sheet-grid gap-y-14">
+        <div className="col-span-12">
           <Logo className="h-5 w-20" />
         </div>
 
@@ -21,7 +22,7 @@ export function Footer({ footer }: { footer: HomeContent["footer"] }) {
           <nav
             key={column.title}
             aria-label={column.title}
-            className="col-span-3 flex flex-col gap-5"
+            className="col-span-4 flex flex-col gap-5 pr-8"
           >
             <Marker>{column.title}</Marker>
             <ul className="flex flex-col gap-3">

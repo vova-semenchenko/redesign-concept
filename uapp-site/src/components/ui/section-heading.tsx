@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { Marker } from "@/components/ui/marker";
-import { Rule } from "@/components/ui/rule";
 
 interface SectionHeadingProps {
   /** Мітка регіону: «об'єкт · величина», а не декоративний eyebrow. */
@@ -23,17 +22,16 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <header className={cn("flex flex-col gap-8", className)}>
+    <header className={cn("flex flex-col gap-8 pb-4", className)}>
       <Marker>{marker}</Marker>
       <div className="grid grid-cols-8 items-end gap-y-6">
-        <h2 className="type-title col-span-5 pr-8">{title}</h2>
+        <h2 className="type-title col-span-4 pr-8">{title}</h2>
         {description ? (
-          <p className="type-body text-muted-foreground col-span-3 pr-8">
+          <p className="type-body text-foreground col-span-4 pr-8">
             {description}
           </p>
         ) : null}
       </div>
-      <Rule />
     </header>
   );
 }

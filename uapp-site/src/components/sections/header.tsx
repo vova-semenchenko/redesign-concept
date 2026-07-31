@@ -23,7 +23,7 @@ export function Header({ nav }: { nav: HomeContent["nav"] }) {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="label-micro text-marker hover:text-heading group relative inline-block py-2 transition-colors duration-[var(--dur-state)]"
+                    className="label-micro text-foreground hover:text-heading group relative inline-block py-2 transition-colors duration-[var(--dur-state)]"
                   >
                     {item.label}
                     <span

@@ -22,7 +22,7 @@ export function PositioningBand({
           <p className="type-headline text-heading col-span-8 max-w-[18ch]">
             {band.statement}
           </p>
-          <p className="type-statement text-muted-foreground col-span-5 col-start-3 pr-8">
+          <p className="type-lead text-foreground col-span-5 col-start-3 pr-8">
             {band.detail}
           </p>
         </div>

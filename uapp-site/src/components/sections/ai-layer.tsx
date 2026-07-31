@@ -4,8 +4,8 @@ import type { HomeContent } from "@/content/types";
 
 /**
  * Найвищий ризик порожніх слів на сторінці, тому блок мінімальний:
- * мандатне твердження на весь аркуш і чесно позначена прогалина —
- * перелік сертифікацій ще не наданий, і пунктир каже це прямо.
+ * мандатне твердження, а під ним — самі шари, у які воно розкладається,
+ * рядками на лініях. Жодного епітета, який не називає місце в процесі.
  */
 export function AiLayer({ ai }: { ai: HomeContent["aiLayer"] }) {
   return (
@@ -19,9 +19,16 @@ export function AiLayer({ ai }: { ai: HomeContent["aiLayer"] }) {
           <p className="type-statement text-foreground max-w-[40ch]">
             {ai.statement}
           </p>
-          <p className="border-rule-strong label-micro text-marker w-fit border border-dashed px-4 py-3">
-            {ai.certificationsNote}
-          </p>
+          <ul className="border-rule grid grid-cols-8 border-t">
+            {ai.layers.map((layer) => (
+              <li
+                key={layer}
+                className="border-rule type-caption text-foreground col-span-2 border-r border-b px-6 py-7 first:pl-0 last:border-r-0"
+              >
+                {layer}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </Zone>

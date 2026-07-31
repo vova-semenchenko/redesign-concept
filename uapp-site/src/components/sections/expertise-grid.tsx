@@ -21,16 +21,16 @@ export function ExpertiseGrid({
           className="sheet-main"
         />
 
-        <ul className="sheet-main">
+        <ul className="border-rule sheet-main border-t">
           {expertise.cards.map((card) => (
             <li
               key={card.title}
-              className="border-rule hover:border-rule-strong group grid grid-cols-8 items-start gap-y-4 border-b py-10 transition-colors duration-[var(--dur-state)] first:border-t"
+              className="border-rule hover:border-rule-strong group grid grid-cols-8 items-start gap-y-4 border-b py-10 transition-colors duration-[var(--dur-state)]"
             >
               <h3 className="type-subtitle text-heading col-span-2 pr-8">
                 {card.title}
               </h3>
-              <p className="type-body text-muted-foreground col-span-4 pr-10">
+              <p className="type-body text-foreground col-span-4 pr-10">
                 {card.description}
               </p>
               <ul className="col-span-2 flex flex-col gap-2.5 pr-4">

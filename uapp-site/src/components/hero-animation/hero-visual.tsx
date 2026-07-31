@@ -18,15 +18,13 @@ const SHORES = [
  */
 export function HeroVisual({
   caption,
-  note,
   className,
 }: {
   caption: string;
-  note: string;
   className?: string;
 }) {
   return (
-    <SchematicWindow caption={caption} note={note} className={className}>
+    <SchematicWindow caption={caption} className={className}>
       <div aria-hidden="true" className="relative px-7 py-8">
         {/* Вісь між берегами: пунктир — те, що зв'язане, а не збудоване */}
         <div className="pointer-events-none absolute inset-y-8 left-1/2 flex -translate-x-1/2 flex-col items-center">

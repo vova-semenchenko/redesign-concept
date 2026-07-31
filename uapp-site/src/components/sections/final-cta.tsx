@@ -74,7 +74,14 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
       challenge: validate("challenge", values.challenge),
     };
     setErrors(next);
-    if (Object.values(next).every((message) => !message)) setSubmitted(true);
+    const firstInvalid = (Object.keys(next) as FieldName[]).find(
+      (field) => next[field],
+    );
+    if (!firstInvalid) {
+      setSubmitted(true);
+      return;
+    }
+    document.getElementById(firstInvalid)?.focus();
   };
 
   return (
@@ -88,7 +95,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
           <h2 className="type-display">{cta.heading}</h2>
           <ul className="flex flex-col gap-3">
             {cta.microcopy.map((line) => (
-              <li key={line} className="type-body text-muted-foreground">
+              <li key={line} className="type-body text-foreground">
                 {line}
               </li>
             ))}
@@ -97,7 +104,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
 
         <div className="col-start-8 col-end-12">
           {submitted ? (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6" role="status">
               <Rule />
               <p className="type-subtitle text-heading">{cta.successMessage}</p>
             </div>
@@ -127,6 +134,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
                     {errors[field.name] ? (
                       <p
                         id={`${field.name}-error`}
+                        role="alert"
                         className="text-destructive type-caption"
                       >
                         {errors[field.name]}
@@ -137,15 +145,19 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
 
                 <div className="col-span-2 flex flex-col gap-3">
                   <Label htmlFor="challenge">{cta.fields.challenge}</Label>
+                  <p id="challenge-hint" className="type-caption text-marker">
+                    {cta.fields.challengeHint}
+                  </p>
                   <Textarea
                     id="challenge"
                     name="challenge"
                     rows={4}
-                    placeholder={cta.fields.challengeHint}
                     value={values.challenge}
                     aria-invalid={Boolean(errors.challenge)}
                     aria-describedby={
-                      errors.challenge ? "challenge-error" : undefined
+                      errors.challenge
+                        ? "challenge-hint challenge-error"
+                        : "challenge-hint"
                     }
                     onChange={(event) =>
                       setField("challenge", event.target.value)
@@ -155,6 +167,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
                   {errors.challenge ? (
                     <p
                       id="challenge-error"
+                      role="alert"
                       className="text-destructive type-caption"
                     >
                       {errors.challenge}

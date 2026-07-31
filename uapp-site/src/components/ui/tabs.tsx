@@ -71,7 +71,7 @@ function TabsList({
         ref={listRef}
         data-slot="tabs-list"
         className={cn(
-          "divide-rule border-rule flex divide-x border-b",
+          "divide-rule border-rule flex divide-x border-y",
           className,
         )}
         {...props}
@@ -99,7 +99,7 @@ function TabsTrigger({
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "flex-1 px-6 py-5 text-left transition-colors duration-[var(--dur-state)]",
+        "flex-1 items-start px-6 py-5 text-left transition-colors duration-[var(--dur-state)]",
         "[&_.label-micro]:text-marker [&_.type-subtitle]:text-marker",
         "hover:[&_.type-subtitle]:text-heading",
         "data-[state=active]:[&_.type-subtitle]:text-heading data-[state=active]:[&_.label-micro]:text-accent-quiet",
@@ -118,7 +118,10 @@ function TabsContent({
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
-      className={cn("outline-none", className)}
+      className={cn(
+        "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ring)]",
+        className,
+      )}
       {...props}
     />
   );

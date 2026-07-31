@@ -50,11 +50,11 @@ export interface HomeContent {
     metrics: Metric[];
     /** Підпис під сигнатурним ефектом — він і називає його схемою. */
     visualCaption: string;
-    visualNote: string;
   };
   /** Мандатний текст, розбитий на твердження і деталізацію — слова ті самі. */
   positioningBand: { marker: string; statement: string; detail: string };
-  trust: { marker: string; metrics: Metric[]; certificationsNote: string };
+  /** Смуга під героєм несе стандарти, а не повтор геройських цифр. */
+  trust: { marker: string; standards: string[]; note: string };
   expertise: { marker: string; heading: string; cards: ExpertiseCard[] };
   solutions: { marker: string; heading: string; cards: SolutionCard[] };
   selectedWork: {
@@ -68,7 +68,7 @@ export interface HomeContent {
     marker: string;
     heading: string;
     statement: string;
-    certificationsNote: string;
+    layers: string[];
   };
   approach: {
     marker: string;
