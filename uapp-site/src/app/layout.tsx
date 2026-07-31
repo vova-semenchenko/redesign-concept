@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { eUkraine, eUkraineHead } from "@/fonts";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${eUkraineHead.variable} ${eUkraine.variable}`}>
       <body className="bg-background text-foreground font-body antialiased">
         {children}
       </body>
