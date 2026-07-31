@@ -1,13 +1,11 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { IsoIcon, type IsoIconName } from "@/components/ui/iso-icon";
+import { MicroLabel } from "@/components/ui/micro-label";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Container, Section } from "@/components/ui/section";
 import type { HomeContent } from "@/content/types";
+
+/** Порядок banking-first із контенту: рейки · комплаєнс · безпека · on-chain. */
+const icons: IsoIconName[] = ["layers", "gate", "shell", "nodes"];
 
 export function ExpertiseGrid({
   expertise,
@@ -15,25 +13,39 @@ export function ExpertiseGrid({
   expertise: HomeContent["expertise"];
 }) {
   return (
-    <section id="expertise" className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeading title={expertise.heading} />
-      <div className="mt-10 grid grid-cols-4 gap-6">
-        {expertise.cards.map((card) => (
-          <Card key={card.title}>
-            <CardHeader>
-              <CardTitle>{card.title}</CardTitle>
-              <CardDescription>{card.description}</CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-wrap gap-2">
-              {card.standards.map((s) => (
-                <Badge key={s} variant="secondary">
-                  {s}
-                </Badge>
-              ))}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </section>
+    <Section id="expertise" zone="light">
+      <Container className="py-28">
+        <SectionHeading index="01" title={expertise.heading} />
+        {/* Рядки списку розділені хейрлайнами, а не відступами */}
+        <div className="mt-16 border-t border-rule">
+          {expertise.cards.map((card, i) => (
+            <div
+              key={card.title}
+              className="grid grid-cols-12 items-start gap-x-8 border-b border-rule py-10"
+            >
+              <div className="col-span-1">
+                <IsoIcon
+                  name={icons[i] ?? "layers"}
+                  className="size-14 text-heading"
+                />
+              </div>
+              <h3 className="col-span-4 text-subtitle">{card.title}</h3>
+              <div className="col-span-7">
+                <p className="max-w-(--measure) text-muted-foreground">
+                  {card.description}
+                </p>
+                <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                  {card.standards.map((s) => (
+                    <MicroLabel as="li" key={s}>
+                      {s}
+                    </MicroLabel>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </Section>
   );
 }

@@ -27,8 +27,10 @@ export const homeContent: HomeContent = {
       { value: "$1B+", label: "in clients' annual revenue" },
     ],
   },
-  positioningBand:
-    "Banking first, crypto where you need it. Eight years in regulated finance — ISO 20022, cards, SEPA, reconciliation and bank-grade security — and just as deeply in wallets, exchanges and on-chain compliance. One team, both sides.",
+  positioningBand: {
+    lead: "Banking first, crypto where you need it.",
+    body: "Eight years in regulated finance — ISO 20022, cards, SEPA, reconciliation and bank-grade security — and just as deeply in wallets, exchanges and on-chain compliance. One team, both sides.",
+  },
   trust: {
     metrics: [
       { value: "8+", label: "years" },
@@ -108,6 +110,10 @@ export const homeContent: HomeContent = {
   selectedWork: {
     heading: "Selected work",
     ndaBadge: "Client withheld under NDA",
+    ctaCard: {
+      note: "Full case studies under NDA.",
+      cta: "Request the details",
+    },
     cases: [
       {
         id: "sepa-instant",
@@ -152,6 +158,7 @@ export const homeContent: HomeContent = {
     heading: "AI across every layer",
     statement:
       "AI runs through how we work — from AI-assisted discovery and design-to-code to AI-augmented QA, and into the products we build for you.",
+    stages: ["Discovery", "Design-to-code", "QA", "Your product"],
     certificationsNote:
       "Team AI certifications — list to be provided by the client.",
   },
@@ -192,5 +199,9 @@ export const homeContent: HomeContent = {
     ],
     submitLabel: "Describe your challenge",
     successMessage: "Thanks — we'll get back to you within one business day.",
+  },
+  footer: {
+    legal: "© 2026 UAPP",
+    note: "Engineering for regulated finance.",
   },
 };

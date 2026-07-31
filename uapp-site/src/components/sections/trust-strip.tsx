@@ -1,17 +1,18 @@
-import { MetricStat } from "@/components/ui/metric-stat";
+import { MetricRow } from "@/components/ui/metric-stat";
+import { MicroLabel } from "@/components/ui/micro-label";
+import { Container, Section } from "@/components/ui/section";
 import type { HomeContent } from "@/content/types";
 
 export function TrustStrip({ trust }: { trust: HomeContent["trust"] }) {
   return (
-    <section className="border-b border-border">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-6 py-10">
-        {trust.metrics.map((m) => (
-          <MetricStat key={m.label} value={m.value} label={m.label} />
-        ))}
-        <p className="text-sm text-muted-foreground">
-          {trust.certificationsNote}
-        </p>
-      </div>
-    </section>
+    <Section zone="quiet">
+      <Container className="py-14">
+        <div className="flex items-baseline justify-between gap-8">
+          <MicroLabel>Track record</MicroLabel>
+          <MicroLabel>{trust.certificationsNote}</MicroLabel>
+        </div>
+        <MetricRow metrics={trust.metrics} className="mt-10" />
+      </Container>
+    </Section>
   );
 }

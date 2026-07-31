@@ -39,12 +39,28 @@ export interface HomeContent {
     ctaSecondary: string;
     metrics: Metric[];
   };
-  positioningBand: string;
+  /**
+   * Мандатний текст брифу §8, розбитий на два рівні ієрархії для верстки:
+   * `lead + " " + body` дає рядок брифу слово в слово.
+   */
+  positioningBand: { lead: string; body: string };
   trust: { metrics: Metric[]; certificationsNote: string };
   expertise: { heading: string; cards: ExpertiseCard[] };
   solutions: { heading: string; cards: SolutionCard[] };
-  selectedWork: { heading: string; ndaBadge: string; cases: CaseTeaser[] };
-  aiLayer: { heading: string; statement: string; certificationsNote: string };
+  selectedWork: {
+    heading: string;
+    ndaBadge: string;
+    cases: CaseTeaser[];
+    /** Остання комірка сітки кейсів — CTA замість картки. */
+    ctaCard: { note: string; cta: string };
+  };
+  aiLayer: {
+    heading: string;
+    statement: string;
+    /** Підписи вузлів схеми — узяті з мандатного statement, не нові твердження. */
+    stages: string[];
+    certificationsNote: string;
+  };
   approach: {
     heading: string;
     pillars: { title: string; description: string }[];
@@ -57,4 +73,5 @@ export interface HomeContent {
     submitLabel: string;
     successMessage: string;
   };
+  footer: { legal: string; note: string };
 }

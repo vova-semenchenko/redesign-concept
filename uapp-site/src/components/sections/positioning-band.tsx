@@ -1,3 +1,4 @@
+import { Container, Section } from "@/components/ui/section";
 import type { HomeContent } from "@/content/types";
 
 export function PositioningBand({
@@ -6,10 +7,14 @@ export function PositioningBand({
   text: HomeContent["positioningBand"];
 }) {
   return (
-    <section className="dark bg-background py-16">
-      <p className="mx-auto max-w-4xl px-6 text-2xl font-medium text-heading">
-        {text}
-      </p>
-    </section>
+    <Section zone="dark">
+      <Container className="py-24">
+        {/* Два рівні всередині блоку: твердження — і приглушена деталізація */}
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-title text-heading">{text.lead}</p>
+          <p className="mt-6 text-lead text-muted-foreground">{text.body}</p>
+        </div>
+      </Container>
+    </Section>
   );
 }
