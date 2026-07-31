@@ -65,7 +65,7 @@ The tone barely drifts across the page — deliberately: banking-grade evenness 
 - **Form:** visible labels (not placeholders); a placeholder is only a format example. Post-submit copy states what happens and when ("We'll reply within one business day" — only if true; we don't write unverified promises).
 - **Validation errors:** what's wrong + how to fix it, without blame. Banned: invalid / illegal / incorrect. Example: `Enter a work email, like name@company.com` instead of `Invalid email address`. Show after the user leaves the field, not while typing.
 - **Empty/intermediate states** (if they appear in showcase mockups): name the real operation; no "Please wait…", no fake progress.
-- All other states: follow `/impeccable clarify` (message hierarchy: fact → action → context → tone).
+- **All other states:** keep the message hierarchy — fact first (what happened), then action (what to do about it), then context (why), then tone. Cut anything that does not serve one of the four.
 
 ## 5. Anti-slop filter
 

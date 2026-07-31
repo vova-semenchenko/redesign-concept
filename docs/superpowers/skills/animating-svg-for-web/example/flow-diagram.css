@@ -1,0 +1,231 @@
+/* Companion styles for FlowDiagram.tsx.
+ *
+ * Structure, and the reason for it:
+ *   1. token aliases        — one place to retheme the whole graphic
+ *   2. resolved base styles — what everyone sees without JS or with reduce
+ *   3. .is-playing          — the one-shot arc, acts 1–5
+ *   4. .is-idle             — the bounded, gated loop
+ *   5. reduced motion       — removes motion, never content
+ */
+
+/* 1 — tokens ------------------------------------------------------------------ */
+.flow-diagram {
+  /* fall back to sane values so the example also runs outside a token system */
+  --diagram-ink: var(--color-ink, #12121a);
+  --diagram-muted: var(--color-ink-muted, #5b5b6b);
+  --diagram-surface: var(--color-surface-2, #ffffff);
+  --diagram-line: var(--color-border, #c9c9d6);
+  --diagram-accent: var(--color-accent, #2f4bff);
+  --diagram-wash-from: var(--color-surface-1, #f6f7fb);
+  --diagram-wash-to: var(--color-surface-1, #eef0f8);
+
+  /* three curves, no fourth: entrances/pops, on-screen movement, loops.
+   * The arrowhead has no separate "pop" curve — impact comes from 140ms + scale,
+   * not from an overshoot that would make labels wobble. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-idle: cubic-bezier(0.37, 0, 0.63, 1);
+
+  --stagger: 70ms;
+  --act1: 200ms; /* stage is up */
+  --act3: 700ms; /* first edge starts */
+  --edge-dur: 520ms;
+
+  /* sizing lives in CSS, never in width/height attributes → no layout shift */
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--diagram-ink);
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+
+/* 2 — resolved base state ----------------------------------------------------- */
+/* Nothing here is hidden. This is the diagram a no-JS visitor reads. */
+
+.region rect {
+  fill: none;
+  stroke: var(--diagram-line);
+  stroke-dasharray: 4 6;
+}
+.region__title {
+  fill: var(--diagram-muted);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.node__box {
+  transform-box: fill-box; /* origin = this shape, not the SVG corner */
+  transform-origin: center;
+  /* interactive state = transition, so a fast in-and-out retargets instead of
+   * restarting from zero the way a keyframe would */
+  transition: transform 180ms var(--ease-out);
+}
+/* touch devices fire :hover on tap and the state sticks — gate it */
+@media (hover: hover) and (pointer: fine) {
+  .node:hover .node__box {
+    transform: translateY(-2px);
+  }
+}
+.node__box rect {
+  fill: var(--diagram-surface);
+  stroke: var(--diagram-line);
+  stroke-width: 1.5;
+}
+.node[data-node="gateway"] .node__box rect {
+  stroke: var(--diagram-accent);
+  stroke-width: 2;
+}
+
+.edge {
+  fill: none;
+  stroke: var(--diagram-line);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  /* pathLength="1" → dash units are fractions of the path */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0; /* resolved: fully drawn */
+}
+.edge__head {
+  fill: var(--diagram-line);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.label {
+  fill: var(--diagram-ink);
+  font-size: 19px;
+  font-weight: 600;
+}
+.label--sub {
+  fill: var(--diagram-muted);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* Hard rule 10, made concrete. Font size is in viewBox units, so the effective size
+ * is `font-size × (rendered width / 960)`. At 1440px wide that is 19 × 1.5 = 28.5px;
+ * at 375px it collapses to 7.4px — below the 12px floor. Below ~640px this diagram
+ * needs a taller viewBox with a stacked layout; the interim fix is to bump the units
+ * so the sub-label is at least readable, and to drop the sub-label copy entirely. */
+@media (max-width: 640px) {
+  .label {
+    font-size: 34px;
+  }
+  .label--sub {
+    display: none;
+  }
+}
+
+.pulse {
+  fill: var(--diagram-accent);
+  opacity: 0; /* only exists while idling */
+  offset-rotate: 0deg;
+  transform-box: fill-box;
+}
+
+/* 3 — the arc ----------------------------------------------------------------- */
+
+/* act 1: stage */
+.is-playing .layer-bg,
+.is-playing .region {
+  animation: fade-in 450ms var(--ease-out) both;
+}
+
+/* act 2: nodes, in flow order */
+.is-playing .node__box {
+  animation: node-in 380ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) + var(--act1));
+}
+.is-playing .label-group {
+  animation: fade-in 300ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) + var(--act1) + 120ms);
+}
+
+/* act 3: edges draw source → destination, heads pop as the line lands */
+.is-playing .edge {
+  animation: edge-draw var(--edge-dur) var(--ease-in-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) + var(--act3));
+}
+.is-playing .edge__head {
+  animation: head-pop 140ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) + var(--act3) + var(--edge-dur) - 40ms);
+}
+
+/* act 4–5 are the pulse (below) plus the hold: nothing animates after ~2.6s */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes node-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes edge-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes head-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.8); /* not 0.6, and never 0: nothing appears from nothing */
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 4 — idle loop (gated by JS: visible + tab in front) ------------------------- */
+.is-idle .pulse {
+  animation: pulse-travel 1400ms linear infinite;
+  animation-delay: 400ms;
+}
+@keyframes pulse-travel {
+  from {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  to {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* 5 — reduced motion: gentler, not gone --------------------------------------- */
+/* Reset broadly first — a hand-picked selector list always leaks one keyframe —
+ * then re-add the single gentle thing: the graphic cross-fades in, nothing moves.
+ * The trigger class is still applied under reduce (see FlowDiagram.tsx); only the
+ * idle loop is withheld by JS. CSS decides what motion means. */
+@media (prefers-reduced-motion: reduce) {
+  .flow-diagram *,
+  .flow-diagram *::before,
+  .flow-diagram *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .flow-diagram.is-playing {
+    animation: fade-in 200ms ease both !important;
+  }
+}
