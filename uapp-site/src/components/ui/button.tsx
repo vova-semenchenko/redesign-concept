@@ -10,6 +10,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
+        /* Первинна дія: повністю скруглена пігулка, суцільна заливка акцентом.
+           Заливка однакова на обох поверхнях — мандат стайлгайду розд. 4. */
+        pill: "rounded-full bg-primary px-5 text-primary-foreground transition-colors duration-tap ease-mech hover:bg-primary-hover",
+        /* Вторинна дія всередині контенту: прямокутник, ледь помітна заливка. */
+        quiet:
+          "border-rule bg-quiet text-micro uppercase text-foreground transition-colors duration-tap ease-mech hover:border-heading hover:text-heading",
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -26,6 +32,8 @@ const buttonVariants = cva(
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        /* Головна дія першого екрана / фінального CTA */
+        hero: "h-11 gap-2 px-6 text-[0.9375rem]",
         icon: "size-8",
         "icon-xs":
           "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
