@@ -1,5 +1,13 @@
 import type { HomeContent } from "./types";
 
+/**
+ * Мандатний копірайт (бриф §8) — hero, positioning band, expertise-картки,
+ * шість кейсів, AI-блок і три стовпи Approach — збережений за змістом;
+ * правки тут допускаються лише точкові (пунктуація, регістр).
+ *
+ * Вільний шар — мітки регіонів, заголовки секцій, підписи, футер і стани
+ * форми — написаний за docs/voice-and-tone.md.
+ */
 export const homeContent: HomeContent = {
   nav: {
     items: [
@@ -12,6 +20,7 @@ export const homeContent: HomeContent = {
     cta: "Describe your challenge",
   },
   hero: {
+    marker: "Regulated fintech · payments · crypto",
     h1: "Engineering for regulated finance.",
     h1Alternatives: [
       "We build the systems that move money.",
@@ -26,10 +35,17 @@ export const homeContent: HomeContent = {
       { value: "15", label: "countries" },
       { value: "$1B+", label: "in clients' annual revenue" },
     ],
+    visualCaption: "Both sides · schematic",
+    visualNote: "Motion next iteration",
   },
-  positioningBand:
-    "Banking first, crypto where you need it. Eight years in regulated finance — ISO 20022, cards, SEPA, reconciliation and bank-grade security — and just as deeply in wallets, exchanges and on-chain compliance. One team, both sides.",
+  positioningBand: {
+    marker: "Positioning",
+    statement: "Banking first, crypto where you need it.",
+    detail:
+      "Eight years in regulated finance — ISO 20022, cards, SEPA, reconciliation and bank-grade security — and just as deeply in wallets, exchanges and on-chain compliance. One team, both sides.",
+  },
   trust: {
+    marker: "Track record",
     metrics: [
       { value: "8+", label: "years" },
       { value: "170+", label: "projects" },
@@ -39,7 +55,8 @@ export const homeContent: HomeContent = {
     certificationsNote: "Security documentation available under NDA.",
   },
   expertise: {
-    heading: "Expertise",
+    marker: "Expertise · 4 domains",
+    heading: "Four domains, banking-first.",
     cards: [
       {
         title: "Fintech & Payments",
@@ -72,41 +89,57 @@ export const homeContent: HomeContent = {
     ],
   },
   solutions: {
-    heading: "Solutions",
+    marker: "Solutions · 4 products",
+    heading: "Four products, one flagship.",
     cards: [
       {
         id: "embedded-crypto",
+        action: "Embed crypto",
         title: "Embedded Crypto for Banks",
         flagship: true,
         audience: "Banks and EMIs adding regulated crypto services",
         problem:
           "Launch compliant crypto features inside your banking app without building the infrastructure yourself.",
+        standards: ["Regulated provider integration", "Settlement webhooks"],
       },
       {
         id: "iso20022-toolkit",
+        action: "Process messages",
         title: "ISO 20022 Toolkit",
         audience: "Payment institutions migrating message flows",
         problem:
           "Model, validate and process ISO 20022 message lifecycles without reinventing the parser.",
+        standards: [
+          "Message validation",
+          "Lifecycle modelling",
+          "CAMT statements",
+        ],
       },
       {
         id: "reconciliation-agent",
+        action: "Reconcile ledgers",
         title: "Bank–Crypto Reconciliation Agent",
         audience: "Teams operating across fiat and on-chain ledgers",
         problem:
           "Reconcile transactions across banking and on-chain rails automatically.",
+        standards: ["Fiat ledgers", "On-chain ledgers", "Automated matching"],
       },
       {
         id: "sca-signing",
+        action: "Sign transactions",
         title: "SCA / Transaction Signing",
         audience: "Fintechs needing strong customer authentication",
         problem:
           "On-device transaction signing that meets SCA requirements without hurting UX.",
+        standards: ["On-device ECDSA", "Secure Enclave", "PSD2 / SCA"],
       },
     ],
   },
   selectedWork: {
-    heading: "Selected work",
+    marker: "Selected work · 6 engagements",
+    heading: "Six engagements, clients withheld.",
+    description:
+      "Every client here is under NDA. What we can show is the rail, the standard and what shipped.",
     ndaBadge: "Client withheld under NDA",
     cases: [
       {
@@ -149,14 +182,16 @@ export const homeContent: HomeContent = {
     ],
   },
   aiLayer: {
-    heading: "AI across every layer",
+    marker: "AI · delivery and product",
+    heading: "AI across every layer.",
     statement:
       "AI runs through how we work — from AI-assisted discovery and design-to-code to AI-augmented QA, and into the products we build for you.",
     certificationsNote:
       "Team AI certifications — list to be provided by the client.",
   },
   approach: {
-    heading: "Why us",
+    marker: "Why us · 3 reasons",
+    heading: "Why us.",
     pillars: [
       {
         title: "Both sides of the bridge",
@@ -176,21 +211,83 @@ export const homeContent: HomeContent = {
     ],
   },
   team: {
-    heading: "The architects who'll work on your system",
+    marker: "Team · senior only",
+    heading: "The architects who'll work on your system.",
     description:
       "A senior team of payments architects, security & compliance leads and on-chain systems engineers.",
+    roles: [
+      "Payments architects",
+      "Security leads",
+      "Compliance leads",
+      "On-chain systems engineers",
+    ],
   },
   insights: {
-    heading: "Insights",
+    marker: "Insights · 3 topics",
+    heading: "Engineering notes.",
     description: "Engineering notes on ISO 20022, on-chain compliance and SCA.",
+    topics: [
+      { title: "ISO 20022 message lifecycle", domain: "Payments" },
+      { title: "On-chain compliance", domain: "Crypto" },
+      { title: "SCA and transaction signing", domain: "Security" },
+    ],
+  },
+  ctaStrip: {
+    statement: "Every engagement starts with an NDA.",
+    action: "Describe your challenge",
   },
   finalCta: {
-    heading: "Describe your challenge",
+    marker: "Contact · one business day",
+    heading: "Describe your challenge.",
     microcopy: [
       "We'll sign an NDA before any details.",
       "Response within one business day.",
     ],
     submitLabel: "Describe your challenge",
     successMessage: "Thanks — we'll get back to you within one business day.",
+    fields: {
+      name: "Name",
+      email: "Work email",
+      company: "Company",
+      challenge: "Your challenge",
+      challengeHint:
+        "The rail, the standard, the deadline — whatever matters most.",
+    },
+  },
+  footer: {
+    columns: [
+      {
+        title: "Expertise",
+        links: [
+          { label: "Fintech & Payments", href: "#expertise" },
+          { label: "Compliance & AML", href: "#expertise" },
+          { label: "Security", href: "#expertise" },
+          { label: "Crypto & Web3", href: "#expertise" },
+        ],
+      },
+      {
+        title: "Solutions",
+        links: [
+          { label: "Embedded Crypto for Banks", href: "#solutions" },
+          { label: "ISO 20022 Toolkit", href: "#solutions" },
+          { label: "Bank–Crypto Reconciliation Agent", href: "#solutions" },
+          { label: "SCA / Transaction Signing", href: "#solutions" },
+        ],
+      },
+      {
+        title: "Company",
+        links: [
+          { label: "Case studies", href: "#work" },
+          { label: "Team", href: "#team" },
+          { label: "Insights", href: "#insights" },
+          { label: "Contact", href: "#contact" },
+        ],
+      },
+    ],
+    legal: [
+      { label: "Privacy policy", href: "#" },
+      { label: "Cookie policy", href: "#" },
+    ],
+    note: "Client work is under NDA. Security documentation available on request.",
   },
 };

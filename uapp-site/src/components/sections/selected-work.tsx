@@ -1,32 +1,44 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Marker } from "@/components/ui/marker";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Zone } from "@/components/ui/zone";
 import type { HomeContent } from "@/content/types";
 
+/**
+ * Шість комірок аркуша, розділених його ж лініями, а не власними рамками.
+ * Стриманість NDA тут — сама подача: профіль клієнта замість імені,
+ * рейка й стандарт замість скріншота, один факт унизу комірки.
+ */
 export function SelectedWork({ work }: { work: HomeContent["selectedWork"] }) {
   return (
-    <section id="work" className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeading title={work.heading} />
-      <div className="mt-10 grid grid-cols-3 gap-6">
-        {work.cases.map((c) => (
-          <Card key={c.id}>
-            <CardHeader>
-              <Badge variant="outline">{work.ndaBadge}</Badge>
-              <CardTitle className="mt-3">{c.clientProfile}</CardTitle>
-              <CardDescription>{c.domainLine}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm font-medium text-heading">{c.factAnchor}</p>
-            </CardContent>
-          </Card>
-        ))}
+    <Zone tone="paper" pad="md" id="work">
+      <div className="sheet-grid gap-y-14">
+        <SectionHeading
+          marker={work.marker}
+          title={work.heading}
+          description={work.description}
+          className="sheet-main"
+        />
+
+        <ul className="border-rule sheet-main grid grid-cols-3 border-t">
+          {work.cases.map((item) => (
+            <li
+              key={item.id}
+              className="border-rule hover:border-rule-strong group flex flex-col gap-5 border-r border-b px-7 pt-8 pb-9 transition-colors duration-[var(--dur-state)] [&:nth-child(3n)]:border-r-0 [&:nth-child(3n)]:pr-0 [&:nth-child(3n+1)]:pl-0"
+            >
+              <Marker className="text-marker/80">{work.ndaBadge}</Marker>
+              <h3 className="type-subtitle text-heading">
+                {item.clientProfile}
+              </h3>
+              <p className="type-body text-muted-foreground flex-1">
+                {item.domainLine}
+              </p>
+              <p className="border-rule group-hover:border-rule-strong text-heading type-caption border-t pt-4 font-medium transition-colors duration-[var(--dur-state)]">
+                {item.factAnchor}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </Zone>
   );
 }

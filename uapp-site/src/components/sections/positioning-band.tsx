@@ -1,15 +1,32 @@
+import { Marker } from "@/components/ui/marker";
+import { Zone } from "@/components/ui/zone";
 import type { HomeContent } from "@/content/types";
 
+/**
+ * Текстова пауза після щільного героя: одне мандатне твердження на весь
+ * аркуш, без опису під ним. Мітка живе в лівій порожній колонці — там,
+ * де на кресленні підписують вид.
+ */
 export function PositioningBand({
-  text,
+  band,
 }: {
-  text: HomeContent["positioningBand"];
+  band: HomeContent["positioningBand"];
 }) {
   return (
-    <section className="dark bg-background py-16">
-      <p className="mx-auto max-w-4xl px-6 text-2xl font-medium text-heading">
-        {text}
-      </p>
-    </section>
+    <Zone tone="paper" pad="lg">
+      <div className="sheet-grid gap-y-10">
+        <div className="sheet-edge-start">
+          <Marker tick>{band.marker}</Marker>
+        </div>
+        <div className="sheet-main grid grid-cols-8 gap-y-8">
+          <p className="type-headline text-heading col-span-8 max-w-[18ch]">
+            {band.statement}
+          </p>
+          <p className="type-statement text-muted-foreground col-span-5 col-start-3 pr-8">
+            {band.detail}
+          </p>
+        </div>
+      </div>
+    </Zone>
   );
 }

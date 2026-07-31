@@ -1,18 +1,31 @@
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Zone } from "@/components/ui/zone";
 import type { HomeContent } from "@/content/types";
 
+/** Три стовпи, розділені вертикальними лініями сітки. */
 export function Approach({ approach }: { approach: HomeContent["approach"] }) {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeading title={approach.heading} />
-      <div className="mt-10 grid grid-cols-3 gap-8">
-        {approach.pillars.map((p) => (
-          <div key={p.title}>
-            <h3 className="text-lg font-semibold">{p.title}</h3>
-            <p className="mt-2 text-foreground">{p.description}</p>
-          </div>
-        ))}
+    <Zone tone="paper" pad="md">
+      <div className="sheet-grid gap-y-14">
+        <SectionHeading
+          marker={approach.marker}
+          title={approach.heading}
+          className="sheet-main"
+        />
+        <ul className="divide-rule sheet-main grid grid-cols-3 divide-x">
+          {approach.pillars.map((pillar) => (
+            <li
+              key={pillar.title}
+              className="flex flex-col gap-4 px-8 first:pl-0"
+            >
+              <h3 className="type-subtitle text-heading">{pillar.title}</h3>
+              <p className="type-body text-muted-foreground">
+                {pillar.description}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </Zone>
   );
 }
