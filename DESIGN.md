@@ -80,6 +80,7 @@ spacing:
   band: "56px"
   zone: "96px"
   zone-lg: "128px"
+  zone-fold: "96px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
@@ -228,7 +229,9 @@ a drawing annotation. The whole hierarchy is that one voice at two extremes.
   form errors — secondary text that must still read comfortably.
 - **Label** (500, 0.6875rem, uppercase, tracking 0.14em): region markers, table headers,
   diagram annotations, tab captions.
-- **Metric** (300, 3rem, tabular-nums, tracking -0.02em): the figures in trust rows.
+- **Metric** (300, `clamp(2.25rem, 3.1vw, 3rem)`, tabular-nums, tracking -0.02em): the
+  figures in evidence rows. It scales because a fixed 48px pushes a four-glyph value past
+  its own dividing rule once the column narrows.
 
 ### Named Rules
 
@@ -267,6 +270,12 @@ Recurring layouts: a two-column row (label left, statement and muted description
 argument blocks; a three-across cell grid divided by grid lines rather than gaps, with the
 last cell replaced by a call to action; a metrics row split by vertical rules; centred
 composition for intro and closing zones, left-aligned for everything that carries content.
+
+One zone type breaks the rhythm on purpose. A **fold zone** — currently the hero — is
+budgeted to finish inside one laptop screen, because the evidence it carries is worthless
+below the fold: it takes 96px of vertical padding instead of 128px, drops to 64px under
+1200px, and separates its last group with a hairline rather than with space. Every other
+zone keeps its air.
 
 Desktop-first per the brief. Below 1024px the sheet collapses to a single content column,
 the construction lines reduce from six to two, and the empty outer columns give up their
@@ -351,6 +360,13 @@ column 1, navigation centred, and the pill CTA in column 12 — the two ends of 
 Three or four figures split by full-height vertical rules, value in Display Light with
 tabular numerals, label beneath in 11px uppercase muted. A metric never gets a card, an icon,
 or a percentage sign it did not earn.
+
+**The Shared Baseline Rule.** Values sit on one line whatever their labels do. The row owns
+two grid tracks and each cell inherits them through `grid-rows-subgrid`, so a label that
+wraps to two lines pushes nothing. `dt` stays before `dd` in the DOM — a screen reader hears
+"projects: 170+" — and `row-start` swaps them for the eye. Bottom-aligning the pair with
+`flex-col-reverse` is what produced a 32px stagger across four numbers, on the one element
+whose whole job is to look precise.
 
 ## Do's and Don'ts
 

@@ -30,10 +30,10 @@ export const homeContent: HomeContent = {
     ctaPrimary: "Describe your challenge",
     ctaSecondary: "See our work",
     metrics: [
-      { value: "8+", label: "years in regulated finance" },
-      { value: "170+", label: "projects delivered" },
+      { value: "8+", label: "years" },
+      { value: "170+", label: "projects" },
       { value: "15", label: "countries" },
-      { value: "$1B+", label: "in clients' annual revenue" },
+      { value: "$1B+", label: "client annual revenue" },
     ],
     visualCaption: "Both sides · schematic",
   },

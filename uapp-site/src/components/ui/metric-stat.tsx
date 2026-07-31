@@ -1,28 +1,17 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Цифра без коментаря сильніша за цифру з коментарем: значення великим
- * світлим накресленням із табличними цифрами, підпис — 11px під ним.
- * Ніякої картки, іконки чи відсотка, якого метрика не заробила.
+ * Рядок метрик, поділений вертикальними лініями сітки.
+ *
+ * Значення стоять на спільній базовій лінії незалежно від того, скільки
+ * рядків займе підпис: зовнішній `dl` задає дві доріжки, кожна комірка
+ * успадковує їх через `grid-rows-subgrid`. DOM лишається `dt` → `dd`
+ * (правильний порядок для скрінрідера), а `row-start` міняє їх місцями
+ * для ока. Без subgrid значення все одно тримаються верху комірки.
+ *
+ * Цифра без коментаря сильніша за цифру з коментарем — ніякої картки,
+ * іконки чи відсотка, якого метрика не заробила.
  */
-export function MetricStat({
-  value,
-  label,
-  className,
-}: {
-  value: string;
-  label: string;
-  className?: string;
-}) {
-  return (
-    <div className={cn("flex flex-col-reverse gap-3", className)}>
-      <dt className="label-micro text-marker">{label}</dt>
-      <dd className="type-metric text-heading">{value}</dd>
-    </div>
-  );
-}
-
-/** Рядок метрик, поділений вертикальними лініями сітки. */
 export function MetricRow({
   metrics,
   className,
@@ -31,14 +20,24 @@ export function MetricRow({
   className?: string;
 }) {
   return (
-    <dl className={cn("divide-rule grid grid-cols-4 divide-x", className)}>
+    <dl
+      className={cn(
+        "divide-rule grid grid-cols-4 grid-rows-[auto_auto] divide-x",
+        className,
+      )}
+    >
       {metrics.map((metric) => (
-        <MetricStat
+        <div
           key={metric.label}
-          value={metric.value}
-          label={metric.label}
-          className="px-8 first:pl-0"
-        />
+          className="row-span-2 grid grid-rows-subgrid gap-2.5 px-6 first:pl-0 last:pr-0"
+        >
+          <dt className="label-micro text-marker row-start-2">
+            {metric.label}
+          </dt>
+          <dd className="type-metric text-heading row-start-1">
+            {metric.value}
+          </dd>
+        </div>
       ))}
     </dl>
   );

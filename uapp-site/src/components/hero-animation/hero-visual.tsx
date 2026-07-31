@@ -25,9 +25,9 @@ export function HeroVisual({
 }) {
   return (
     <SchematicWindow caption={caption} className={className}>
-      <div aria-hidden="true" className="relative px-7 py-8">
+      <div aria-hidden="true" className="relative px-7 py-6">
         {/* Вісь між берегами: пунктир — те, що зв'язане, а не збудоване */}
-        <div className="pointer-events-none absolute inset-y-8 left-1/2 flex -translate-x-1/2 flex-col items-center">
+        <div className="pointer-events-none absolute inset-y-6 left-1/2 flex -translate-x-1/2 flex-col items-center">
           <div className="bg-window-rule-strong w-px flex-1 [mask-image:repeating-linear-gradient(to_bottom,#000_0_4px,transparent_4px_8px)]" />
           <div className="bg-primary size-2 shrink-0 rotate-45" />
           <div className="bg-window-rule-strong w-px flex-1 [mask-image:repeating-linear-gradient(to_bottom,#000_0_4px,transparent_4px_8px)]" />
@@ -54,7 +54,7 @@ export function HeroVisual({
                 {nodes.map((node) => (
                   <li
                     key={node}
-                    className="border-window-rule text-window-foreground type-caption border-t py-2.5 first:border-t-0"
+                    className="border-window-rule text-window-foreground type-caption border-t py-2 first:border-t-0"
                   >
                     {node}
                   </li>

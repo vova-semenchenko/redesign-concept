@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Marker } from "@/components/ui/marker";
-import { MetricStat } from "@/components/ui/metric-stat";
-import { Rule } from "@/components/ui/rule";
+import { MetricRow } from "@/components/ui/metric-stat";
 import { Zone } from "@/components/ui/zone";
 import { HeroVisual } from "@/components/hero-animation";
 import type { HomeContent } from "@/content/types";
@@ -10,10 +9,15 @@ import type { HomeContent } from "@/content/types";
  * Єдиний авторський момент сторінки: спершу згори вниз прокреслюються
  * конструкційні лінії, і вже в готову сітку сідає заголовок. Далі на
  * сторінці нічого не «з'являється» — рух живе тільки в станах.
+ *
+ * Вертикаль зони тримається в межах одного екрана ноутбука: чотири
+ * цифри — єдиний перевірний доказ на першому екрані, і вони мусять
+ * бути видимі там, а не під фолдом. Тому ритм тут щільніший за решту
+ * сторінки, а метрики відділені лінією, а не порожнечею.
  */
 export function Hero({ hero }: { hero: HomeContent["hero"] }) {
   return (
-    <Zone tone="ink" pad="lg" rules={false} className="overflow-hidden">
+    <Zone tone="ink" pad="fold" rules={false} className="overflow-hidden">
       <div
         aria-hidden="true"
         className="sheet pointer-events-none absolute inset-0"
@@ -21,13 +25,13 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
         <div className="rules-v draw-y" />
       </div>
 
-      <div className="sheet-grid relative gap-y-16">
-        <div className="sheet-main flex flex-col gap-8">
+      <div className="sheet-grid relative gap-y-10">
+        <div className="sheet-main flex flex-col gap-6">
           <Marker className="settle" style={{ animationDelay: "240ms" }}>
             {hero.marker}
           </Marker>
           <h1
-            className="type-display settle max-w-[16ch]"
+            className="type-display settle"
             style={{ animationDelay: "320ms" }}
           >
             {hero.h1}
@@ -35,11 +39,11 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
         </div>
 
         <div
-          className="settle col-start-3 col-end-8 flex min-w-0 flex-col gap-10 pr-12"
+          className="settle col-start-3 col-end-8 flex min-w-0 flex-col gap-8 pr-12"
           style={{ animationDelay: "440ms" }}
         >
           <p className="type-lead text-foreground">{hero.sub}</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
             <Button asChild>
               <a href="#contact">{hero.ctaPrimary}</a>
             </Button>
@@ -58,19 +62,10 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
           <HeroVisual caption={hero.visualCaption} />
         </div>
 
-        <div className="sheet-main flex flex-col gap-10">
-          <Rule />
-          <dl className="divide-rule grid grid-cols-4 divide-x">
-            {hero.metrics.map((metric) => (
-              <MetricStat
-                key={metric.label}
-                value={metric.value}
-                label={metric.label}
-                className="px-8 first:pl-0"
-              />
-            ))}
-          </dl>
-        </div>
+        <MetricRow
+          metrics={hero.metrics}
+          className="border-rule sheet-main border-t pt-8"
+        />
       </div>
     </Zone>
   );
