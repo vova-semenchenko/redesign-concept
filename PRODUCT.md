@@ -3,7 +3,7 @@
 <!-- impeccable:product-schema 1 -->
 
 Source of truth for the facts below: `docs/task/uapp-redesign-brief.md` (client spec),
-`docs/brand-style-guide.md` (client brand tokens), `docs/voice-and-tone.md` (copy mandate).
+`docs/references-research.md` (client brand tokens), `docs/voice-and-tone.md` (copy mandate).
 This file distills them; it does not replace them.
 
 ## Platform
@@ -72,7 +72,7 @@ readiness, and on whether the team has shipped the exact rail in question.
 ## Brand Commitments
 
 - **Colour and type are mandated by the client brand book**, captured in
-  `docs/brand-style-guide.md`: ultramarine scale, gray scale, black and white. The two
+  `docs/references-research.md`: ultramarine scale, gray scale, black and white. The two
   secondary colours (`#578ADA`, `#9A98FF`) were explicitly excluded.
 - **Typefaces:** e-Ukraine Head for headings, e-Ukraine for body and UI. Font files are in
   the repository (source OTFs in `uapp-site/public/fonts/`, shipped WOFF2 in

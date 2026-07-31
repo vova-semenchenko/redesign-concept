@@ -35,6 +35,6 @@ The visual system is documented in the repo-root `DESIGN.md` (tokens are normati
 ## Code rules
 
 - **Colors: semantic tokens only** (`bg-background`, `text-primary`, `border-rule`, `text-marker`, `bg-window`, …) in all components. Raw hex values and primitive scales (`ultramarine-*`, `gray-*`) are allowed in exactly two places: token definitions in `globals.css` and the decorative layer of `hero-animation` (see its contract).
-- **Token values are not invented here** — they come from `docs/brand-style-guide.md` at the repo root; `globals.css` mirrors it.
+- **Token values are not invented here** — they come from `docs/references-research.md` at the repo root; `globals.css` mirrors it.
 - **shadcn components are added via `npx shadcn@latest add`**, not written by hand; their variants may be restyled to the blueprint language afterwards.
 - **Copy is data**: text lives in `src/content/`, components render it. Mandated copy is verified against the brief — see the working rules in the repo root `CLAUDE.md`.

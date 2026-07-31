@@ -149,7 +149,7 @@ radii, glass and blur surfaces, auto-rotating carousels, and aggressive motion.
 
 A three-role model: a deep institutional navy, a cool near-white sheet, and one electric
 ultramarine that is spent sparingly. Every value comes from the client brand book
-(`docs/brand-style-guide.md`); nothing here was invented.
+(`docs/references-research.md`); nothing here was invented.
 
 ### Primary
 

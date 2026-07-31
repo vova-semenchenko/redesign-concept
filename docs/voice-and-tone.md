@@ -1,6 +1,6 @@
 # UAPP voice & tone — reference for homepage copy
 
-Working reference for anyone writing or reviewing the prototype's English copy (human or agent). Grounded in the [brief](task/uapp-redesign-brief.md) (brand qualities §4, mandatory copy §8) and the [brand style guide](brand-style-guide.md) (tonal benchmark §8). Voice chart format follows Podmajersky, *Strategic Writing for UX*; tone dimensions follow NN/g.
+Working reference for anyone writing or reviewing the prototype's English copy (human or agent). Grounded in the [brief](task/uapp-redesign-brief.md) (brand qualities §4, mandatory copy §8) and the [brand style guide](references-research.md) (tonal benchmark §8). Voice chart format follows Podmajersky, *Strategic Writing for UX*; tone dimensions follow NN/g.
 
 ## 0. Mandate boundaries and verification against the brief
 

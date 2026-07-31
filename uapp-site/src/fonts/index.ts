@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 
 /**
  * e-Ukraine Head / e-Ukraine — mandated by the client brand book
- * (docs/brand-style-guide.md §2). Source OTFs live in `public/fonts/`;
+ * (docs/references-research.md §2). Source OTFs live in `public/fonts/`;
  * these WOFF2 builds are what ships.
  *
  * Head carries 300/400/500, body 400/500 — the system needs no more,
