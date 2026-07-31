@@ -4,6 +4,8 @@
 > `.claude/skills/`) та плагін superpowers v6.2.0. Колонка «Роль у
 > пайплайні» — за спекою
 > [`specs/2026-07-30-ui-subagent-pipeline-design.md`](specs/2026-07-30-ui-subagent-pipeline-design.md).
+> Реалізація: [`../pipeline/README.md`](../pipeline/README.md) — встановлення,
+> ролі, прогін етапів, запобіжники.
 
 ## Проєктні скіли (`.agents/skills/`)
 
