@@ -249,9 +249,11 @@ at normal weight and one muted description. A third level means the block is doi
 Uppercase exists at exactly one size, 11px, and always with 0.14em tracking. There is no
 uppercase in between.
 
-**The Full Stop Rule.** Statement headings end in a period. It makes them read as assertions
-rather than slogans. Single-word section headings (Expertise, Solutions) are markers, not
-statements, and take no period.
+**The No Full Stop Rule.** Headings (`h1`/`h2`/`h3`) never end in a period, regardless of
+whether they read as a single word or a full assertion — a heading is a label, not a
+sentence, and periods on headings are a mistake even when mandated copy makes it. The period
+is reserved for actual sentences: paragraph statements (the positioning band, a CTA-strip
+line) and body text keep theirs.
 
 ## Layout
 

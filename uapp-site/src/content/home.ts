@@ -21,10 +21,10 @@ export const homeContent: HomeContent = {
   },
   hero: {
     marker: "Regulated fintech · payments · crypto",
-    h1: "Engineering for regulated finance.",
+    h1: "Engineering for regulated finance",
     h1Alternatives: [
-      "We build the systems that move money.",
-      "Payments-grade engineering. Crypto-fluent.",
+      "We build the systems that move money",
+      "Payments-grade engineering. Crypto-fluent",
     ],
     sub: "We design and ship payment rails, card programs and core integrations — with deep crypto and on-chain expertise where it counts. Banks and fintechs have trusted us across 170+ projects in 15 countries.",
     ctaPrimary: "Describe your challenge",
@@ -50,7 +50,7 @@ export const homeContent: HomeContent = {
   },
   expertise: {
     marker: "Expertise · 4 domains",
-    heading: "Four domains, banking-first.",
+    heading: "Four domains, banking-first",
     cards: [
       {
         title: "Fintech & Payments",
@@ -84,7 +84,7 @@ export const homeContent: HomeContent = {
   },
   solutions: {
     marker: "Solutions · 4 products",
-    heading: "Four products, one flagship.",
+    heading: "Four products, one flagship",
     cards: [
       {
         id: "embedded-crypto",
@@ -131,7 +131,7 @@ export const homeContent: HomeContent = {
   },
   selectedWork: {
     marker: "Selected work · 6 engagements",
-    heading: "Six engagements, clients withheld.",
+    heading: "Six engagements, clients withheld",
     description:
       "Every client here is under NDA. What we can show is the rail, the standard and what shipped.",
     ndaBadge: "Client withheld under NDA",
@@ -177,7 +177,7 @@ export const homeContent: HomeContent = {
   },
   aiLayer: {
     marker: "AI · delivery and product",
-    heading: "AI across every layer.",
+    heading: "AI across every layer",
     statement:
       "AI runs through how we work — from AI-assisted discovery and design-to-code to AI-augmented QA, and into the products we build for you.",
     layers: [
@@ -189,7 +189,7 @@ export const homeContent: HomeContent = {
   },
   approach: {
     marker: "Why us · 3 reasons",
-    heading: "Why us.",
+    heading: "Why us",
     pillars: [
       {
         title: "Both sides of the bridge",
@@ -210,7 +210,7 @@ export const homeContent: HomeContent = {
   },
   team: {
     marker: "Team · senior only",
-    heading: "The architects who'll work on your system.",
+    heading: "The architects who'll work on your system",
     description:
       "A senior team of payments architects, security & compliance leads and on-chain systems engineers.",
     roles: [
@@ -222,7 +222,7 @@ export const homeContent: HomeContent = {
   },
   insights: {
     marker: "Insights · 3 topics",
-    heading: "Engineering notes.",
+    heading: "Engineering notes",
     description: "Engineering notes on ISO 20022, on-chain compliance and SCA.",
     topics: [
       { title: "ISO 20022 message lifecycle", domain: "Payments" },
@@ -236,7 +236,7 @@ export const homeContent: HomeContent = {
   },
   finalCta: {
     marker: "Contact",
-    heading: "Describe your challenge.",
+    heading: "Describe your challenge",
     microcopy: [
       "We'll sign an NDA before any details.",
       "Response within one business day.",

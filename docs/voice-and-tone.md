@@ -30,7 +30,7 @@ Derived from the brief's brand qualities (institutional trust · engineering pre
 | **Vocabulary — no** | Outsourcing genericisms: full-cycle development, digital transformation, end-to-end solutions, "robust solutions", dedicated teams | Empty intensifiers: world-class, cutting-edge, seamless, innovative, truly, best-in-class | Crypto hype: revolutionary, the future of finance, Web3 revolution; exclamatory sentences; emoji |
 | **Verbosity** | A metric without commentary is stronger than a metric with one | Front-load: the point lives in the first 3–4 words. One idea per sentence | H1 ≤ 6 words; subheading ≤ 2 lines; card ≤ 40 words |
 | **Grammar** | Active voice. The subject is we or the system ("The agent reconciles…"), never impersonal "it is provided" | Present simple by default; perfect only for track record ("have trusted us") | Contractions allowed (we're, you'll); full forms in compliance/security claims (do not, cannot) |
-| **Punctuation** | The period at the end of the H1 is a signature device of the mandated copy ("Engineering for regulated finance.") | Em dash ≤ 1 per block; no exclamation marks; no rhetorical questions in headings | Lists without semicolons; metrics joined with a middle dot: "8+ years · 170+ projects" |
+| **Punctuation** | No period on a heading, ever — not on the H1, not on any section heading, mandated or free ("Engineering for regulated finance", not "…finance.") | Em dash ≤ 1 per block; no exclamation marks; no rhetorical questions in headings | Lists without semicolons; metrics joined with a middle dot: "8+ years · 170+ projects" |
 | **Capitalization** | Sentence case everywhere: headings, buttons, labels | Products and standards as proper names: Embedded Crypto for Banks, ISO 20022 Toolkit | Never Title Case in navigation or CTAs |
 
 ## 2. Site tone on the 4 NN/g dimensions
@@ -83,6 +83,8 @@ Banlist (with what to replace it with):
 
 Structural bans: the "It's not X, it's Y" construction; parallel triplets where one item is enough; rhetorical questions in headings; moralising wrap-ups; more than one em dash per block; identical length of adjacent sentences (vary the rhythm).
 
+**No period on headings — permanent rule, no exception for mandated copy.** `h1`/`h2`/`h3` never take a trailing period, on this page or any future one. A heading is a label, not a sentence, whatever its length or how declarative it reads — "Engineering for regulated finance" and "Why us" follow the same rule. This corrects the original brief text, which set a period on the H1 ("Engineering for regulated finance."); an earlier version of this document called that period a deliberate signature device, and both the brief and this document were wrong. The mandate-preservation rule in §0 protects content, message and figures — it does not require preserving a punctuation mistake. Sentences keep their periods: paragraph statements (the positioning band, a CTA-strip line) and body copy are unaffected.
+
 The words robust, key, critical, secure are fine in their technical sense with an object ("bank-grade security", "signing key") — the filter targets subject-less epithets, not terminology.
 
 ## 6. Checklist before finalizing a block
@@ -96,4 +98,4 @@ The words robust, key, critical, secure are fine in their technical sense with a
 7. Is the mandated content (brief §8) refined only, not rewritten?
 8. Read aloud — does it sound like an engineer, not a landing page?
 
-The positive benchmark when in doubt is the hero copy from the brief: "We build the systems that move money." Six words, active voice, zero adjectives.
+The positive benchmark when in doubt is the hero copy from the brief: "We build the systems that move money" (no trailing period — it's a heading). Six words, active voice, zero adjectives.
