@@ -18,7 +18,7 @@
 - **Frontmatter дефініцій:** `name`, `description`, `model`, `tools`, за потреби `skills`. **`Skill` ніколи не з'являється в `tools:`** — це невалідний запис; пропуск його не блокує виклик скілів. Preload — лише через `skills:`, і **лише** для скілів без `disable-model-invocation`.
 - **Скіли, недоступні агентам:** `review-animations`, `pick-ui-library`, `prototype`, `grill-me` мають `disable-model-invocation: true` — сабагент не може ні preload-нути їх, ні викликати. Їхні стандарти агенти читають файлами за шляхом (`.agents/skills/<skill>/STANDARDS.md` або `SKILL.md`).
 - **`impeccable` — заборонений усередині сабагентів** (spec §5): 2.9 МБ, write-capable, ставить власні хуки. Викликається лише з головного лупа. Кожна дефініція несе цю заборону в Boundaries.
-- **Хук `agent-guard.sh` (spec §3, шар 2):** matcher `Edit|Write|MultiEdit|NotebookEdit`. Deny (перевіряється **першим**, до будь-яких allow): `docs/task/*`, `docs/research/*`, `docs/brand-style-guide.md`, `docs/voice-and-tone.md`, `docs/pipeline/*`. Allow-корені: `uapp-site`, `docs/superpowers`, `.superpowers`. Плюс системні temp-теки. Exit 2 блокує й повертає stderr, 0 дозволяє.
+- **Хук `agent-guard.sh` (spec §3, шар 2):** matcher `Edit|Write|MultiEdit|NotebookEdit`. Deny (перевіряється **першим**, до будь-яких allow): `docs/task/*`, `docs/research/*`, `docs/brand-style-guide.md`, `docs/voice-and-tone.md`, `docs/pipeline/*`. Allow-корені: `uapp-site`, `docs/superpowers`, `.superpowers`. Плюс системні temp-теки. Exit 2 блокує й повертає stderr, 0 дозволяє. — **Знято 2026-07-31**, разом із своїм тестом; жодного write-хука пайплайн більше не має (`docs/pipeline/README.md`).
 - **SDD-статуси у звітах:** рівно один із `DONE`, `DONE_WITH_CONCERNS`, `NEEDS_CONTEXT`, `BLOCKED`.
 - **Мандатний копірайт — обов'язок автора, не лише ревʼюера** (`CLAUDE.md`, working rules; `docs/voice-and-tone.md` §0): перед будь-якою зміною тексту визначити рівень свободи блоку, а для mandated-блоків звірити з verbatim-текстом брифу §8.
 - **Артефакти передаються шляхами до файлів, не вставленим текстом** (spec §2).
@@ -95,6 +95,11 @@
 ---
 
 ### Task 1: Хук `agent-guard.sh` + тестовий харнес
+
+> **Виконано, потім скасовано 2026-07-31.** Хук і його тест прибрані з репо;
+> `tests/lib.sh` із цієї задачі лишається — на ньому тримаються інші сюїти.
+> Крок нижче не переграється: це запис того, що було зроблено. Причини й
+> наслідки — `docs/pipeline/README.md`, «The write guard that used to be layer 2».
 
 **Files:**
 - Create: `docs/pipeline/tests/lib.sh`

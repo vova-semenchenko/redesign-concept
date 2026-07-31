@@ -10,22 +10,19 @@ Controller's own checklist: [`CONTROLLER.md`](CONTROLLER.md).
 bash docs/pipeline/scripts/install.sh
 ```
 
-Copies `agents/*.md` into `.claude/agents/` and `hooks/agent-guard.sh` into
-`.claude/hooks/`, then verifies the wiring in `.claude/settings.json` (printing
-the JSON to add, and exiting 1, if it is missing). Copies rather than symlinks:
+Copies `agents/*.md` into `.claude/agents/`. Copies rather than symlinks:
 loading symlinked agent definitions is not documented behaviour.
 
 `.claude/` is gitignored — the tracked source here is the source of truth. After
-editing anything under `docs/pipeline/`, re-run `install.sh` **and restart the
-session**: the harness reads agent definitions and hooks at startup. Check for
-drift without copying:
+editing anything under `docs/pipeline/agents/`, re-run `install.sh` **and restart
+the session**: the harness reads agent definitions at startup. Check for drift
+without copying:
 
 ```bash
 bash docs/pipeline/scripts/install.sh --check
 ```
 
-Requirements: `bash`, `git`, `python3` (hook JSON), `perl` (frontmatter and
-brief parsing).
+Requirements: `bash`, `git`, `perl` (frontmatter and brief parsing).
 
 ## Tests
 
@@ -33,8 +30,8 @@ brief parsing).
 bash docs/pipeline/tests/run-all.sh
 ```
 
-Five suites: the hook, both contract scripts, the installer, and static
-validation of every agent definition against the spec's role tables. They are
+Four suites: both contract scripts, the installer, and static validation of
+every agent definition against the spec's role tables. They are
 hermetic — the installer suite works in a temp directory and never touches the
 live `.claude/`. Run before every commit into this directory.
 
@@ -79,38 +76,42 @@ nested agents never decide what comes next. Full checklist in
 | Layer | Mechanism | What it catches |
 |-------|-----------|-----------------|
 | 1 | `tools:` in each definition | Read-only roles get no **direct** write tools |
-| 2 | `hooks/agent-guard.sh` | Writes to sources of truth, to `docs/pipeline/**`, or outside the allowlist — at any nesting depth, inside worktrees too |
-| 3 | `scripts/scope-check`, `scripts/report-check` | Silent scope creep, uncommitted work read as success, reports with no status or phantom commits |
-| 4 | `ui-qa`, `copy-guard`, SDD's reviewers | Semantics: was the right thing built, and built well |
+| 2 | `scripts/scope-check`, `scripts/report-check` | Silent scope creep, uncommitted work read as success, reports with no status or phantom commits |
+| 3 | `ui-qa`, `copy-guard`, SDD's reviewers | Semantics: was the right thing built, and built well |
 
 Layer 1 is honest about its limit: read-only roles hold no write tool, but they
 may dispatch subagents, so "cannot write directly" is the guarantee — not
-"cannot cause a write". Layer 2's deny table and layer 3's `scope-check` are
-the backstop.
+"cannot cause a write". Layer 2's `scope-check` is the backstop.
 
-### When `agent-guard` blocks
+### The write guard that used to be layer 2
 
-It is not worked around. It denies edits to the sources of truth
-(`docs/task/**`, `docs/brand-style-guide.md`, `docs/voice-and-tone.md`,
-`docs/research/**`) and to the pipeline's own files (`docs/pipeline/**`), and
-allows writes only under `uapp-site/`, `docs/superpowers/`, `.superpowers/`
-(worktree prefixes are stripped first, so SDD's worktrees work).
+The pipeline shipped `hooks/agent-guard.sh`: a `PreToolUse` hook on the file
+tools that denied edits to the sources of truth (`docs/task/**`,
+`docs/brand-style-guide.md`, `docs/voice-and-tone.md`, `docs/research/**`) and to
+`docs/pipeline/**`, and allowed writes only under `uapp-site/`,
+`docs/superpowers/`, `.superpowers/`.
 
-Consequences worth knowing: `CLAUDE.md`, the root `README.md`, `.claude/**` and
-this pipeline's own files are user territory. Changing the pipeline means the
-user edits it, or approves a diff — by design, since a guard an agent can
-rewrite is not a guard. To widen the reach deliberately, edit `ALLOW_ROOTS` (or
-`DENY_PATTERNS`) at the top of `hooks/agent-guard.sh`, re-run `install.sh` and
-restart the session.
+**Dropped on 2026-07-31.** The allowlist half generated most of the friction and
+little of the value: it blocked installing a skill into `.claude/skills/`,
+blocked its own policy files, and turned routine edits into commands handed back
+to the user — while the deny half it was bundled with is already stated in
+`CLAUDE.md` as the user's exclusive territory.
+
+What this costs, stated plainly: nothing mechanically prevents an agent from
+editing `docs/task/**`, the brand guide, voice-and-tone, `.claude/hooks/**` or
+this file. Those boundaries now live in `CLAUDE.md` and
+`.claude/rules/git-workflow.md` as instructions, which is a weaker layer than a
+hook. If that turns out to matter, the deny table is the part worth reviving —
+without `ALLOW_ROOTS`.
 
 ## Limitations
 
 - Visual verification is the user's eyes only — screenshot automation
   (Playwright, MCP) is deliberately out of scope.
-- `agent-guard` sees only the file tools (`Edit`, `Write`, `MultiEdit`,
-  `NotebookEdit`); writes via Bash (`cat >`, `sed -i`) are not intercepted —
-  `git-guard.sh` covers the git side.
-- Layer 3 is run by the controller, not by a hook. Automating it via
+- No hook intercepts writes any more (see *The write guard that used to be layer
+  2*); `git-guard.sh` still covers the git side, and it is hand-installed local
+  config rather than a pipeline artifact.
+- Layer 2 is run by the controller, not by a hook. Automating it via
   `SubagentStop` is an open question in the spec.
 - `impeccable` is main-loop only: 2.9 MB, write-capable, and it installs its
   own `PostToolUse`/`Stop` hooks.
