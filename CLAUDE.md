@@ -14,7 +14,7 @@ UAPP is repositioning its site from "generalist outsourcing" to a focused **regu
 
 ## Document map
 
-- `docs/task/uapp-redesign-brief.md` — full context: business goal, audience, positioning, block flow, mandated copy.
+- `docs/raw-briefs/uapp-redesign-brief.md` — full context: business goal, audience, positioning, block flow, mandated copy.
 - `docs/research/` — `uapp-redesign-research.md` (consolidated index report) over the numbered `01-current-site-audit` … `05-brand-strategy-hypotheses`. Warning: `04-visual-redesign-concept.md` is obsolete — do not use its navy palette or IBM Plex; the client style guide is the mandate.
 - `docs/concept-research.md` — two halves with different standing. §1–4 are the client-mandated tokens (colors, fonts, logo, semantic light/dark pairs with WCAG figures); in code they live as tokens in `uapp-site/src/styles/globals.css`. §5–8 are the designer's own direction (style directions, motion, illustration, the five annotated visual references) — a working guide, not a mandate, and each of those sections says so in its own text.
 - `uapp-site/README.md` — prototype structure and code rules.

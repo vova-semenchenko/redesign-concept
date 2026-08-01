@@ -6,14 +6,14 @@
 
 1. **[Figma-концепт](https://www.figma.com/design/Y4hZIZjrpGokO2m0mYgYBC/UAPP-GROUP-Redesign-Concept?node-id=19-57&t=eMWeNJblJlgjnbw0-11)** — референс-сайти та зібрані приклади (ілюстрації, діаграми) в одному файлі.
 2. **[Концепт-ресьорч](docs/concept-research.md)** — мандатні токени бренду (розд. 1–4) + візуальний напрямок дизайнера: рух, ілюстрації, референси з розбором «що беремо для UAPP» (розд. 5–8).
-3. **[Бриф](docs/task/uapp-redesign-brief.md)** — бізнес-ціль, ЦА, потік 12 блоків головної, мандатний копірайт.
+3. **[Бриф](docs/raw-briefs/uapp-redesign-brief.md)** — бізнес-ціль, ЦА, потік 12 блоків головної, мандатний копірайт.
 4. **[Консолідований звіт дослідження](docs/research/uapp-redesign-research.md)** — TL;DR-висновки та навігація по повному ресьорчу.
 
 ## Мапа репозиторію
 
 | Шлях | Що всередині |
 |---|---|
-| [`docs/task/`](docs/task/) | Бриф редизайну (ТЗ v7) + оригінальний PDF від клієнта |
+| [`docs/raw-briefs/`](docs/raw-briefs/) | Бриф редизайну (ТЗ v7) + оригінальний PDF від клієнта |
 | [`docs/concept-research.md`](docs/concept-research.md) | Мандат клієнта (розд. 1–4): стильові токени за брендбуком + семантичні пари світла/темна поверхня · Матеріал дизайнера (розд. 5–8): напрямки, рух, ілюстрації, візуальні референси |
 | [`docs/brand-style-guide-palette.html`](docs/brand-style-guide-palette.html) | Інтерактивне превʼю палітри (відкрити в браузері) · [PNG-знімок](docs/brand-style-guide-palette.png) для швидкого перегляду без браузера |
 | [`docs/research/`](docs/research/) | Дослідження: [звіт-індекс](docs/research/uapp-redesign-research.md) → [01 аудит сайту](docs/research/01-current-site-audit.md) · [02 візуальний бенчмаркінг](docs/research/02-visual-benchmark.md) · [03 UX-стратегія](docs/research/03-ux-audience-strategy.md) · [04 візуальна концепція](docs/research/04-visual-redesign-concept.md) · [05 бренд-гіпотези](docs/research/05-brand-strategy-hypotheses.md) |

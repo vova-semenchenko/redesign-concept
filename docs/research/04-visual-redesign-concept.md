@@ -186,7 +186,7 @@
 
 **Прочитані документи проєкту (без редагування):**
 - `CLAUDE.md`
-- `docs/task/uapp-redesign-brief.md`
+- `docs/raw-briefs/uapp-redesign-brief.md`
 - `research/01-current-site-audit.md`
 - `research/02-visual-benchmark.md`
 - `research/03-ux-audience-strategy.md`
