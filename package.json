@@ -1,0 +1,23 @@
+{
+  "name": "uapp-group",
+  "version": "1.0.0",
+  "description": "Матеріали редизайну головної сторінки uapp.group: зміна позиціонування з «дженераліст-аутсорсу» на сфокусовану команду **regulated fintech & payments (banking-first)** з крипто-компетенцією як перевагою. Тут зібрано все, що зроблено на етапі дослідження та підготовки візуального напрямку: аудит поточного сайту, бенчмаркінг конкурентів і еталонних fintech-сайтів, UX-стратегія під нову ЦА, стильові токени за брендбуком і візуальні референси.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vova-semenchenko/redesign-concept.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vova-semenchenko/redesign-concept/issues"
+  },
+  "homepage": "https://github.com/vova-semenchenko/redesign-concept#readme"
+}
