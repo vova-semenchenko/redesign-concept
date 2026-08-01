@@ -39,7 +39,7 @@ What a neighbouring shop cannot truthfully copy is the combination: banking-grad
 
 ## Capabilities and Constraints
 
-**Copy is governed, not authored.** Brief §8 fixes the content and message of the hero, positioning band, expertise cards, the six selected-work cases, the AI block and Approach. `docs/voice-and-tone.md` §0 defines three freedom levels — mandated (wording refinements only), editable (Solutions; the choice among three H1 options), free (microcopy, labels, form states). Forbidden: writing original copy for mandated blocks, replacing mandated copy wholesale, merging mandated messages, or adding facts and figures absent from the brief.
+**Copy is governed, not authored.** Brief §8 fixes the content and message of the hero, positioning band, expertise cards, the six selected-work cases, the AI block and Approach. The brief (§1, §8, §11) defines three freedom levels — mandated (wording refinements only), editable (Solutions; the choice among three H1 options), free (microcopy, labels, form states). Forbidden: writing original copy for mandated blocks, replacing mandated copy wholesale, merging mandated messages, or adding facts and figures absent from the brief.
 
 **Structural rules that cannot be traded away:**
 
@@ -65,7 +65,7 @@ What a neighbouring shop cannot truthfully copy is the combination: banking-grad
 - **Name:** UAPP. **Logo:** `docs/research/assets/logo-uapp.svg` — the final mark; its shape is not to be altered. White on dark canvas, black on light.
 - **Mandated tokens** (`docs/concept-research.md` §1–4, materialized in `uapp-site/src/styles/globals.css`): ultramarine as the single accent, gray as neutral, e-Ukraine Head for headings and e-Ukraine for body, and the semantic light/dark pairs with their computed contrast figures. Values come from the client's brand book and are not invented or adjusted.
 - **Brand qualities:** institutional trust · engineering precision · premium feel · regulated-grade · AI-native.
-- **Voice** (`docs/voice-and-tone.md`): engineers you can trust with money · precision over promotion · calm confidence. Serious, formal-neutral, respectful, matter-of-fact. Sentence case everywhere. An anti-slop banlist governs vocabulary.
+- **Voice** (derived from the brief's §4 brand qualities): engineers you can trust with money · precision over promotion · calm confidence. Serious, formal-neutral, respectful, matter-of-fact. Sentence case everywhere. An anti-slop banlist governs vocabulary.
 - **Fonts on hand:** both mandated families are in the repo as `.otf` sources under `uapp-site/public/fonts/`, in six cuts each (UltraLight, Thin, Light, Regular, Medium, Bold). Regular and Medium are converted to woff2 and wired into the app; the rest are unused.
 - **Open brand items — do not guess:** which cuts are approved for production use, the webfont licence terms, and logo clearspace.
 
