@@ -1,17 +1,18 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { HomeContent } from "@/content/types";
 
+/**
+ * Тизер Insights без карток статей: матеріалів ще немає, і порожні
+ * плейсхолдер-картки виглядали б як контент, якого не існує.
+ */
 export function InsightsTeaser({
   insights,
 }: {
   insights: HomeContent["insights"];
 }) {
   return (
-    <section id="insights" className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeading
-        title={insights.heading}
-        description={insights.description}
-      />
-    </section>
+    <div>
+      <SectionHeading title={insights.heading} lead={insights.description} />
+    </div>
   );
 }

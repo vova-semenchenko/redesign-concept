@@ -59,7 +59,37 @@
   --border: var(--color-gray-200);
   --input: var(--color-gray-200);
   --ring: var(--color-ultramarine-600);
-  --radius: 0.5rem;
+
+  /* ── Світ «The Drafting Table» (DESIGN.md) ── */
+
+  /* Форма: квадрат за замовчуванням; пігулка й чип — два винятки. */
+  --radius: 0;
+  --pill: 9999px;
+  --chip: 2px;
+
+  /* Лінування. --rule — видимий хейрлайн; --rule-faint — колонкова сітка,
+     яка має читатися як напрямна, а не як межа таблиці. */
+  --rule: var(--color-gray-200);
+  --rule-faint: color-mix(in srgb, var(--color-gray-300) 45%, transparent);
+
+  /* Ритм смуги. */
+  --page-max: 84rem;
+  --page-edge: clamp(1.25rem, 5vw, 5rem);
+  --band-y: clamp(4.5rem, 9vw, 9.5rem);
+  --band-y-tight: clamp(2.5rem, 4vw, 4rem);
+
+  /* Ізометрія: одна заливка на композицію — акцент і дві темніші грані. */
+  --iso-stroke: var(--color-ultramarine-800);
+  --iso-face-top: var(--color-ultramarine-600);
+  --iso-face-left: var(--color-ultramarine-800);
+  --iso-face-right: var(--color-ultramarine-700);
+  --iso-grid: color-mix(in srgb, var(--color-ultramarine-800) 18%, transparent);
+
+  /* Рух: механічне прибуття без overshoot. Пружин у системі немає. */
+  --motion-mech: cubic-bezier(0.2, 0, 0, 1);
+  --duration-tap: 90ms;
+  --duration-state: 180ms;
+  --duration-reveal: 420ms;
 }
 
 /* ── Семантика: темна поверхня — скоуп секції (стайлгайд розд. 4, темна колонка) ── */
@@ -80,11 +110,26 @@
   /* accent на темному — ultramarine/400, ТІЛЬКИ великий текст/лейбли (стайлгайд) */
   --accent: var(--color-ultramarine-400);
   --accent-foreground: #ffffff;
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
+  /* #dc2626 на navy/900 дає ≈4:1 і провалює AA для тексту 13px, а форма
+     стоїть саме на темній смузі. Брендбук destructive не задає, тож тут
+     він світлішає так само, як світлішає решта тексту (≈7:1). */
+  --destructive: #f87171;
+  --destructive-foreground: var(--color-ultramarine-900);
   --border: var(--color-gray-800);
   --input: var(--color-gray-800);
-  --ring: var(--color-ultramarine-600);
+  --ring: var(--color-ultramarine-400);
+
+  /* На темній смузі лінування світлішає, а не темнішає. */
+  --rule: var(--color-gray-800);
+  --rule-faint: color-mix(in srgb, var(--color-gray-200) 14%, transparent);
+
+  /* Ізометрія на темному: обводка світла, заливні грані ті самі —
+     акцент лишається акцентом, не перефарбовується під поверхню. */
+  --iso-stroke: var(--color-gray-400);
+  --iso-face-top: var(--color-ultramarine-600);
+  --iso-face-left: var(--color-ultramarine-800);
+  --iso-face-right: var(--color-ultramarine-700);
+  --iso-grid: color-mix(in srgb, var(--color-gray-200) 10%, transparent);
 }
 
 /* ── Міст семантики в утиліти Tailwind ── */
@@ -109,13 +154,30 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  /* Уся шкала радіусів зведена до нуля навмисно: shadcn-примітиви
+     споживають rounded-md/lg/xl, і так вони стають квадратними без
+     правки кожного компонента. Два винятки названі окремо. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+  --radius-pill: var(--pill);
+  --radius-chip: var(--chip);
+
+  --color-rule: var(--rule);
+  --color-rule-faint: var(--rule-faint);
+  --color-iso-stroke: var(--iso-stroke);
+  --color-iso-grid: var(--iso-grid);
+
+  --spacing-edge: var(--page-edge);
+  --spacing-band: var(--band-y);
+  --spacing-band-tight: var(--band-y-tight);
+
+  --ease-mech: var(--motion-mech);
+
   --font-heading: var(--font-head);
 }
 
@@ -130,5 +192,133 @@
   h2,
   h3 {
     @apply font-head text-heading;
+  }
+
+  /* Контракт ізометрії: сітку вмикає атрибут, а не клас на кожному шляху.
+     non-scaling-stroke — причина, з якої hero-схема й 16-піксельна іконка
+     мають однакову товщину лінії при різному масштабі. */
+  [data-iso] {
+    stroke: var(--iso-stroke);
+    stroke-width: 1;
+    stroke-linejoin: round;
+    fill: none;
+  }
+  [data-iso] * {
+    vector-effect: non-scaling-stroke;
+  }
+  [data-iso] [data-iso-face="top"] {
+    fill: var(--iso-face-top);
+    stroke: none;
+  }
+  [data-iso] [data-iso-face="left"] {
+    fill: var(--iso-face-left);
+    stroke: none;
+  }
+  [data-iso] [data-iso-face="right"] {
+    fill: var(--iso-face-right);
+    stroke: none;
+  }
+  [data-iso] [data-iso-dash] {
+    stroke-dasharray: 3 4;
+  }
+  [data-iso] [data-iso-grid] {
+    stroke: var(--iso-grid);
+  }
+
+  /* Цифри в метриках мусять шикуватися в колонку. */
+  [data-figure] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Один вимикач на весь рух системи — вимога брифу §7. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      /* Затримку теж треба зняти: інакше оркестрована послідовність
+         просто «зачекає» свої 2 с порожнім місцем і стрибне. */
+      animation-delay: 0s !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ── Сигнатурний момент першого екрана ──
+   Кожен стан за замовчуванням — ЗАВЕРШЕНИЙ, анімація лише програє шлях до
+   нього. Тому і reduced-motion, і будь-який збій анімації дають готову
+   схему, а не порожнє місце. */
+@layer components {
+  @keyframes hero-draw {
+    from {
+      stroke-dashoffset: var(--crossing-length);
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes hero-head-run {
+    0% {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: calc(-1 * var(--crossing-length));
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .hero-trace {
+    fill: none;
+    stroke-dasharray: var(--crossing-length);
+    stroke-dashoffset: 0;
+    animation: hero-draw 2.2s var(--motion-mech) 0.35s both;
+  }
+
+  .hero-head {
+    fill: none;
+    opacity: 0;
+    stroke-dasharray: 14 9999;
+    animation: hero-head-run 2.2s var(--motion-mech) 0.35s both;
+  }
+
+  .hero-payment {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-rise 0.7s var(--motion-mech) both;
+  }
+
+  .hero-annotations {
+    animation: hero-fade 0.6s var(--motion-mech) 2.1s both;
   }
 }

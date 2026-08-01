@@ -1,27 +1,44 @@
-import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/band";
+import { HeaderCta } from "@/components/sections/header-cta";
 import { Logo } from "@/components/ui/logo";
 import type { HomeContent } from "@/content/types";
 
+/**
+ * Хедер — це правило з вмістом, а не панель із заливкою: жодного фону,
+ * жодного блюру, тільки нижній хейрлайн. Заливка тут з'їла б колонкові
+ * лінії, які мусять проходити наскрізь.
+ */
 export function Header({ nav }: { nav: HomeContent["nav"] }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Logo className="text-heading" />
-        <nav aria-label="Main">
-          <ul className="flex items-center gap-6 text-sm">
-            {nav.items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className="hover:text-heading">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <Button asChild size="sm">
-          <a href="#contact">{nav.cta}</a>
-        </Button>
-      </div>
+    <header className="sticky top-0 z-50 border-b border-rule bg-background">
+      <Container>
+        <div className="flex items-center justify-between gap-4 py-5 sm:gap-8">
+          <a
+            href="#top"
+            className="shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          >
+            <Logo className="text-heading" />
+            <span className="sr-only">UAPP — home</span>
+          </a>
+
+          <nav aria-label="Main" className="hidden lg:block">
+            <ul className="flex items-center gap-8">
+              {nav.items.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="font-body text-[0.6875rem] font-medium tracking-[0.08em] text-muted-foreground uppercase transition-colors duration-(--duration-state) ease-mech hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <HeaderCta label={nav.cta} />
+        </div>
+      </Container>
     </header>
   );
 }

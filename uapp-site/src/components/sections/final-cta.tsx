@@ -1,58 +1,198 @@
 "use client";
 
 import { useState } from "react";
+
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { MicroLabel } from "@/components/ui/annotation";
+import { SectionHeading } from "@/components/ui/section-heading";
 import type { HomeContent } from "@/content/types";
+
+/**
+ * Поле — не коробка, а базова лінія з міткою над нею: форма на кресленні.
+ * Фокус потовщує лінію й фарбує її акцентом; жодного світіння.
+ *
+ * Помилка називає, що саме не так і як це полагодити, і показується після
+ * виходу з поля, а не під час набору (voice-and-tone §4). Слова invalid /
+ * incorrect заборонені.
+ *
+ * Бекенду немає навмисно: PRODUCT.md фіксує доставку лідів як поза обсягом
+ * цієї ітерації. Сабміт лишається клієнтським — це прототип форми, не її
+ * інтеграція.
+ */
+interface FieldProps {
+  id: string;
+  label: string;
+  type?: "text" | "email";
+  placeholder?: string;
+  multiline?: boolean;
+  error?: string;
+  onBlur: (value: string) => void;
+}
+
+function Field({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  multiline,
+  error,
+  onBlur,
+}: FieldProps) {
+  const base = cn(
+    "w-full border-0 border-b bg-transparent px-0 py-3 text-[0.9375rem] leading-[1.65] text-foreground",
+    "placeholder:text-muted-foreground/70",
+    "transition-colors duration-(--duration-state) ease-mech",
+    "focus:border-b-2 focus:pb-[11px] focus:outline-none",
+    error
+      ? "border-destructive focus:border-destructive"
+      : "border-rule focus:border-primary",
+  );
+
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="mb-2 block font-body text-[0.6875rem] leading-[1.2] font-medium tracking-[0.08em] text-muted-foreground uppercase"
+      >
+        {label}
+      </label>
+      {multiline ? (
+        <textarea
+          id={id}
+          name={id}
+          rows={4}
+          required
+          placeholder={placeholder}
+          aria-describedby={error ? `${id}-error` : undefined}
+          aria-invalid={error ? true : undefined}
+          className={cn(base, "resize-y")}
+          onBlur={(e) => onBlur(e.target.value)}
+        />
+      ) : (
+        <input
+          id={id}
+          name={id}
+          type={type}
+          required
+          placeholder={placeholder}
+          aria-describedby={error ? `${id}-error` : undefined}
+          aria-invalid={error ? true : undefined}
+          className={base}
+          onBlur={(e) => onBlur(e.target.value)}
+        />
+      )}
+      {error ? (
+        <p
+          id={`${id}-error`}
+          className="mt-2 text-[0.8125rem] leading-[1.5] text-destructive"
+        >
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+type Errors = Partial<Record<"name" | "email" | "company" | "challenge", string>>;
 
 export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
+
+  function check(field: keyof Errors, value: string): string | undefined {
+    const v = value.trim();
+    if (field === "email") {
+      if (!v) return "Add a work email so we can reply.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))
+        return "Enter a work email, like name@company.com";
+      return undefined;
+    }
+    if (!v) {
+      if (field === "challenge")
+        return "Tell us what you are building, in a line or two.";
+      if (field === "company") return "Add the company you are writing from.";
+      return "Add your name so we know who is writing.";
+    }
+    return undefined;
+  }
+
+  function onBlur(field: keyof Errors) {
+    return (value: string) =>
+      setErrors((prev) => ({ ...prev, [field]: check(field, value) }));
+  }
 
   return (
-    <section id="contact" className="dark bg-background py-20">
-      <div className="mx-auto max-w-2xl px-6">
-        <h2 className="text-3xl font-bold">{cta.heading}</h2>
-        {submitted ? (
-          <p className="mt-8 text-lg">{cta.successMessage}</p>
-        ) : (
-          <form
-            className="mt-8 flex flex-col gap-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSubmitted(true);
-            }}
-          >
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" name="name" required />
+    <div id="contact" className="scroll-mt-24">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <SectionHeading title={cta.heading} size="display" />
+          <ul className="mt-10 border-t border-rule">
+            {cta.microcopy.map((line) => (
+              <li key={line} className="border-b border-rule py-4">
+                <MicroLabel>{line}</MicroLabel>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="lg:col-span-6 lg:col-start-7">
+          {submitted ? (
+            <p
+              role="status"
+              className="font-head text-[1.5rem] leading-[1.3] font-normal text-heading"
+            >
+              {cta.successMessage}
+            </p>
+          ) : (
+            <form
+              noValidate
+              className="flex flex-col gap-8"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const data = new FormData(e.currentTarget);
+                const next: Errors = {};
+                (["name", "email", "company", "challenge"] as const).forEach(
+                  (f) => {
+                    const msg = check(f, String(data.get(f) ?? ""));
+                    if (msg) next[f] = msg;
+                  },
+                );
+                setErrors(next);
+                if (Object.keys(next).length === 0) setSubmitted(true);
+              }}
+            >
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <Field id="name" label="Name" error={errors.name} onBlur={onBlur("name")} />
+                <Field
+                  id="email"
+                  label="Work email"
+                  type="email"
+                  placeholder="name@company.com"
+                  error={errors.email}
+                  onBlur={onBlur("email")}
+                />
               </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="email">Work email</Label>
-                <Input id="email" name="email" type="email" required />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="company">Company</Label>
-              <Input id="company" name="company" required />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="challenge">Your challenge</Label>
-              <Textarea id="challenge" name="challenge" rows={4} required />
-            </div>
-            <Button type="submit" size="lg">
-              {cta.submitLabel}
-            </Button>
-          </form>
-        )}
-        <ul className="mt-6 flex gap-6 text-sm text-muted-foreground">
-          {cta.microcopy.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
+              <Field
+                id="company"
+                label="Company"
+                error={errors.company}
+                onBlur={onBlur("company")}
+              />
+              <Field
+                id="challenge"
+                label="Your challenge"
+                multiline
+                error={errors.challenge}
+                onBlur={onBlur("challenge")}
+              />
+              <Button type="submit" variant="pill" size="pill" className="self-start">
+                {cta.submitLabel}
+              </Button>
+            </form>
+          )}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

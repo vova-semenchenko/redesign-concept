@@ -144,7 +144,7 @@ A near-monochrome system of two neutral worlds and exactly one saturated voice.
 
 ### Named Rules
 
-**The Scarcity Rule.** If the accent appears more than once per viewport, it is overused. Target under 5% of screen area. Its rarity is the entire mechanism by which it reads as a signal.
+**The Scarcity Rule.** The accent has exactly three homes: the one filled object of a composition, the primary action, and small markers inside a diagram. The test is area, not count — under 5% of any viewport. Two primary buttons in one screen is overuse; a filled hero object beside one pill is the world working as intended. Its rarity is the entire mechanism by which it reads as a signal.
 
 **The Never-Text Rule.** The accent and every step darker than it are never used as text on the dark ground — contrast collapses to roughly 2.4–2.6:1. On dark bands the accent exists as fill, line, or graphic mass only; text stays on the white-to-graphite ladder. Mirrored on paper: `graphite-muted` is the lightest permissible text, and anything lighter is border or decoration.
 

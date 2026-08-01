@@ -19,10 +19,27 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+
+        /* ── Варіанти світу «The Drafting Table» ──
+           Стокові варіанти вище лишаються для внутрішніх станів форми;
+           на сторінці працюють ці два. */
+
+        /** Головна дія: єдиний пігулковий об'єкт у смузі. Не інвертується
+            між ґрунтами — брендбук розд. 4 фіксує пару #011EFF + білий. */
+        pill: "rounded-pill bg-primary text-primary-foreground uppercase tracking-[0.08em] hover:bg-ultramarine-700 active:bg-ultramarine-700",
+
+        /** Дія всередині контенту: без заливки, без рамки, лінія
+            проявляється під міткою. Ніколи не головна дія смуги. */
+        quiet:
+          "rounded-none border-b border-transparent uppercase tracking-[0.08em] text-foreground hover:border-rule hover:text-heading",
       },
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+
+        /** Розміри під варіанти світу: висота від набору, не фіксована. */
+        pill: "h-auto gap-2 px-7 py-3.5 text-[0.6875rem]",
+        quiet: "h-auto gap-2 px-0 py-2.5 text-[0.6875rem]",
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
