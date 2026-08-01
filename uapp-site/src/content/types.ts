@@ -49,7 +49,12 @@ export interface HomeContent {
     heading: string;
     pillars: { title: string; description: string }[];
   };
-  team: { heading: string; description: string };
+  /**
+   * `roles` — ті самі три рольові родини, що вже названі в `description`,
+   * винесені у структуру для набору. Жодних нових фактів: імен, кількості
+   * людей і стажу клієнт не надавав, і вигадувати їх не можна.
+   */
+  team: { heading: string; description: string; roles: string[] };
   insights: { heading: string; description: string };
   finalCta: {
     heading: string;

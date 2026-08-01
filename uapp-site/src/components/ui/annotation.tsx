@@ -27,7 +27,9 @@ export function MicroLabel({
         "font-body text-[0.6875rem] leading-[1.2] font-medium tracking-[0.08em] uppercase",
         tone === "muted" && "text-muted-foreground",
         tone === "ink" && "text-heading",
-        tone === "accent" && "text-primary",
+        // На темному ґрунті акцент як ТЕКСТ дає 2.4:1 — це рівно те, що
+        // забороняє The Never-Text Rule. Там світлішаємо до ultramarine/400.
+        tone === "accent" && "text-primary dark:text-accent",
         className,
       )}
     >
@@ -52,7 +54,9 @@ export function IndexChip({
     <span
       className={cn(
         "inline-flex min-w-[1.6em] items-center justify-center bg-heading px-[0.35em] py-[0.1em]",
-        "font-body text-[0.625rem] leading-[1.4] font-medium tracking-[0.08em] text-background",
+        // Розмір — задокументований label-регістр (DESIGN.md, chip-index);
+        // компактність дає padding, а не окремий крок шкали.
+        "font-body text-[0.6875rem] leading-[1.3] font-medium tracking-[0.08em] text-background",
         className,
       )}
       style={{ borderRadius: "var(--chip)" }}

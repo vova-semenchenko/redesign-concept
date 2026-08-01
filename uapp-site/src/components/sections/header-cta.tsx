@@ -20,19 +20,30 @@ export function HeaderCta({ label }: { label: string }) {
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    const anchor = document.getElementById("hero-cta");
+    // Ховаємось і біля hero-кнопки, і біля форми: у фінальній смузі сабміт —
+    // це та сама дія тим самим текстом, і дві пігулки в екрані знову були б
+    // перевитратою акценту.
+    const anchors = ["hero-cta", "contact"]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
-    if (!anchor) {
-      // Хедер без hero-кнопки: показуємо CTA одразу після першого кадру.
+    if (anchors.length === 0) {
+      // Хедер без цих орієнтирів: показуємо CTA одразу після першого кадру.
       const raf = requestAnimationFrame(() => setShown(true));
       return () => cancelAnimationFrame(raf);
     }
 
+    const visible = new Set<Element>();
     const io = new IntersectionObserver(
-      ([entry]) => setShown(!entry.isIntersecting),
+      (entries) => {
+        entries.forEach((e) =>
+          e.isIntersecting ? visible.add(e.target) : visible.delete(e.target),
+        );
+        setShown(visible.size === 0);
+      },
       { rootMargin: "-72px 0px 0px 0px" },
     );
-    io.observe(anchor);
+    anchors.forEach((a) => io.observe(a));
     return () => io.disconnect();
   }, []);
 
@@ -43,7 +54,10 @@ export function HeaderCta({ label }: { label: string }) {
       size="pill"
       // Мітка мандатна й скороченню не підлягає, тож на вузькому екрані
       // стискаються поля кнопки, а не текст.
-      className={`shrink-0 px-5 transition-opacity duration-(--duration-state) ease-mech sm:px-7 ${
+      // Нижче lg кнопки в шапці немає взагалі: прихована прозорістю, вона
+      // все одно займала б місце й виштовхувала розкриття за край екрана.
+      // Там головна дія живе всередині розкритого меню.
+      className={`hidden shrink-0 px-5 transition-opacity duration-(--duration-state) ease-mech lg:inline-flex sm:px-7 ${
         shown ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       aria-hidden={!shown}

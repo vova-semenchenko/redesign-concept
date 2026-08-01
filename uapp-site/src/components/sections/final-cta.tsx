@@ -41,12 +41,17 @@ function Field({
 }: FieldProps) {
   const base = cn(
     "w-full border-0 border-b bg-transparent px-0 py-3 text-[0.9375rem] leading-[1.65] text-foreground",
-    "placeholder:text-muted-foreground/70",
+    // Без прозорості: /70 давало 4.15:1, а placeholder несе єдиний зразок
+    // формату на всій формі.
+    "placeholder:text-muted-foreground",
     "transition-colors duration-(--duration-state) ease-mech",
     "focus:border-b-2 focus:pb-[11px] focus:outline-none",
+    // Фокус на темному ґрунті: primary дав би 2.4:1 і провалив SC 1.4.11 —
+    // а форма стоїть саме на темній смузі. `--accent` там світлішає до
+    // ultramarine/400 (≈4.7:1), як уже роблять таби.
     error
       ? "border-destructive focus:border-destructive"
-      : "border-rule focus:border-primary",
+      : "border-rule focus:border-accent",
   );
 
   return (
@@ -85,7 +90,8 @@ function Field({
       {error ? (
         <p
           id={`${id}-error`}
-          className="mt-2 text-[0.8125rem] leading-[1.5] text-destructive"
+          role="alert"
+          className="mt-2 text-[0.9375rem] leading-[1.65] text-destructive"
         >
           {error}
         </p>
@@ -140,7 +146,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
           {submitted ? (
             <p
               role="status"
-              className="font-head text-[1.5rem] leading-[1.3] font-normal text-heading"
+              className="max-w-[22ch] font-head text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.05] font-normal tracking-[-0.02em] text-balance text-heading"
             >
               {cta.successMessage}
             </p>
@@ -159,7 +165,16 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
                   },
                 );
                 setErrors(next);
-                if (Object.keys(next).length === 0) setSubmitted(true);
+                const firstBad = (
+                  ["name", "email", "company", "challenge"] as const
+                ).find((f) => next[f]);
+                if (firstBad) {
+                  // Без цього натискання кнопки нічого не змінює для того,
+                  // хто не бачить екрана: фокус лишався б на сабміті.
+                  document.getElementById(firstBad)?.focus();
+                  return;
+                }
+                setSubmitted(true);
               }}
             >
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">

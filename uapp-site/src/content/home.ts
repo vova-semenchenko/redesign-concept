@@ -179,6 +179,11 @@ export const homeContent: HomeContent = {
     heading: "The architects who'll work on your system",
     description:
       "A senior team of payments architects, security & compliance leads and on-chain systems engineers.",
+    roles: [
+      "Payments architects",
+      "Security & compliance leads",
+      "On-chain systems engineers",
+    ],
   },
   insights: {
     heading: "Insights",

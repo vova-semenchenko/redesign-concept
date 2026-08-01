@@ -189,12 +189,19 @@ The grid is a visible material, not a service layer.
 - **Empty outer columns.** The leftmost and rightmost columns stay empty as a page margin. Content never bleeds into them except for deliberate full-bleed illustration.
 - **Bands, not sections.** The page is a sequence of full-width horizontal bands, each self-contained and each closed by a hairline. A band ends because a line says so, not because padding ran out. Dark and light alternate; two adjacent bands never share a ground.
 - **Definition rows.** The primary content pattern: a short title term on the left, an explanatory paragraph on the right, a hairline between rows. It reads as a spec sheet.
-- **Card grids.** Equal-height flat cells separated by grid lines rather than gaps. The final cell may break the pattern to carry a call to action.
-- **Chapter breaks.** A band holding nothing but one huge centered display line, used to separate major movements of the page.
-- **Sticky rail.** Inside long dark product passages, a left rail lists the entries with the active one marked while content scrolls at the right.
+- **Card grids.** Equal-height flat cells separated by grid lines rather than gaps. The final cell may break the pattern to carry a call to action. *Available; the home page uses definition rows and the ruled register instead, and no card grid appears on it.*
 - **Rhythm.** More space above a heading than below it, one spacing rhythm throughout, and a dense passage always earns a quiet one.
 
 > **Provisional:** the spacing scale in the frontmatter is the intended rhythm; exact band padding settles on first build.
+
+### Specified but not built on this surface
+
+Recorded so a later pass knows these were decided against, not forgotten:
+
+- **Chapter-break band** — a band carrying one huge centred display line. It needs a line of display copy, and every candidate would be original writing for a page whose copy the client brief governs. Blocked on copy, not on design.
+- **Sticky rail** — the Solutions passage is one screen tall; a rail needs a passage long enough to scroll past it.
+- **Interface frame overlapping a band boundary** — the sanctioned exception to flatness. No product screenshot exists and none may be fabricated; it would need an authored diagram at full fidelity, labelled illustrative.
+- **`A → B` statistics** — the four mandated figures are counts, not transformations. Inventing a before/after pair would be inventing data.
 
 ### Named Rules
 
@@ -208,7 +215,7 @@ One controlled exception to flatness exists at the composition level: an embedde
 
 ### Named Rules
 
-**The No-Shadow Rule.** `box-shadow` does not appear in this codebase. A finding that asks for a shadow to separate two surfaces is asking for the wrong fix; add a hairline or change the ground.
+**The No-Shadow Rule.** No shadow ever conveys depth, elevation or state. A finding that asks for a shadow to separate two surfaces is asking for the wrong fix; add a hairline or change the ground. The one `box-shadow` in the codebase is the focus ring inherited from the button primitive — an accessibility affordance, not elevation, and it is exempt.
 
 ## Shapes
 
@@ -243,8 +250,10 @@ Borders are always hairline weight. Strokes in illustration are uniform and non-
 
 ### Navigation
 
-- **Style:** text-only, label-sized, sentence case, with the primary pill at the right end. Sticky and light; the header is a rule with contents, not a bar with a fill.
-- **Active state:** an underline that *travels* between items rather than switching instantly.
+- **Style:** text-only in the label role — therefore uppercase, tracked, 11px — with the primary pill at the right end. Sticky and light; the header is a rule with contents, not a bar with a fill.
+- **Primary action:** the header pill is not a permanent fixture. It appears only when no other instance of the same action is on screen, so the first viewport and the closing form never carry two identical pills.
+- **Below the desktop breakpoint:** the nav collapses into a disclosure that drops a ruled list beneath the header rule, with the primary action as its last row.
+- **Active state:** none. Scroll-spy is not built on this surface; the travelling underline belongs to Tabs, which has real selection state.
 
 ### Tabs
 
@@ -263,7 +272,7 @@ The system's identity lives here. One vocabulary serves icons, diagrams and the 
 - **Line art by default.** Uniform non-scaling stroke, no fills, hidden edges drawn so construction stays visible.
 - **One filled object per composition.** Exactly one object takes the accent fill with flat lighter and darker faces for volume — no gradients, no soft shading. Everything around it stays wireframe.
 - **Annotation layer.** Dashed orbits, hairline leader lines, node dots, and small label chips attached to objects. A drawing without annotation is not finished.
-- **Ground.** A faint isometric floor grid on dark bands, with objects standing above it on dashed standoffs. On light bands, planes are indicated by diagonal hatching rather than by solid fill.
+- **Ground.** Every composition stands on a faint isometric floor grid, whatever the band's ground — the grid is the drafting table, and a drawing floating without one reads as clip art. Objects stand above it on dashed standoffs. Diagonal hatching is reserved for indicating a solid plane and is currently unused.
 - **Icons are miniatures.** Small isometric monoline icons share the projection and stroke weight of the large drawings; they are not a separate flat icon set, and they inherit color from context.
 
 ## Do's and Don'ts

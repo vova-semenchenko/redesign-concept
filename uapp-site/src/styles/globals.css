@@ -298,27 +298,50 @@
     }
   }
 
+  /* Постановка dissection plate: шари приходять по черзі до нерухомої пози.
+     Порядок навмисний — спочатку два береги, потім те, що між ними. */
+  .hero-layer {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-rise 0.55s var(--motion-mech) both;
+  }
+  .hero-layer-0 {
+    animation: hero-fade 0.5s var(--motion-mech) both;
+  }
+  .hero-layer-1 {
+    animation-delay: 0.3s;
+  }
+  .hero-layer-4 {
+    animation-delay: 0.55s;
+  }
+  .hero-layer-2 {
+    animation-delay: 0.85s;
+  }
+  .hero-layer-3 {
+    animation-delay: 1.15s;
+  }
+
   .hero-trace {
     fill: none;
     stroke-dasharray: var(--crossing-length);
     stroke-dashoffset: 0;
-    animation: hero-draw 2.2s var(--motion-mech) 0.35s both;
+    animation: hero-draw 1.5s var(--motion-mech) 1.45s both;
   }
 
   .hero-head {
     fill: none;
     opacity: 0;
     stroke-dasharray: 14 9999;
-    animation: hero-head-run 2.2s var(--motion-mech) 0.35s both;
+    animation: hero-head-run 1.5s var(--motion-mech) 1.45s both;
   }
 
-  .hero-payment {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: hero-rise 0.7s var(--motion-mech) both;
+  .hero-marks {
+    animation: hero-fade 0.5s var(--motion-mech) 2.5s both;
   }
 
-  .hero-annotations {
-    animation: hero-fade 0.6s var(--motion-mech) 2.1s both;
+  /* Рядок ключа світлішає тоді ж, коли приходить його шар: літера в схемі
+     і літера в ключі — та сама адреса. Затримку задає розмітка. */
+  .hero-key-row {
+    animation: hero-fade 0.45s var(--motion-mech) both;
   }
 }

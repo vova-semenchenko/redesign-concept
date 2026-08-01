@@ -5,7 +5,7 @@ import { useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/band";
-import { IsoIcon } from "@/components/ui/iso-icon";
+import { IsoSchematic } from "@/components/ui/iso-schematic";
 import { MicroLabel } from "@/components/ui/annotation";
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { HomeContent } from "@/content/types";
@@ -121,14 +121,11 @@ export function SolutionsShowcase({
                 <a href="#contact">Explore {card.title}</a>
               </Button>
             </div>
-            <div className="flex justify-center lg:col-span-5 lg:justify-end">
-              {/* Заливний об'єкт темної смуги — рівно один на композицію. */}
-              <IsoIcon
-                name={card.flagship ? "orbit" : "module"}
-                size={220}
-                filled
-                className="text-iso-stroke"
-              />
+            {/* Кожен продукт має власне креслення з підлогою, одним заливним
+                об'єктом і підписами — раніше три з чотирьох малювали той
+                самий куб без жодної анотації. */}
+            <div className="lg:col-span-5">
+              <IsoSchematic id={card.id} />
             </div>
           </div>
         </div>
