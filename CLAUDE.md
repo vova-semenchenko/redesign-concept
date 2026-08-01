@@ -2,12 +2,6 @@
 
 Redesign of the uapp.group home page: documentation lives in `docs/` (brief, research, client-mandated style tokens in `docs/concept-research.md` §1–4, final logo `docs/research/assets/logo-uapp.svg`); the prototype is a Next.js app in `uapp-site/`.
 
-## Commands (run inside `uapp-site/`)
-
-- `npm run dev` — dev server (http://localhost:3000)
-- `npm run typecheck && npm run lint` — checks before committing
-- `npm run format` — Prettier over all files
-
 ## What this project is
 
 UAPP is repositioning its site from "generalist outsourcing" to a focused **regulated fintech & payments (banking-first) team with crypto competence as an advantage**, AI-native throughout. The goal is a lead engine for a ~60-person company, not a business card.
