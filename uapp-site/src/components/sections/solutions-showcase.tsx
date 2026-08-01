@@ -80,7 +80,7 @@ export function SolutionsShowcase({
             </span>
             <span
               className={cn(
-                "font-head text-[1.0625rem] leading-[1.25] font-medium tracking-[-0.01em] transition-colors",
+                "font-head text-[1.125rem] leading-[1.3] font-medium tracking-[-0.01em] transition-colors",
                 i === active ? "text-heading" : "text-muted-foreground",
               )}
             >

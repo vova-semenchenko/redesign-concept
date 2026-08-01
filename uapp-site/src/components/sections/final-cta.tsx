@@ -28,6 +28,7 @@ interface FieldProps {
   multiline?: boolean;
   error?: string;
   onBlur: (value: string) => void;
+  onInput?: (value: string) => void;
 }
 
 function Field({
@@ -38,6 +39,7 @@ function Field({
   multiline,
   error,
   onBlur,
+  onInput,
 }: FieldProps) {
   const base = cn(
     "w-full border-0 border-b bg-transparent px-0 py-3 text-[0.9375rem] leading-[1.65] text-foreground",
@@ -73,6 +75,7 @@ function Field({
           aria-invalid={error ? true : undefined}
           className={cn(base, "resize-y")}
           onBlur={(e) => onBlur(e.target.value)}
+          onInput={(e) => onInput?.(e.currentTarget.value)}
         />
       ) : (
         <input
@@ -85,6 +88,7 @@ function Field({
           aria-invalid={error ? true : undefined}
           className={base}
           onBlur={(e) => onBlur(e.target.value)}
+          onInput={(e) => onInput?.(e.currentTarget.value)}
         />
       )}
       {error ? (
@@ -126,6 +130,18 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
   function onBlur(field: keyof Errors) {
     return (value: string) =>
       setErrors((prev) => ({ ...prev, [field]: check(field, value) }));
+  }
+
+  // Поле з видимою помилкою перевіряється на кожен ввід, а не лише на blur.
+  // Без цього помилка зникала б у момент mousedown на сабміті: розмітка над
+  // кнопкою стискається, кнопка підстрибує, і mouseup уже не влучає — клік
+  // з'їдається. Показ помилки лишається тільки після виходу з поля
+  // (voice-and-tone §4); достроково вона може лише зникнути.
+  function revalidate(field: keyof Errors) {
+    return (value: string) =>
+      setErrors((prev) =>
+        prev[field] ? { ...prev, [field]: check(field, value) } : prev,
+      );
   }
 
   return (
@@ -178,7 +194,13 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
               }}
             >
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <Field id="name" label="Name" error={errors.name} onBlur={onBlur("name")} />
+                <Field
+                  id="name"
+                  label="Name"
+                  error={errors.name}
+                  onBlur={onBlur("name")}
+                  onInput={revalidate("name")}
+                />
                 <Field
                   id="email"
                   label="Work email"
@@ -186,6 +208,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
                   placeholder="name@company.com"
                   error={errors.email}
                   onBlur={onBlur("email")}
+                  onInput={revalidate("email")}
                 />
               </div>
               <Field
@@ -193,6 +216,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
                 label="Company"
                 error={errors.company}
                 onBlur={onBlur("company")}
+                onInput={revalidate("company")}
               />
               <Field
                 id="challenge"
@@ -200,6 +224,7 @@ export function FinalCta({ cta }: { cta: HomeContent["finalCta"] }) {
                 multiline
                 error={errors.challenge}
                 onBlur={onBlur("challenge")}
+                onInput={revalidate("challenge")}
               />
               <Button type="submit" variant="pill" size="pill" className="self-start">
                 {cta.submitLabel}

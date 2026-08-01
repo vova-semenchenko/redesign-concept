@@ -29,7 +29,7 @@ export function SelectedWork({ work }: { work: HomeContent["selectedWork"] }) {
               {String(i + 1).padStart(2, "0")}
             </IndexChip>
 
-            <p className="font-head text-[1.0625rem] leading-[1.3] font-medium tracking-[-0.01em] text-heading">
+            <p className="font-head text-[1.125rem] leading-[1.3] font-medium tracking-[-0.01em] text-heading">
               {c.clientProfile}
             </p>
 
