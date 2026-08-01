@@ -46,6 +46,12 @@ typography:
     fontWeight: 500
     lineHeight: 1.2
     letterSpacing: "0.08em"
+  mark:
+    fontFamily: "e-Ukraine, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "14px"
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: "0.08em"
   figure:
     fontFamily: "e-Ukraine Head, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "clamp(2rem, 4vw, 3.5rem)"
@@ -172,6 +178,7 @@ Both families are loaded and self-hosted through `next/font/local` in `src/app/l
 - **Figure** (400, `clamp(2rem, 4vw, 3.5rem)`, 1): statistics typeset as display material, with tabular figures and arrow glyphs for transformations.
 - **Body** (400, 0.9375rem, 1.65): small, muted, generously leaded, and rarely wider than 60ch.
 - **Label** (500, 0.6875rem, tracking 0.08em, uppercase): the engineering-annotation layer — diagram tags, stat captions, section numbers, nav eyebrows, quiet button text.
+- **Mark** (500, 14 units, tracking 0.08em): lettering *inside* a drawing — the key letters on the hero schematic and the labels on product schematics. The one size expressed in SVG user units rather than page pixels, because it scales with the drawing it belongs to; at the sizes these viewBoxes render, it lands near the label role. Single value across every drawing, exactly as the stroke weight is single across every drawing.
 
 ### Named Rules
 

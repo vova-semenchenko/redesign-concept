@@ -54,7 +54,7 @@ function Marks({ marks }: { marks: Mark[] }) {
               textAnchor={m.dx < 0 ? "end" : m.dx > 0 ? "start" : "middle"}
               fill="var(--muted-foreground)"
               stroke="none"
-              className="font-body text-[13px] font-medium tracking-[0.08em] uppercase"
+              className="font-body text-[14px] font-medium tracking-[0.08em] uppercase"
             >
               {m.text}
             </text>

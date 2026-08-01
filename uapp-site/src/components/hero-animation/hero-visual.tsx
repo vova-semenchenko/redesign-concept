@@ -155,7 +155,7 @@ export function HeroVisual({ className }: { className?: string }) {
                 textAnchor={m.dx < 0 ? "end" : m.dx > 0 ? "start" : "middle"}
                 fill="var(--heading)"
                 stroke="none"
-                className="font-head text-[19px] font-medium"
+                className="font-head text-[14px] font-medium"
               >
                 {m.mark}
               </text>
