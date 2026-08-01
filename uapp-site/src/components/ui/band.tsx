@@ -25,8 +25,6 @@ interface BandProps {
   children: ReactNode;
   ground?: Ground;
   id?: string;
-  /** Колонкові лінії. Вимикати лише там, де смуга сама є одним об'єктом. */
-  rules?: boolean;
   /** Стиснений вертикальний ритм — для службових смуг на кшталт trust. */
   tight?: boolean;
   /** Прибрати верхню межу (перша смуга під хедером). */
@@ -38,7 +36,6 @@ export function Band({
   children,
   ground = "paper",
   id,
-  rules = true,
   tight = false,
   seamless = false,
   className,
@@ -56,7 +53,6 @@ export function Band({
         paddingBlock: tight ? "var(--band-y-tight)" : "var(--band-y)",
       }}
     >
-      {rules ? <GridRules /> : null}
       <div className="relative">{children}</div>
     </section>
   );
@@ -82,44 +78,6 @@ export function Container({
       }}
     >
       {children}
-    </div>
-  );
-}
-
-/**
- * Дванадцять наскрізних вертикальних ліній, кожна третя — пунктирна.
- * Вони проходять і крізь порожні зони: це кістяк аркуша, а не межі таблиці,
- * тому контраст мінімальний (`--rule-faint`).
- *
- * Лінії вирівняні по тому ж контейнеру, що й контент, інакше сітка
- * розійшлася б із набором.
- */
-function GridRules() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-      <div
-        className="mx-auto h-full w-full"
-        style={{
-          maxWidth: "var(--page-max)",
-          paddingInline: "var(--page-edge)",
-        }}
-      >
-        <div className="grid h-full grid-cols-4 md:grid-cols-12">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "border-l border-rule-faint",
-                i % 3 === 2 && "border-dashed",
-                i >= 4 && "hidden md:block",
-                // Права крайня лінія: на вузькому екрані видно перші чотири.
-                i === 3 && "border-r md:border-r-0",
-                i === 11 && "md:border-r",
-              )}
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

@@ -6,16 +6,16 @@
  * abstract orb, three icon cards, logo strip.
  *
  * OWN-WORLD. Two grounds — paper white and navy engine room — alternating as
- * full-bleed bands with hard hairline edges. Visible 12-column rules, every
- * third dashed. One saturated ultramarine, under 5% of any viewport. Display
- * type against 11px annotation, nothing in between. One isometric projection
- * for every drawn object. No shadows, square corners, one pill.
+ * full-bleed bands with hard hairline edges. One saturated ultramarine, under
+ * 5% of any viewport. Display type against 11px annotation, nothing in
+ * between. One isometric projection for every drawn object. No shadows,
+ * square corners, one pill.
  *
  * STORY. A Head of Payments sees a team that lives inside regulated rails,
  * reads banking-first with crypto as the edge, and describes their challenge.
  *
- * FIRST VIEWPORT. Light band. Display H1 left at 5.5rem over the ruled grid;
- * the sub as one hairline-separated line; the primary pill directly beneath —
+ * FIRST VIEWPORT. Light band. Display H1 left at 5.5rem; the sub as one
+ * hairline-separated line; the primary pill directly beneath —
  * the only accent in the screen. Right two thirds: the payment schematic held
  * in a fixed isometric pose. Trust metrics close the band as a ruled footer.
  *
