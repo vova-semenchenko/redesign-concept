@@ -30,9 +30,10 @@
   --color-gray-900: #111827;
   --color-gray-950: #040816;
 
-  /* Шрифти: e-Ukraine підключиться пізніше (ліцензія) — поки фолбек-стек */
-  --font-head: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Мандатні гарнітури (розд. 2). Змінні задає next/font/local у layout.tsx —
+     він же підставляє метрики фолбека, тож стек нижче лише на випадок збою. */
+  --font-head: var(--font-e-ukraine-head), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: var(--font-e-ukraine), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 /* ── Семантика: світла поверхня (стайлгайд розд. 4, світла колонка) ── */

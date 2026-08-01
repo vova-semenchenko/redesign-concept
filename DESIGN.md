@@ -160,7 +160,9 @@ A near-monochrome system of two neutral worlds and exactly one saturated voice.
 
 **Character:** one geometric grotesque across the entire site. Personality comes from scale and spacing, never from mixing families. The pairing is the client's mandate; what the world contributes is how far apart the sizes are allowed to sit.
 
-> **Provisional:** the webfonts are not licensed yet, so both roles currently resolve to the system stack declared in the frontmatter. Every size, weight and tracking value below is tuned for the fallback and must be re-tuned when the real faces land.
+Both families are loaded and self-hosted through `next/font/local` in `src/app/layout.tsx`, which also generates the metric-adjusted fallback that keeps the swap from shifting layout. Only the two cuts this system uses are shipped — Regular (400) and Medium (500) per family, 168 KB of woff2 in total. The remaining supplied cuts (UltraLight, Thin, Light, Bold) are deliberately not bundled; adding one is a system decision, not a local override.
+
+> **Still to verify:** the size, line-height and tracking values below were set against the system fallback and have not yet been re-tuned against the real faces on screen. Expect adjustment at the display end during the first build.
 
 ### Hierarchy
 

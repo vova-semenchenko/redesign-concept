@@ -66,7 +66,8 @@ What a neighbouring shop cannot truthfully copy is the combination: banking-grad
 - **Mandated tokens** (`docs/concept-research.md` §1–4, materialized in `uapp-site/src/styles/globals.css`): ultramarine as the single accent, gray as neutral, e-Ukraine Head for headings and e-Ukraine for body, and the semantic light/dark pairs with their computed contrast figures. Values come from the client's brand book and are not invented or adjusted.
 - **Brand qualities:** institutional trust · engineering precision · premium feel · regulated-grade · AI-native.
 - **Voice** (`docs/voice-and-tone.md`): engineers you can trust with money · precision over promotion · calm confidence. Serious, formal-neutral, respectful, matter-of-fact. Sentence case everywhere. An anti-slop banlist governs vocabulary.
-- **Open brand items — do not guess:** font weights, webfont licensing, logo clearspace.
+- **Fonts on hand:** both mandated families are in the repo as `.otf` sources under `uapp-site/public/fonts/`, in six cuts each (UltraLight, Thin, Light, Regular, Medium, Bold). Regular and Medium are converted to woff2 and wired into the app; the rest are unused.
+- **Open brand items — do not guess:** which cuts are approved for production use, the webfont licence terms, and logo clearspace.
 
 ## Evidence on Hand
 
