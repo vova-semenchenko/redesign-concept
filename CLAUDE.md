@@ -1,6 +1,6 @@
 # UAPP — Website Redesign
 
-Redesign of the uapp.group home page: documentation lives in `docs/` (brief, research, client-mandated style tokens in `docs/concept-research.md`, final logo `docs/research/assets/logo-uapp.svg`); the prototype is a Next.js app in `uapp-site/`.
+Redesign of the uapp.group home page: documentation lives in `docs/` (brief, research, client-mandated style tokens in `docs/concept-research.md` §1–4, final logo `docs/research/assets/logo-uapp.svg`); the prototype is a Next.js app in `uapp-site/`.
 
 ## Commands (run inside `uapp-site/`)
 
@@ -16,7 +16,7 @@ UAPP is repositioning its site from "generalist outsourcing" to a focused **regu
 
 - `docs/task/uapp-redesign-brief.md` — full context: business goal, audience, positioning, block flow, mandated copy.
 - `docs/research/` — `uapp-redesign-research.md` (consolidated index report) over the numbered `01-current-site-audit` … `05-brand-strategy-hypotheses`. Warning: `04-visual-redesign-concept.md` is obsolete — do not use its navy palette or IBM Plex; the client style guide is the mandate.
-- `docs/concept-research.md` — client-mandated tokens (colors/fonts/logo) and annotated visual references; in code they live as tokens in `uapp-site/src/styles/globals.css`.
+- `docs/concept-research.md` — two halves with different standing. §1–4 are the client-mandated tokens (colors, fonts, logo, semantic light/dark pairs with WCAG figures); in code they live as tokens in `uapp-site/src/styles/globals.css`. §5–8 are the designer's own direction (style directions, motion, illustration, the five annotated visual references) — a working guide, not a mandate, and each of those sections says so in its own text.
 - `uapp-site/README.md` — prototype structure and code rules.
 - `README.md` — entry point: document navigation plus the Figma concept link.
 
@@ -31,7 +31,7 @@ These documents change faster than this file — read them directly instead of r
 ## Working rules (not obvious from code/docs)
 
 - **Never rewrite mandated copy — and verify against the brief on every text change.** The client brief (§1, §8, §11) fixes the content and message of the hero, positioning band, expertise, case studies, and the AI block. Wording may be refined; positioning may not. Writing original copy for these blocks or globally replacing text is forbidden. Before changing any prototype text, determine the block's freedom level (mandated / editable / free) and, for mandated blocks, check against the verbatim brief text (§8) — the levels table and verification rule are in `docs/voice-and-tone.md` §0. Voice, tone, and microcopy for free blocks also follow `docs/voice-and-tone.md`.
-- **Style decisions are mandated by the client's brand book — don't invent them.** The client provided brand book fragments (ultramarine palette, e-Ukraine Head/e-Ukraine fonts, logo); they are captured in `docs/concept-research.md` as given tokens — the source of truth for token *values*. In code they are already materialized as the token layer in `uapp-site/src/styles/globals.css`; how components consume tokens is defined by the code rules in `uapp-site/README.md`. The full brand book doesn't exist yet: open items (font weights, webfont license, logo clearspace) are listed there — don't guess at them.
+- **Style decisions are mandated by the client's brand book — don't invent them.** The client provided brand book fragments (ultramarine palette, e-Ukraine Head/e-Ukraine fonts, logo); they are captured in `docs/concept-research.md` §1–4 as given tokens — the source of truth for token *values*. (§5–8 of that same file are the designer's direction, not client mandate — don't cite them as brand-book requirements.) In code they are already materialized as the token layer in `uapp-site/src/styles/globals.css`; how components consume tokens is defined by the code rules in `uapp-site/README.md`. The full brand book doesn't exist yet: open items (font weights, webfont license, logo clearspace) are listed there — don't guess at them.
 - **Embedded Crypto for Banks is the flagship product in the showcase, not the site's headline.** Don't undermine the banking-first identity.
 - The team is presented by domain roles only — no "Frontend/Backend" split.
 - Case studies are anonymous under NDA; non-fintech projects go only under "Other experience", never on the home page.
