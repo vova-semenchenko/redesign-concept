@@ -20,7 +20,9 @@ export function Header({ nav }: { nav: HomeContent["nav"] }) {
             href="#top"
             className="shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
-            <Logo className="text-heading" />
+            {/* Ім'я посилання несе sr-only рядок; логотип тут декоративний,
+                інакше скрінрідер оголошує «UAPP» двічі. */}
+            <Logo decorative className="text-heading" />
             <span className="sr-only">UAPP — home</span>
           </a>
 

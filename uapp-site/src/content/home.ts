@@ -5,7 +5,7 @@ export const homeContent: HomeContent = {
     items: [
       { label: "Expertise", href: "#expertise" },
       { label: "Solutions", href: "#solutions" },
-      { label: "Case studies", href: "#work" },
+      { label: "Selected work", href: "#work" },
       { label: "Team", href: "#team" },
       { label: "Insights", href: "#insights" },
     ],
@@ -78,30 +78,30 @@ export const homeContent: HomeContent = {
         id: "embedded-crypto",
         title: "Embedded Crypto for Banks",
         flagship: true,
-        audience: "Banks and EMIs adding regulated crypto services",
+        audience: "For banks and EMIs adding regulated crypto services",
         problem:
           "Launch compliant crypto features inside your banking app without building the infrastructure yourself.",
       },
       {
         id: "iso20022-toolkit",
         title: "ISO 20022 Toolkit",
-        audience: "Payment institutions migrating message flows",
+        audience: "For payment institutions migrating message flows",
         problem:
           "Model, validate and process ISO 20022 message lifecycles without reinventing the parser.",
       },
       {
         id: "reconciliation-agent",
         title: "Bank–Crypto Reconciliation Agent",
-        audience: "Teams operating across fiat and on-chain ledgers",
+        audience: "For teams operating across fiat and on-chain ledgers",
         problem:
           "Reconcile transactions across banking and on-chain rails automatically.",
       },
       {
         id: "sca-signing",
         title: "SCA / Transaction Signing",
-        audience: "Fintechs needing strong customer authentication",
+        audience: "For fintechs needing strong customer authentication",
         problem:
-          "On-device transaction signing that meets SCA requirements without hurting UX.",
+          "Sign transactions on-device to meet SCA requirements without hurting UX.",
       },
     ],
   },
@@ -192,10 +192,10 @@ export const homeContent: HomeContent = {
   finalCta: {
     heading: "Describe your challenge",
     microcopy: [
-      "We'll sign an NDA before any details.",
+      "We'll sign an NDA before you share any details.",
       "Response within one business day.",
     ],
-    submitLabel: "Describe your challenge",
+    submitLabel: "Send your challenge",
     successMessage: "Thanks — we'll get back to you within one business day.",
   },
 };

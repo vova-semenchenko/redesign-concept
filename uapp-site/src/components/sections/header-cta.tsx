@@ -21,8 +21,8 @@ export function HeaderCta({ label }: { label: string }) {
 
   useEffect(() => {
     // Ховаємось і біля hero-кнопки, і біля форми: у фінальній смузі сабміт —
-    // це та сама дія тим самим текстом, і дві пігулки в екрані знову були б
-    // перевитратою акценту.
+    // це та сама дія, і дві пігулки в екрані знову були б перевитратою
+    // акценту.
     const anchors = ["hero-cta", "contact"]
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);

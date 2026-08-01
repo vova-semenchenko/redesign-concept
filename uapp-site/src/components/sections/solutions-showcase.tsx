@@ -117,8 +117,11 @@ export function SolutionsShowcase({
               <p className="mt-8 border-t border-rule pt-6">
                 <MicroLabel>{card.audience}</MicroLabel>
               </p>
+              {/* Мітка мусить називати справжній наслідок кліку: сторінок
+                  продуктів не існує, лінк веде на форму — тож не «Explore»,
+                  а розмова про продукт. */}
               <Button asChild variant="quiet" size="quiet" className="mt-8">
-                <a href="#contact">Explore {card.title}</a>
+                <a href="#contact">Ask about {card.title}</a>
               </Button>
             </div>
             {/* Кожен продукт має власне креслення з підлогою, одним заливним
